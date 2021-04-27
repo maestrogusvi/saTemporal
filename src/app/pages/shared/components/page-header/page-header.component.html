@@ -1,0 +1,13 @@
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-header-main">
+            <h3 class="page-header-title" *ngIf="title">
+                {{title}}
+                <span class ="button" *ngIf="button"><button mat-stroked-button class="sapper-button">{{button.title}}</button></span>
+            </h3>
+            <p class="page-header-subtitle" *ngIf="description">
+                {{description}}
+            </p>
+        </div>
+    </div>
+</div>

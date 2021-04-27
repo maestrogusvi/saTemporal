@@ -1,0 +1,257 @@
+<div *ngIf="connectionData && connectionData.type">
+    <!-- <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.AUTHENTICATION-TYPE</mat-label>
+                <mat-select name="type" [(ngModel)]="connectionData.type" [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let type of authType" [value]="type.key">
+                        {{type.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+        </div>
+    </div> -->
+    <!-- <div *ngIf="connectionData && connectionData.type">
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.CONTENT-TYPE</mat-label>
+                    <mat-select name="type" [(ngModel)]="connectionData.connectionProperties.contentType"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let type of contentType" [value]="type">
+                            {{type}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%"></div>
+        </div>
+    </div> -->
+    <!-- <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+        *ngIf="connectionData.type === 'REST_BASIC'">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.API-URI</mat-label>
+                <input matInput type="text" name="user-name" [(ngModel)]="connectionData.connectionProperties.apiUri">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%"></div>
+    </div> -->
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="100%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label *ngIf="connectionData.type === 'REST_TOKEN'" translate>ADD-EDIT-CONNECTION-POPUP.AUTH-URL
+                </mat-label>
+                <mat-label *ngIf="connectionData.type !== 'REST_TOKEN'" translate>ADD-EDIT-CONNECTION-POPUP.API-URI
+                </mat-label>
+                <input matInput type="text" name="authorizationUrl" (keydown.enter)="$event.preventDefault();"
+                    [(ngModel)]="connectionData.connectionProperties.authorizationUrl" trim="blur" required>
+                <button mat-button matSuffix mat-icon-button aria-label="Clear"
+                    (click)="connectionData.connectionProperties.authorizationUrl=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+        *ngIf="connectionData.type === 'REST_TOKEN' || connectionData.type === 'REST_BASIC' || connectionData.type === 'REST_API_KEY'">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.HTTP-METHOD</mat-label>
+                <mat-select name="method" [(ngModel)]="connectionData.connectionProperties.httpMethod"
+                    [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let method of httpMethod" [value]="method">
+                        {{method}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.CONTENT-TYPE</mat-label>
+                <mat-select name="type" [(ngModel)]="connectionData.connectionProperties.contentType"
+                    [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let type of contentType" [value]="type">
+                        {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+        *ngIf="connectionData.type === 'REST_BASIC'">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.USERNAME</mat-label>
+                <input matInput type="text" name="user-name" [(ngModel)]="connectionData.connectionProperties.username"
+                    required (keydown.enter)="$event.preventDefault();" trim="blur">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear"
+                    (click)="connectionData.connectionProperties.username=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.PASSWORD</mat-label>
+                <input matInput type="text" name="password" [(ngModel)]="connectionData.connectionProperties.password"
+                    (keydown.enter)="$event.preventDefault();" trim="blur" required>
+                <button mat-button matSuffix mat-icon-button aria-label="Clear"
+                    (click)="connectionData.connectionProperties.password=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="connectionData.type === 'REST_TOKEN' || connectionData.type === 'REST_BASIC'">
+        <mat-label class="group-header" translate>ADD-EDIT-CONNECTION-POPUP.HTTP-HEADER</mat-label>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngFor="let row of headerArr; let rowIndex=index" id="httpHeaderDiv_{{rowIndex}}">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label>key</mat-label>
+                    <input matInput type="text" name="row.headerKey" [(ngModel)]="row.headerKey" trim="blur"
+                        (change)="connectionData.connectionProperties.httpHeaders[row.headerKey] = row.headerValue">
+                </mat-form-field>
+            </div>
+            <div fxFlex="42%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label>value</mat-label>
+                    <input matInput type="text" name="row.headerValue" [(ngModel)]="row.headerValue" trim="blur"
+                        (change)="connectionData.connectionProperties.httpHeaders[row.headerKey] = row.headerValue">
+                </mat-form-field>
+            </div>
+            <div fxFlex="5%">
+                <div class="icons">
+                    <mat-icon class="delete-icon" matTooltip="{{ 'CONNECTION.DELETE' | translate }}"
+                        *ngIf="headerArr.length !== 1"
+                        (click)="onDeleteRow('httpHeaderDiv_'+rowIndex,rowIndex, row.headerKey, 'headers')">delete
+                    </mat-icon>
+                    <mat-icon class="add-icon" matTooltip="{{ 'CONNECTION.ADD' | translate }}"
+                        (click)="addField('headers')" *ngIf="headerArr.length === rowIndex+1">add</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="connectionData.type === 'REST_TOKEN' || connectionData.type === 'REST_BASIC'">
+        <mat-label class="group-header" translate>ADD-EDIT-CONNECTION-POPUP.QUERY-PARAMETER</mat-label>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngFor="let row of queryParam; let rowIndex=index" id="queryParamDiv_{{rowIndex}}">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label>key</mat-label>
+                    <input matInput type="text" name="row.headerKey" [(ngModel)]="row.headerKey" trim="blur"
+                        (change)="connectionData.connectionProperties.queryParams[row.headerKey] = row.headerValue">
+                </mat-form-field>
+            </div>
+            <div fxFlex="42%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label>value</mat-label>
+                    <input matInput type="text" name="row.headerValue" [(ngModel)]="row.headerValue" trim="blur"
+                        (change)="connectionData.connectionProperties.queryParams[row.headerKey] = row.headerValue">
+                </mat-form-field>
+            </div>
+            <div fxFlex="5%">
+                <div class="icons">
+                    <mat-icon class="delete-icon" matTooltip="{{ 'CONNECTION.DELETE' | translate }}"
+                        *ngIf="queryParam.length !== 1"
+                        (click)="onDeleteRow('queryParamDiv_'+rowIndex,rowIndex, row.headerKey, 'queryParam')">delete
+                    </mat-icon>
+                    <mat-icon class="add-icon" matTooltip="{{ 'CONNECTION.ADD' | translate }}"
+                        (click)="addField('queryParam')" *ngIf="queryParam.length === rowIndex+1">add</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <mat-label class="group-header" translate>ADD-EDIT-CONNECTION-POPUP.AUTH-HEADER</mat-label>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngIf="connectionData.type === 'REST_TOKEN' || connectionData.type === 'REST_BASIC'">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.HEADER-FIELD</mat-label>
+                    <input matInput type="text" name="header-field"
+                        [(ngModel)]="connectionData.connectionProperties.headerField"
+                        (keydown.enter)="$event.preventDefault();" trim="blur" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear"
+                        (click)="connectionData.connectionProperties.headerField=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.HEADER-PREFIX</mat-label>
+                    <mat-select name="method" [(ngModel)]="connectionData.connectionProperties.headerPrefix"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let method of headerPrefix" [value]="method.value">
+                            {{method.key}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+        *ngIf="connectionData.connectionProperties.httpMethod === 'POST'">
+        <div fxFlex="100%">
+            <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.REQUEST-BODY</mat-label>
+                <textarea class="textarea-content" matInput placeholder="Request Body" name="requestBody"
+                    [(ngModel)]="connectionData.connectionProperties.requestBody" [ngModelOptions]="{standalone: true}"
+                    trim="blur"></textarea>
+                <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="connectionData.type === 'REST_API_KEY'">
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngFor="let row of headerArr; let rowIndex=index" id="httpHeaderDiv_{{rowIndex}}">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label>key</mat-label>
+                    <input matInput type="text" name="row.headerKey"
+                        [(ngModel)]="connectionData.connectionProperties.key" trim="blur" required>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label>value</mat-label>
+                    <input matInput type="text" name="row.headerValue"
+                        [(ngModel)]="connectionData.connectionProperties.value" trim="blur" required>
+                </mat-form-field>
+            </div>
+            <!-- <div fxFlex="10%">
+                <div class="icons">
+                    <mat-icon class="delete-icon" matTooltip="{{ 'CONNECTION.DELETE' | translate }}"
+                        (click)="onDeleteRow('httpHeaderDiv_'+rowIndex,rowIndex, row.headerKey, 'headers')">delete</mat-icon>
+                    <mat-icon class="add-icon" matTooltip="{{ 'CONNECTION.ADD' | translate }}" (click)="addField('headers')"
+                        *ngIf="headerArr.length === rowIndex+1">add</mat-icon>
+                </div>
+            </div> -->
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngFor="let row of headerArr; let rowIndex=index" id="httpHeaderDiv_{{rowIndex}}">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label>Add To</mat-label>
+                    <mat-select name="paramType" [(ngModel)]="connectionData.connectionProperties.addTo"
+                        (selectionChange)="connectionData.connectionProperties.addTo = $event.value"
+                        [ngModelOptions]="{standalone: true}" required>
+                        <mat-option *ngFor="let type of parameterType" [value]="type.value">
+                            {{type.key}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%"></div>
+        </div>
+    </div>
+</div>

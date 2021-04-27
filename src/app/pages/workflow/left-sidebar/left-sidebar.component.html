@@ -1,0 +1,126 @@
+<div class="leftCont float-left">
+  <aside id="left-nav">
+    <span (click)="openCloseTab('workflows')" class="leftNavButton triggerNavButton"
+      [ngClass]="displayTab === 'workflows' ? 'active' : ''">
+      <span class="triggerNav">
+        <mat-icon class="icon">account_tree</mat-icon>
+        <span class="button-tools margin-right-5"></span> Automation
+      </span>
+    </span>
+    <span *ngIf="isDisplayNodes" (click)="openCloseTab('trigger')" class="leftNavButton triggerNavButton"
+      [ngClass]="displayTab === 'trigger' ? 'active' : ''">
+      <span class="triggerNav">
+        <mat-icon class="icon">offline_bolt</mat-icon>
+        <span class="button-tools margin-right-5"></span> Trigger
+      </span>
+    </span>
+    <span *ngIf="isDisplayNodes" (click)="openCloseTab('app')" class="leftNavButton appNavButton"
+      [ngClass]="displayTab === 'app' ? 'active' : ''">
+      <span class="appNav">
+        <mat-icon class="icon">apps</mat-icon>
+        <span class="button-print margin-right-5"></span> Apps
+      </span>
+    </span>
+    <span *ngIf="isDisplayNodes" (click)="openCloseTab('core')" class="leftNavButton coreNavButton"
+      [ngClass]="displayTab === 'core' ? 'active' : ''">
+      <span class="coreNav">
+        <mat-icon class="icon">sports_soccer</mat-icon>
+        <span class="button-project margin-right-5"></span> Core
+      </span>
+    </span>
+    <span *ngIf="isDisplayNodes" (click)="openCloseTab('helper')" class="leftNavButton helperNavButton"
+      [ngClass]="displayTab === 'helper' ? 'active' : ''">
+      <span class="helperNav">
+        <mat-icon class="icon">perm_data_setting</mat-icon>
+        <span class="button-project margin-right-5"></span> Helper
+      </span>
+    </span>
+  </aside>
+  <div class="tabs" [@customAnm]="custAnm" *ngIf="displayTab !== ''">
+    <mat-icon class="close_tab" *ngIf="displayTab !== ''" (click)="hideTab()">chevron_left</mat-icon>
+    <div class="tabcontent" *ngIf="displayTab === 'workflows'">
+      <mat-form-field class="search_app">
+        <mat-label><span class="fa fa-search"></span> Search</mat-label>
+        <input matInput name="search" [(ngModel)]="searchApp">
+        <button mat-button *ngIf="searchApp" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div class="scrollable_container workflow-height">
+        <ul #workflow class="workflow-list">
+          <li *ngFor="let workflow of workflows  | search : searchApp" (click)="onWorkflowClick(workflow)"
+            [matTooltip]="workflow?.name" [ngClass]="{'active':activeWorkflow?.id === workflow?.id}">
+            {{workflow?.name}}
+          </li>
+        </ul>
+        <div class="nodata" *ngIf="!(workflows | search : searchApp)?.length">No data found...</div>
+      </div>
+    </div>
+    <div class="tabcontent" *ngIf="displayTab === 'trigger'">
+      <div class="scrollable_container set-height">
+        <ul class="application-list" *ngIf="(triggerData | search : searchApp)?.length">
+          <li [@shakeit]="this.states['state1']" (click)="addNode.emit(app)" (@shakeit.done)="shakeEnd('state1')"
+            *ngFor="let app of triggerData | search : searchApp" dnd-draggable [dragEnabled]="true" [dragData]="app"
+            [dropZones]="['drop-zone']">
+            <img alt="app-img" class="application-image" src="{{app.imageUrl}}" />
+            <span class="small-text" translate>{{app.name}}</span>
+          </li>
+        </ul>
+        <div class="nodata" *ngIf="!(triggerData | search : searchApp)?.length">No data found...</div>
+      </div>
+    </div>
+    <div class="tabcontent" *ngIf="displayTab === 'core'">
+      <mat-form-field class="search_app">
+        <mat-label><span class="fa fa-search"></span> Search</mat-label>
+        <input matInput name="search" [(ngModel)]="searchApp">
+        <button mat-button *ngIf="searchApp" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div class="scrollable_container">
+        <ul class="application-list" *ngIf="(coreData | search : searchApp)?.length">
+          <li [@shakeit]="this.states['state1']" (click)="addNode.emit(app)" (@shakeit.done)="shakeEnd('state1')"
+            *ngFor="let app of coreData  | search : searchApp" dnd-draggable [dragEnabled]="true" [dragData]="app"
+            [dropZones]="['drop-zone']">
+            <img alt="app-img" class="application-image" src="{{app.imageUrl}}" />
+            <span class="small-text" translate>{{app.name}}</span>
+          </li>
+        </ul>
+        <div class="nodata" *ngIf="!(coreData | search : searchApp)?.length">No data found...</div>
+      </div>
+    </div>
+    <div class="tabcontent" *ngIf="displayTab === 'helper'">
+      <div class="scrollable_container set-height">
+        <ul class="application-list" *ngIf="(helperData | search : searchApp)?.length">
+          <li [@shakeit]="this.states['state1']" (click)="addNode.emit(app)" (@shakeit.done)="shakeEnd('state1')"
+            *ngFor="let app of helperData | search : searchApp" dnd-draggable [dragEnabled]="true" [dragData]="app"
+            [dropZones]="['drop-zone']">
+            <img alt="app-img" class="application-image" src="{{app.imageUrl}}" />
+            <span class="small-text" translate>{{app.name}}</span>
+          </li>
+        </ul>
+        <div class="nodata" *ngIf="!(helperData | search : searchApp)?.length">No data found...</div>
+      </div>
+    </div>
+    <div class="tabcontent" *ngIf="displayTab === 'app'">
+      <mat-form-field class="search_app">
+        <mat-label><span class="fa fa-search"></span> Search</mat-label>
+        <input matInput name="search" [(ngModel)]="searchApp">
+        <button mat-button *ngIf="searchApp" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div class="scrollable_container">
+        <ul class="application-list" *ngIf="(appData | search : searchApp)?.length">
+          <li [@shakeit]="this.states['state1']" (click)="addNode.emit(app)" (@shakeit.done)="shakeEnd('state1')"
+            *ngFor="let app of appData | search : searchApp" dnd-draggable [dragEnabled]="true" [dragData]="app"
+            [dropZones]="['drop-zone']">
+            <img alt="app-img" class="application-image" src="{{app.logoPath}}" />
+            <span class="small-text" translate>{{app.name}}</span>
+          </li>
+        </ul>
+        <div class="nodata" *ngIf="!(appData | search : searchApp)?.length">No data found...</div>
+      </div>
+    </div>
+  </div>
+</div>

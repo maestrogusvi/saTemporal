@@ -1,0 +1,1126 @@
+{
+  "TransformationFormulas": [
+    {
+      "name": "Mathematical Operators",
+      "formulas": [
+        {
+          "name": "+",
+          "description": "Adds two numbers. In case of Strings it will act as Concatenate function.",
+          "examples": [
+            {
+              "expression": "5+4",
+              "result": "9"
+            }
+          ]
+        },
+        {
+          "name": "-",
+          "description": "Subtracts two numbers",
+          "examples": [
+            {
+              "expression": "5-4",
+              "result": "1"
+            }
+          ]
+        },
+        {
+          "name": "*",
+          "description": "Multiplies two numbers",
+          "examples": [
+            {
+              "expression": "5*4",
+              "result": "20"
+            }
+          ]
+        },
+        {
+          "name": "/",
+          "description": "Divides two numbers",
+          "examples": [
+            {
+              "expression": "20/4",
+              "result": "5"
+            }
+          ]
+        },
+        {
+          "name": "DIV",
+          "description": "Quotient of two numbers",
+          "examples": [
+            {
+              "expression": "DIV(5,2)",
+              "result": "2"
+            }
+          ]
+        },
+        {
+          "name": "MOD",
+          "description": "Remainder of two numbers",
+          "examples": [
+            {
+              "expression": "MOD(5,2)",
+              "result": "1"
+            }
+          ]
+        },
+        {
+          "name": "^",
+          "description": "Exponent of number",
+          "examples": [
+            {
+              "expression": "6^3",
+              "result": "216"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Logical Operators",
+      "formulas": [
+        {
+          "name": "<",
+          "description": "Less than operator",
+          "examples": [
+            {
+              "expression": "6<3",
+              "result": false
+            },
+            {
+              "expression": "3<6",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": ">",
+          "description": "Greater than operator",
+          "examples": [
+            {
+              "expression": "2>3",
+              "result": false
+            },
+            {
+              "expression": "6>3",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "<=",
+          "description": "Less than Equal tooperator",
+          "examples": [
+            {
+              "expression": "6<=3",
+              "result": false
+            },
+            {
+              "expression": "3<=3",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": ">=",
+          "description": "Greater than Equal to operator",
+          "examples": [
+            {
+              "expression": "2>=3",
+              "result": false
+            },
+            {
+              "expression": "3>=3",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "==",
+          "description": " Equal to operator",
+          "examples": [
+            {
+              "expression": "2==3",
+              "result": false
+            },
+            {
+              "expression": "3==3",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "!=",
+          "description": "Not Equal to operator",
+          "examples": [
+            {
+              "expression": "2!=3",
+              "result": true
+            },
+            {
+              "expression": "3!=3",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "AND",
+          "description": "AND multiple operators conditions",
+          "examples": [
+            {
+              "expression": "AND(4>3,3<2)",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "OR",
+          "description": "OR multiple operators conditions",
+          "examples": [
+            {
+              "expression": "OR(4>3,3<2)",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "NOT",
+          "description": "Negation of condition",
+          "examples": [
+            {
+              "expression": "NOT(2>3)",
+              "result": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Date Functions",
+      "formulas": [
+        {
+          "name": "DATEADD",
+          "description": "Adds or subtracts a period of time to a Date value.Period units: m=month, d=day, y=year, hr=hour, mi=minute, se=second (day is default)",
+          "examples": [
+            {
+              "expression": "date = 03/14/2007 12:00:00;<br />DATEADD(date, 1)",
+              "result": "03/15/2007 12:00:00"
+            },
+            {
+              "expression": "date = 03/14/2007 12:00:00;<br />DATEADD(date, 1, 'm')",
+              "result": "04/15/2007 12:00:00"
+            },
+            {
+              "expression": "date = 03/14/2007 12:00:00;<br />DATEADD(date, 500, 'ms')",
+              "result": "03/15/2008 12:00:01.500"
+            }
+          ]
+        },
+        {
+          "name": "DATEBETWEEN",
+          "description": "Tests a datetime to see if it is between two values",
+          "examples": [
+            {
+              "expression": "Date1 = 2009-11-01 12:00:00;<br />Date2 = 2009-12-10 12:00:00;<br />FromDate = 2009-12-01 12:00:00;<br />ThruDate = 2009-12-15 12:00:00;<br />DATEBETWEEN(Date1, dtFrom, dtThru)",
+              "result": false
+            },
+            {
+              "expression": "DATEBETWEEN(Date2, dtFrom, dtThru)",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "DATEBOD",
+          "description": "Sets the date to the beginning of the day",
+          "examples": [
+            {
+              "expression": "date = 03/15/2007 13:14:15;<br />DATEBOD(date)",
+              "result": "03/15/2007 00:00:00"
+            }
+          ]
+        },
+        {
+          "name": "DATEEOD",
+          "description": "Sets the date to the end of the day",
+          "examples": [
+            {
+              "expression": "date = 03/15/2007 13:14:15;<br />DATEEOD(date)",
+              "result": "03/15/2007 23:59:59"
+            }
+          ]
+        },
+        {
+          "name": "DATEFORMAT",
+          "description": "Formats or creates and formats a Date value",
+          "examples": [
+            {
+              "expression": "formatString = 'MM/dd/yyyy';<br />DATEFORMAT(formatString, NOW())",
+              "result": "03/14/2007"
+            },
+            {
+              "expression": "DATEFORMAT(formatString, '2007/03/14')",
+              "result": "03/14/2007"
+            },
+            {
+              "expression": "DATEFORMAT(formatString, 3, 14, 2007)",
+              "result": "03/14/2007"
+            }
+          ]
+        },
+        {
+          "name": "DATEWITHIN",
+          "description": "Tests two dates to see if they are within x milliseconds of each other",
+          "examples": [
+            {
+              "expression": "Date1 = 2009-12-01 12:20:00;<br />Date2 = 2009-12-01 12:20:30;<br />DATEWITHIN(Date1, Date2, 10000)",
+              "result": false
+            },
+            {
+              "expression": "DATEWITHIN(Date1, Date2, 60000)",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "CONVERTDATETOMILLISEC",
+          "description": "Convert given date to milli seconds",
+          "examples": [
+            {
+              "expression": "date = 2009-12-01 12:20:00; <br /> CONVERTDATETOMILLISEC(date)",
+              "result": 1575183000000
+            }
+          ]
+        },
+        {
+          "name": "CONVERTSTRINGDATETOMILLISEC",
+          "description": "Convert given string date to milli seconds",
+          "examples": [
+            {
+              "expression": "CONVERTSTRINGDATETOMILLISEC('2019-12-01','yyyy-MM-DD')",
+              "result": 1575158400000
+            }
+          ]
+        },
+        {
+          "name": "_GETCURRENTMILISEC",
+          "description": "Get current milli seconds",
+          "examples": [
+            {
+              "expression": "_GETCURRENTMILISEC()",
+              "result": 1592999822310
+            }
+          ]
+        },
+        {
+          "name": "CONVERTMILLISECTODATE",
+          "description": "Convert given millisecond to date",
+          "examples": [
+            {
+              "expression": "CONVERTMILLISECTODATE('3010')",
+              "result": "Thu Jan 01 00:00:03 UTC 1970"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "String Functions",
+      "formulas": [
+        {
+          "name": "CONCAT",
+          "description": "Concatenate two or more strings",
+          "examples": [
+            {
+              "expression": "CONCAT('ab','cd')",
+              "result": "abcd"
+            },
+            {
+              "expression": "CONCAT('ab','cd','ef')",
+              "result": "abcdef"
+            }
+          ]
+        },
+        {
+          "name": "EMPTYSTRING",
+          "description": "Returns the empty string.",
+          "examples": [
+            {
+              "expression": "EMPTYSTRING()",
+              "result": ""
+            }
+          ]
+        },
+        {
+          "name": "CONTAINS",
+          "description": "Determines if source string contains target string",
+          "examples": [
+            {
+              "expression": "CONTAINS('','lp')",
+              "result": false
+            },
+            {
+              "expression": "CONTAINS('Ralph', 'lp')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "CONTAINSALL",
+          "description": "Determines if source string contains ALL of the CHARACTERS in the target. The characters can appear anywhere in the source string",
+          "examples": [
+            {
+              "expression": "CONTAINSALL('Ralph', 'xyz')",
+              "result": false
+            },
+            {
+              "expression": "CONTAINSALL('Ralph', 'hR')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "CONTAINSANY",
+          "description": "Determines if source string contains ANY of the CHARACTERS in the target. The characters can appear anywhere in the source string",
+          "examples": [
+            {
+              "expression": "CONTAINSANY('Ralph', 'xyz')",
+              "result": false
+            },
+            {
+              "expression": "CONTAINSANY('Ralph', '12a')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "DATEFORMATTER",
+          "description": "Formats a String Date value to a desired format.",
+          "examples": [
+            {
+              "expression": "DATEFORMATTER('03-MAY-2018', 'dd-MMM-yyyy', 'dd/MM/yyyy')",
+              "result": "03/05/2018"
+            },
+            {
+              "expression": "DATEFORMATTER('03-MAY-2018', 'dd-MM-yyyy', 'dd/MM/yyyy')",
+              "result": "Invalid Date String in Source field"
+            }
+          ]
+        },
+        {
+          "name": "DIGITSONLY",
+          "description": "Strip non-digit characters from a string",
+          "examples": [
+            {
+              "expression": "DIGITSONLY('(815) 555-1212')",
+              "result": "8155551212"
+            }
+          ]
+        },
+        {
+          "name": "ENDSWITH",
+          "description": "Tests to see if a string ends with a given case sensitive string",
+          "examples": [
+            {
+              "expression": "ENDSWITH('Ralph', 'I')",
+              "result": false
+            },
+            {
+              "expression": "ENDSWITH('Ralph', 'ph')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "EXACT",
+          "description": "Tests to see if a two string are same",
+          "examples": [
+            {
+              "expression": "EXACT('Ralph', 'Ralph')",
+              "result": true
+            },
+            {
+              "expression": "EXACT('Ralph', 'RALPH')",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "FIND",
+          "description": "Returns a 1 based index of search within target string. Third parameter is the index from where to look for.",
+          "examples": [
+            {
+              "expression": "FIND('Ralph', '')",
+              "result": 1
+            },
+            {
+              "expression": "FIND('Ralph', 'lp')",
+              "result": 3
+            },
+            {
+              "expression": "FIND('Ralph', 'lp', 5)",
+              "result": 8
+            }
+          ]
+        },
+        {
+          "name": "FORMAT",
+          "description": "Applies basic formatting of a string using a mask. Any character positions in the mask that contain '#' will be replaced a character from the string to format",
+          "examples": [
+            {
+              "expression": "FORMAT('(###) ###-####', 8155551212)",
+              "result": "(815) 555-1212"
+            }
+          ]
+        },
+        {
+          "name": "FORMATBYLEN",
+          "description": "Performs a match of the regular expression and returns a formatted string. This is used to format strings, phone numbers based on the length of the matched pattern.",
+          "examples": [
+            {
+              "expression": "FORMATBYLEN('8155551212', '[0-9]*', '?='invalid':0=:7=      ###-####:10=(###) ###-####')",
+              "result": "(815) 555-1212"
+            }
+          ]
+        },
+        {
+          "name": "IF",
+          "description": "It allows you to make logical comparisons between a value and what you expect.The first result is if your comparison is True, the second if your comparison is False",
+          "examples": [
+            {
+              "expression": "IF(5>4, 3, 2)",
+              "result": "3"
+            },
+            {
+              "expression": "IF(EXACT(4,3), 3, 7)",
+              "result": "7"
+            }
+          ]
+        },
+        {
+          "name": "LEFT",
+          "description": "Returns the leftmost n characters.",
+          "examples": [
+            {
+              "expression": "LEFT('Ralph', 3)",
+              "result": "Ral"
+            },
+            {
+              "expression": "LEFT('Ra', 3)",
+              "result": "Ra"
+            }
+          ]
+        },
+        {
+          "name": "LEFTOF",
+          "description": "Returns everything to the left of the match string or the entire string if no match is found.",
+          "examples": [
+            {
+              "expression": "LEFTOF('riden@mymail.org', '@')",
+              "result": "riden"
+            },
+            {
+              "expression": "LEFTOF('riden@mymail.org', '<->')",
+              "result": "riden@mymail.org"
+            }
+          ]
+        },
+        {
+          "name": "LEN",
+          "description": "Returns the length of a string.",
+          "examples": [
+            {
+              "expression": "LEN('raLph')",
+              "result": 5
+            }
+          ]
+        },
+        {
+          "name": "LOWER",
+          "description": "Lower cases a string.",
+          "examples": [
+            {
+              "expression": "LOWER('raLph iDen')",
+              "result": "ralph iden"
+            }
+          ]
+        },
+        {
+          "name": "MID",
+          "description": "Returns a substring of a set of characters.",
+          "examples": [
+            {
+              "expression": "MID('Ralph',2,1)",
+              "result": "a"
+            },
+            {
+              "expression": "MID('Ralph',2)",
+              "result": "alph"
+            }
+          ]
+        },
+        {
+          "name": "REPLACE",
+          "description": "Replaces the occurrences of the first string with the second string. Does not support regular expressions for the search.",
+          "examples": [
+            {
+              "expression": "REPLACE('Ralph,Iden,Dev', ',', '/')",
+              "result": "Ralph/Iden/Dev"
+            },
+            {
+              "expression": "REPLACE('abbbcabc-000-abc', 'ab+c', '123')",
+              "result": "abbbcabc-000-abc"
+            }
+          ]
+        },
+        {
+          "name": "REPLACEALL",
+          "description": "Replaces all the occurrences of the first string with the second string. Supports regular expressions for the search.",
+          "examples": [
+            {
+              "expression": "REPLACEALL('Ralph,Iden', ',', '/')",
+              "result": "Ralph/Iden"
+            },
+            {
+              "expression": "REPLACEALL('acabc-000-abc', 'ab+c', '123')",
+              "result": "ac123-000-123"
+            }
+          ]
+        },
+        {
+          "name": "REPLACEFIRST",
+          "description": "Replaces the first occurrence of the first string with the second string. Supports regular expressions for the search.",
+          "examples": [
+            {
+              "expression": "REPLACEFIRST('Ralph,Iden,Dev', ',', '/'')",
+              "result": "Ralph/Iden,Dev"
+            },
+            {
+              "expression": "REPLACEFIRST('acabc-000-abc', 'ab+c', '123')",
+              "result": "ac123-000-abc"
+            }
+          ]
+        },
+        {
+          "name": "RIGHT",
+          "description": "Returns the rightmost n characters.",
+          "examples": [
+            {
+              "expression": "RIGHT('Ralph', 3)",
+              "result": "lph"
+            }
+          ]
+        },
+        {
+          "name": "RIGHTOF",
+          "description": "Returns everything to the right of the match string or an empty string if no match is found.",
+          "examples": [
+            {
+              "expression": "RIGHTOF('riden@mymail.org', '@')",
+              "result": "mymail.org"
+            }
+          ]
+        },
+        {
+          "name": "SPLIT",
+          "description": "Splits a string on delimiter boundaries into a String array. One can get the element at array index.",
+          "examples": [
+            {
+              "expression": "SPLIT('Ralph,Iden', ',')[0]",
+              "result": "Ralph"
+            },
+            {
+              "expression": "SPLIT('Ralph,Iden', ',')[1]",
+              "result": "Iden"
+            }
+          ]
+        },
+        {
+          "name": "STARTSWITH",
+          "description": "Tests to see if a string starts with a given string.",
+          "examples": [
+            {
+              "expression": "STARTSWITH('Ralph', 'Ra')",
+              "result": true
+            },
+            {
+              "expression": "STARTSWITH('Ralph', 'ra')",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "STR",
+          "description": "Converts a number to a string value - Note that Java's formatter will not truncate the string;<br /> for example str(123456,3) = 123456 and NOT '123', '456', or error.",
+          "examples": [
+            {
+              "expression": "STR(123.45)",
+              "result": "123.45"
+            },
+            {
+              "expression": "STR(123.45, 3)",
+              "result": "123"
+            }
+          ]
+        },
+        {
+          "name": "STRING",
+          "description": "Replicates a string n number of times.",
+          "examples": [
+            {
+              "expression": "STRING('*', 2)",
+              "result": "**"
+            },
+            {
+              "expression": "STRING('RI', 2)",
+              "result": "RIRI"
+            }
+          ]
+        },
+        {
+          "name": "STRINGTODATE",
+          "description": "Converts a date string value to Date type",
+          "examples": [
+            {
+              "expression": "STRINGTODATE('23-May-2019','dd-MMM-yyyy')",
+              "result": "Thu May 23 00:00:00 UTC 2019"
+            },
+            {
+              "expression": "DATEEOD(STRINGTODATE('23-May-2019','dd-MMM-yyyy'))",
+              "result": "Thu May 23 18:29:59 UTC 2019"
+            }
+          ]
+        },
+        {
+          "name": "STRINGTONUMBER",
+          "description": "Converts a string value to Integer",
+          "examples": [
+            {
+              "expression": "STRINGTONUMBER('23')",
+              "result": 23
+            }
+          ]
+        },
+        {
+          "name": "ENCODETOBASE64",
+          "description": "Encode a string value to Base 64 String",
+          "examples": [
+            {
+              "expression": "ENCODETOBASE64('sapper')",
+              "result": "c2FwcGVy"
+            }
+          ]
+        },
+        {
+          "name": "DECODETOBASE64",
+          "description": "Decode a Base 64 String value to String",
+          "examples": [
+            {
+              "expression": "DECODETOBASE64('c2FwcGVy')",
+              "result": "sapper"
+            }
+          ]
+        },
+        {
+          "name": "TIMEDIFFERENCE",
+          "description": "Gives the difference in times. The time format should be in 24 hour clock (HH:MM) format.",
+          "examples": [
+            {
+              "expression": "TIMEDIFFERENCE('11:00','17:00')",
+              "result": "6:0"
+            },
+            {
+              "expression": "TIMEDIFFERENCE('09:45','15:15')",
+              "result": "5:30"
+            }
+          ]
+        },
+        {
+          "name": "TRIM",
+          "description": "Removes the specified character (or WHITESPACE) from both ends of a string.",
+          "examples": [
+            {
+              "expression": "TRIM(' Ralph  ')",
+              "result": "Ralph"
+            },
+            {
+              "expression": "TRIM('**Ralph**', '*')",
+              "result": "Ralph"
+            }
+          ]
+        },
+        {
+          "name": "TRIMLEFT",
+          "description": "Removes the specified character (or WHITESPACE) from the left side of a string.",
+          "examples": [
+            {
+              "expression": "TRIMLEFT(' Ralph  ')",
+              "result": "Ralph  "
+            },
+            {
+              "expression": "TRIMLEFT('**Ralph**', '*')",
+              "result": "Ralph**"
+            }
+          ]
+        },
+        {
+          "name": "TRIMRIGHT",
+          "description": "Removes the specified character (or WHITESPACE) from the right side of a string.",
+          "examples": [
+            {
+              "expression": "TRIMRIGHT(' Ralph  ')",
+              "result": " Ralph"
+            },
+            {
+              "expression": "TRIMRIGHT('**Ralph**', '*')",
+              "result": "**Ralph"
+            }
+          ]
+        },
+        {
+          "name": "UPPER",
+          "description": "Upper cases a string.",
+          "examples": [
+            {
+              "expression": "UPPER('raLph iDen')",
+              "result": "RALPH IDEN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mathematical Functions",
+      "formulas": [
+        {
+          "name": "AVERAGE",
+          "description": "Returns the average for a list of NUMBER values.",
+          "examples": [
+            {
+              "expression": "AVERAGE(2, 4, 6, 8)",
+              "result": 5
+            }
+          ]
+        },
+        {
+          "name": "CEILING",
+          "description": "Returns the next integer greater than the number.",
+          "examples": [
+            {
+              "expression": "CEILING(0.01)",
+              "result": 1
+            },
+            {
+              "expression": "CEILING(2.022)",
+              "result": 3
+            }
+          ]
+        },
+        {
+          "name": "EXP",
+          "description": "Returns e (the base of natural logarithms or Euler number) raised to a power of given number.the value of e^n (where n is the parameter for function)",
+          "examples": [
+            {
+              "expression": "EXP(1)",
+              "result": 2.71828
+            },
+            {
+              "expression": "EXP(2)",
+              "result": 7.38906
+            }
+          ]
+        },
+        {
+          "name": "FACTORIAL",
+          "description": "Factorial of a number.",
+          "examples": [
+            {
+              "expression": "FACTORIAL(5)",
+              "result": 120
+            }
+          ]
+        },
+        {
+          "name": "FLOOR",
+          "description": "Returns the lowest integer less than the number.",
+          "examples": [
+            {
+              "expression": "FLOOR(0.01)",
+              "result": 0
+            },
+            {
+              "expression": "FLOOR(2.022)",
+              "result": 2
+            }
+          ]
+        },
+        {
+          "name": "LOG",
+          "description": "Returns the natural log of the number.",
+          "examples": [
+            {
+              "expression": "LOG(2)",
+              "result": 0.69314
+            }
+          ]
+        },
+        {
+          "name": "LOG10",
+          "description": "Returns the log of the number.",
+          "examples": [
+            {
+              "expression": "LOG10(2)",
+              "result": 0.30102
+            }
+          ]
+        },
+        {
+          "name": "MIN",
+          "description": "Returns the smaller of the two values.",
+          "examples": [
+            {
+              "expression": "MIN(5, 3)",
+              "result": 3
+            },
+            {
+              "expression": "MIN(1, null)",
+              "result": "null"
+            }
+          ]
+        },
+        {
+          "name": "SQR",
+          "description": "Returns the number squared.",
+          "examples": [
+            {
+              "expression": "SQR(9)",
+              "result": 81
+            }
+          ]
+        },
+        {
+          "name": "SQRT",
+          "description": "Returns the square root of the number.",
+          "examples": [
+            {
+              "expression": "SQRT(81)",
+              "result": 9
+            }
+          ]
+        },
+        {
+          "name": "ABS",
+          "description": "Returns the absolute value of the number.",
+          "examples": [
+            {
+              "expression": "ABS(-1)",
+              "result": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Others",
+      "formulas": [
+        {
+          "name": "ISANYOF",
+          "description": "Tests to see if case sensitive string(first parameter) is one of the supplied values.",
+          "examples": [
+            {
+              "expression": "ISANYOF('beta', 'alpha', 'beta', 'gamma')",
+              "result": true
+            },
+            {
+              "expression": "ISANYOF('BETA', 'alpha', 'beta', 'gamma')",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "ISBLANK",
+          "description": "Returns whether or not the string is null or empty.",
+          "examples": [
+            {
+              "expression": "ISBLANK('')",
+              "result": true
+            },
+            {
+              "expression": "ISBLANK(null)",
+              "result": true
+            },
+            {
+              "expression": "ISBLANK('raLph')",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "ISDATE",
+          "description": "Returns whether or not the string can be parsed into a valid DATE value.",
+          "examples": [
+            {
+              "expression": "ISDATE('05/10/2009')",
+              "result": true
+            },
+            {
+              "expression": "ISDATE('YR: 2009')",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "ISNONEOF",
+          "description": "Tests to see if string is not one of the supplied values.",
+          "examples": [
+            {
+              "expression": "ISNONEOF('omega', 'alpha', 'beta', 'gamma')",
+              "result": true
+            },
+            {
+              "expression": "ISNONEOF('beta', 'alpha', 'beta', 'gamma')",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "ISNULL",
+          "description": "Returns whether or not the string is null.",
+          "examples": [
+            {
+              "expression": "ISNULL('')",
+              "result": false
+            },
+            {
+              "expression": "ISNULL(null)",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "ISNUMBER",
+          "description": "Returns whether or not the string represents a number.",
+          "examples": [
+            {
+              "expression": "ISNUMBER('0')",
+              "result": true
+            },
+            {
+              "expression": "ISNUMBER('x')",
+              "result": false
+            }
+          ]
+        },
+        {
+          "name": "JSONPATHEVAL",
+          "description": "Returns equivalent value of jsonpath againest the json data .",
+          "examples": [
+            {
+              "expression": "JSONPATHEVAL('path','defaultValue')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "LOOKUP",
+          "description": "Returns respective value for dataset key.",
+          "examples": [
+            {
+              "expression": "LOOKUP('datasetname','key','defaultValue')",
+              "result": "result change according dataset"
+            }
+          ]
+        },
+        {
+          "name": "_DIVISION",
+          "description": "Quotient of two numbers",
+          "examples": [
+            {
+              "expression": "_DIVISION(5,2)",
+              "result": "2"
+            }
+          ]
+        },
+        {
+          "name": "_MODULUS",
+          "description": "Remainder of two numbers",
+          "examples": [
+            {
+              "expression": "_MODULUS(5,2)",
+              "result": "1"
+            }
+          ]
+        },
+        {
+          "name": "DOWNLOADBASE64CONTENT",
+          "description": "Download respective content.",
+          "examples": [
+            {
+              "expression": "DOWNLOADBASE64CONTENT('base64EncodedString','fileName','fileExtension')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "DECODEBASE64CONTENT",
+          "description": "Decoded base64 content.",
+          "examples": [
+            {
+              "expression": "DECODEBASE64CONTENT('base64EncodedString')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "DOWNLOADURLCONTENT",
+          "description": "Download respective content.",
+          "examples": [
+            {
+              "expression": "DOWNLOADURLCONTENT('url','fileName','fileExtension')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "ENCODEBASE64URLCONTENT",
+          "description": "ENCODEBASE64 respective content.",
+          "examples": [
+            {
+              "expression": "ENCODEBASE64URLCONTENT('url')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "UPLOADMULTIPARTFILE",
+          "description": "upload multipart content.",
+          "examples": [
+            {
+              "expression": "UPLOADMULTIPARTFILE('path')",
+              "result": true
+            }
+          ]
+        },
+        {
+          "name": "RANDOMNUMBERGENERATOR",
+          "description": "Generate a random number with provided length",
+          "examples": [
+            {
+              "expression": "RANDOMNUMBERGENERATOR(4)",
+              "result": "2345"
+            }
+          ]
+        },
+        {
+          "name": "EXTRACT_TEXT_FROM_HTML",
+          "description": "Strip all tags keep text only.",
+          "examples": [
+            {
+              "expression": "EXTRACT_TEXT_FROM_HTML('<p> <span> foo </span> <em> bar <a> foobar </a> baz </em> </p>')",
+              "result": "foo bar foobar baz"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

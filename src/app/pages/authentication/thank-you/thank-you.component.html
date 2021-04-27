@@ -1,0 +1,52 @@
+<div class="thank-you-container">
+    <div class="container">
+        <div class="form-container">
+            <div class="header">
+                <div class="arrow-down"> </div>
+                <div><img src="assets/images/SapperLogoTrans.png" alt="logo" /></div>
+                <div class="thank-you-txt">
+                    <h5>Thank You for Registering!</h5>
+                    <h6>Please check your business email to activate the account.</h6>
+                </div>
+
+            </div>
+            <div class="thank-you-body">
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+                    <mat-card fxFlex="30%">
+                        <div class="card-head">
+                            <mat-icon class="icons mailbox">markunread_mailbox</mat-icon>
+                        </div>
+                        <div class="cord-desc">
+                            <span><strong class="mailbox">1. Check</strong> your email inbox</span>
+                            <p>Go to the <strong>inbox</strong> of the email address you used to sign up.</p>
+                        </div>
+                    </mat-card>
+                    <mat-card fxFlex="30%">
+                        <div class="card-head">
+                            <mat-icon class="icons email">email</mat-icon>
+                        </div>
+                        <div class="cord-desc">
+                            <span><strong class="email">2. Open</strong> our email</span>
+                            <p>Find the <strong>email</strong> we just sent you. It has subject line "Sapper account
+                                activation".</p>
+                        </div>
+                    </mat-card>
+                    <mat-card fxFlex="30%">
+                        <div class="card-head">
+                            <mat-icon class="icons click">touch_app</mat-icon>
+                        </div>
+                        <div class="cord-desc">
+                            <span><strong class="click">3. Click</strong> on activate account button</span>
+                            <p>The <strong>Account</strong> will activated automatically.</p>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="thank-you-footer" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                    fxLayoutGap.xs="0">
+                    <button mat-stroked-button class="sapper-button" [routerLink]="['/login']">Continue
+                        to login page</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

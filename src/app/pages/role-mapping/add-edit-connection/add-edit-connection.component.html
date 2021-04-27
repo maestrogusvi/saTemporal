@@ -1,0 +1,67 @@
+<div class="dialog" #addEditConnection>
+  <div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="connectionData.id" translate>
+      ADD-EDIT-ROLE-MAPPING-POPUP.TITLE-EDIT</h4>
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="!connectionData.id" translate="">ADD-EDIT-ROLE-MAPPING-POPUP.TITLE-ADD</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dialogRef.close(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="dialog-body">
+    <form novalidate [formGroup]="connectionForm" role="form" name="connectionForm">
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.MG-ID</mat-label>
+            <mat-select name="type" [(ngModel)]="connectionData.marketGroupId"
+                        [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let marketId of marketIds" [value]="marketId">
+                {{marketId}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.BRAND</mat-label>
+            <mat-select name="type" [(ngModel)]="connectionData.brand"
+                        [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let brand of brandList" [value]="brand">
+                {{brand.brandName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.SUMTOTALROLE</mat-label>
+            <mat-select name="type" [(ngModel)]="connectionData.stRole"
+                        [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let securityRole of stSecurityList" [value]="securityRole">
+                {{securityRole.stRoleName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.VWROLE</mat-label>
+            <mat-select name="type" [(ngModel)]="connectionData.grpRole"
+                        [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let grpRole of grpRoleList" [value]="grpRole">
+                {{grpRole.grpRoleName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <div class="dialog-footer">
+    <button mat-stroked-button  (click)="saveRoleMapping()" class="sapper-button">
+      {{ 'ADD-EDIT-MARKET-GROUP-POPUP.SAVE' | translate }}
+    </button>
+  </div>
+</div>

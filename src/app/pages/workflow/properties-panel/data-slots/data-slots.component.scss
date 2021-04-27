@@ -1,0 +1,33 @@
+@import '../../../shared/styles/colors.scss';
+
+.data-slot-container {
+  padding: 5px;
+  height: 95%;
+  max-height: 95%;
+  overflow: auto;
+
+  .data-slot-accordion {
+    margin-bottom: 10px;
+
+    .expansion-panel-header {
+      height: 40px !important;
+      font-size: 13px;
+      padding: 0 10px;
+      background: $lavender;
+    }
+  }
+}
+.type-icons {
+  margin-right: 5px;
+  color: grey;
+  font-size: 12px;
+}
+.type-icons1 {
+  margin-right: 5px;
+  font-size: 9px;
+  font-family: FreeMono;
+}
+.type-icons2 {
+  color: grey;
+  font-size: 10px;
+}

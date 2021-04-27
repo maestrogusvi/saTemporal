@@ -1,0 +1,47 @@
+@import "../../../shared/styles/material-styles.scss";
+@import "../../../shared/styles/layout.scss";
+
+:host {
+  .select-connection {
+    margin-bottom: 0px;
+  }
+
+  .create-connection {
+    margin-left: 5px;
+    vertical-align: -webkit-baseline-middle;
+    cursor: pointer;
+  }
+
+  .form-field {
+    width: 24%;
+    padding: 10px 0px 10px 60px;
+
+    .section {
+      margin-bottom: 10px;
+    }
+  }
+
+  .chk-align {
+    padding: 0 53px;
+  }
+
+  .small-text {
+    font-size: 15px;
+  }
+
+  .close {
+    position: relative;
+    float: right;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    line-height: 13px;
+    min-width: auto;
+    font-size: 10px;
+    border: none;
+
+    ::ng-deep .tag-editor {
+      float: inherit;
+    }
+  }
+}

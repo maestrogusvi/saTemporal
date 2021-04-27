@@ -1,0 +1,174 @@
+<div *ngIf="connectionData && connectionData.type">
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.GRAND-TYPE</mat-label>
+                <mat-select name="type" [(ngModel)]="connectionData.connectionProperties.grantType"
+                    [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let type of grandType" [value]="type.value">
+                        {{type.key}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%"></div>
+    </div>
+    <div *ngIf="connectionData.connectionProperties.grantType != ''">
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.CLIENT-ID</mat-label>
+                    <input matInput type="text" name="client-id" [(ngModel)]="connectionData.connectionProperties.clientId"
+                        trim="blur" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.clientId=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.CLIENT-SECRET</mat-label>
+                    <input matInput type="text" name="client-secret" [(ngModel)]="connectionData.connectionProperties.clientSecret"
+                        trim="blur" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.clientSecret=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+            <div fxFlex="50%" *ngIf="connectionData.connectionProperties.grantType === 'AUTHORIZATION_CODE'">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.AUTH-URL</mat-label>
+                    <input matInput type="text" name="auth-url" [(ngModel)]="connectionData.connectionProperties.authUrl" trim="blur" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.authUrl=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.ACCESS-TOKEN-URL</mat-label>
+                    <input matInput type="text" name="access-token-url" [(ngModel)]="connectionData.connectionProperties.accessTokenUrl"
+                        trim="blur" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.accessTokenUrl=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%" *ngIf="connectionData.connectionProperties.grantType !== 'AUTHORIZATION_CODE'"></div>
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+            <div fxFlex="50%" *ngIf="connectionData.connectionProperties.grantType === 'AUTHORIZATION_CODE'">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.STATE</mat-label>
+                    <input matInput type="text" name="state" [(ngModel)]="connectionData.connectionProperties.state" trim="blur">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.state=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.SCOPE</mat-label>
+                    <input matInput type="text" name="scope" [(ngModel)]="connectionData.connectionProperties.scope" trim="blur" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.scope=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%" *ngIf="connectionData.connectionProperties.grantType !== 'AUTHORIZATION_CODE'"></div>
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngIf="connectionData.connectionProperties.grantType === 'AUTHORIZATION_CODE'">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.RESPONSE-TYPE</mat-label>
+                    <mat-select name="method" [(ngModel)]="connectionData.connectionProperties.responseType"
+                        [ngModelOptions]="{standalone: true}" required>
+                        <mat-option *ngFor="let type of responseType" [value]="type">
+                            {{type}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <!-- <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.STATE</mat-label>
+                    <input matInput type="text" name="user-name" [(ngModel)]="connectionData.connectionProperties.state">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field> -->
+            </div>
+        </div>
+    
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngIf="connectionData.connectionProperties.grantType === 'PASSWORD'">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.USERNAME</mat-label>
+                    <input matInput type="text" name="user-name" [(ngModel)]="connectionData.connectionProperties.username" trim="blur">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.username=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.PASSWORD</mat-label>
+                    <input matInput type="text" name="password" [(ngModel)]="connectionData.connectionProperties.password" trim="blur">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.password=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.HEADER-FIELD</mat-label>
+                    <input matInput type="text" name="header-field" [(ngModel)]="connectionData.connectionProperties.headerField"
+                        (keydown.enter)="$event.preventDefault();" trim="blur" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.headerField=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.HEADER-PREFIX</mat-label>
+                    <mat-select name="method" [(ngModel)]="connectionData.connectionProperties.headerPrefix"
+                        [ngModelOptions]="{standalone: true}" required>
+                        <mat-option *ngFor="let method of headerPrefix" [value]="method.value">
+                            {{method.key}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0"
+            *ngIf="connectionData.connectionProperties.grantType === 'PASSWORD' || connectionData.connectionProperties.grantType === 'CLIENT_CREDENTIALS'">
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.ACCESS-TOKEN-URL</mat-label>
+                    <input matInput type="text" name="access-toen-url" [(ngModel)]="connectionData.connectionProperties.accessTokenUrl" trim="blur">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.accessTokenUrl=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline" class="form_field text">
+                    <mat-label translate>ADD-EDIT-CONNECTION-POPUP.CONTENT-TYPE</mat-label>
+                    <input matInput type="text" name="content-type" [(ngModel)]="connectionData.connectionProperties.contentType" trim="blur">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.connectionProperties.contentType=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div> -->
+    </div>
+    
+</div>

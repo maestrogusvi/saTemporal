@@ -1,0 +1,5 @@
+<div *ngIf="applicationFlexOptions" class="application-container" [fxLayout]="applicationFlexOptions.layout" [fxLayout.xs]="applicationFlexOptions.layoutxs" [fxLayoutAlign]="applicationFlexOptions.layoutAlign" [fxLayoutGap]="applicationFlexOptions.layoutGap">
+  <span *ngFor="let application of applicationsList" class="application-card" [fxFlex]="applicationFlexOptions.size">
+    <img alt="application-logo" class="application-card-image" src="{{application.logoPath}}" [matTooltip]="application.name" matTooltipPosition="below">
+  </span>
+</div>

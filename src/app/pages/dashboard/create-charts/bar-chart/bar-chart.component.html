@@ -1,0 +1,4 @@
+<div id="barChart"></div>
+<a mat-button color="primary" class="sapper-lable" [ngClass]="{'selected-filter' : selectedFilter=='monthly'}" (click)="showChartMonthly()">Last Month</a>
+<a mat-button color="primary" class="sapper-lable" [ngClass]="{'selected-filter' : selectedFilter=='weekly'}" (click)="showChartWeekly()">Current Month</a>
+<a mat-button color="primary" class="sapper-lable" [ngClass]="{'selected-filter' : selectedFilter=='last7days'}" (click)="showChartDailyBasis()">Current Week</a>

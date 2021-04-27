@@ -1,0 +1,78 @@
+@import './../shared/styles/colors.scss';
+
+.connections-container {
+  min-height: calc(100vh - 90px);
+  padding: 20px;
+
+    .create-connection {
+      margin: 15px 10px 50px 0px;
+      // float: right;
+      // .sapper-button {
+      //   float: right;
+      // }
+      right: 0px;
+    }
+
+    .set-margin {
+      margin-bottom: 50px;
+      display: block;
+    }
+
+    .connection-table {
+      .empty-connection-list {
+        margin: auto;
+
+        .empty-data-card {
+          background: none;
+          box-shadow: none;
+
+          .content {
+            margin-top: -25px;
+          }
+
+          .empty-image {
+            opacity: 0.5;
+          }
+        }
+      }
+      .card-table {
+        width: 100%;
+        border-radius: 10px;
+        background-color: $white;
+        box-shadow: $box-shadow;
+
+        .card-table-header {
+          margin: -20px 15px 15px 15px;
+          box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(244, 67, 54, 0.4);
+          background: $table_header_box_shadow;
+          color: $white;
+          border-radius: 10px;
+        }
+
+        .icons {
+          text-align: center;
+          cursor: pointer;
+
+          .edit-icon,
+          .delete-icon {
+            height: 15px;
+            width: 15px;
+            font-size: 20px;
+          }
+
+          .edit-icon {
+            color: $sapper_btn;
+
+            &:hover {
+              color: $blue_darker;
+            }
+          }
+
+          .delete-icon {
+            color: $delete_red;
+          }
+        }
+      }
+    }
+
+}

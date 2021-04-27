@@ -1,0 +1,10 @@
+<div class="collector-container">
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label>Collector</mat-label>
+    <textarea [froalaEditor]="collectorOptions" matInput type="text"
+      name="collector"
+      [ngModel]="taskProperties.collectorInput| templateToSlot: dragDataObj"
+      (ngModelChange)="taskProperties.collectorInput = $event"
+      required>{{taskProperties.collectorInput | templateToSlot: dragDataObj}}</textarea>
+  </mat-form-field>
+</div>

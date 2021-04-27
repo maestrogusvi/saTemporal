@@ -1,0 +1,43 @@
+<div class="data-slot-container">
+  <mat-accordion class="example-headers-align" multi>
+    <div class="data-slot-accordion" *ngFor="let dataSlot of dataSlots; let i = index" draggable="true"
+      (dragstart)="onDragStart($event)" [attr.json-path]="''" [attr.json-step]="dataSlot.sapper_prop.step" [attr.task-id]="dataSlot.id" [attr.slot-type]="dataSlot.sapper_prop.bpmnType">
+      <mat-expansion-panel class="expansion-panel" (opened)="getMetaByMetaId(dataSlot, i)"
+        (closed)="panelOpenState = false" [expanded]="false">
+        <mat-expansion-panel-header class="expansion-panel-header">
+          <mat-panel-title>
+            {{dataSlot.sapper_prop.step}}-{{dataSlot.name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expansion-content">
+          <tree-root #sourceTree [nodes]="dataSlot.jsonMeta" [focused]="true" [options]="options">
+            <ng-template #treeNodeTemplate let-node let-index="index">
+              <div (dragstart)="onDragStart($event)">
+                <span *ngIf="node.data.type==='array'" class="fa fa-bars type-icons "></span>
+                <!-- <span *ngIf="node.data.type==='string'" class="fa fa-sort-alpha-asc type-icons">
+                </span>
+                <span *ngIf="node.data.type==='number'" class="fa fa-sort-numeric-asc type-icons"></span> -->
+                <span *ngIf="node.data.type==='string' || node.data.type==='null'" class="type-icons1">ABC
+                </span>
+                <!-- <span class="fa-layers fa-fw" *ngIf="node.data.type==='string' || node.data.type==='null'" style="background:MistyRose">
+                  <i class="fa fa-circle"></i>
+                  <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:100">ABC</span>
+                </span> -->
+                <span *ngIf="node.data.type==='number'" class=" type-icons1">123</span>
+                <span *ngIf="node.data.type==='object'" class="fa fa-th-large type-icons"></span>
+                <!-- <span *ngIf="node.data.type==='null'" class="fa fa-image type-icons"></span> -->
+                <span *ngIf="node.data.type==='boolean'" >
+                  <span class="fa fa-check-circle type-icons2"></span>
+                  <span class="fa fa-times-circle type-icons2 margin-right-5"></span>
+                </span>
+                <span class="node-label" [attr.json-path]="getParent(node)" [attr.json-step]="dataSlot.sapper_prop.step"
+                  [attr.task-id]="dataSlot.id"
+                  [attr.slot-type]="dataSlot.sapper_prop.bpmnType">{{ node.data.name }}</span>
+              </div>
+            </ng-template>
+          </tree-root>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
+</div>

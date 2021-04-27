@@ -1,0 +1,51 @@
+<!-- <div class="dialog" #tenantSettingsDialog>
+    <div class="dialog-header">
+        <h4 class="dialog-title">{{data.name}}</h4>
+        <mat-icon class="close pull-right" matTooltip="Close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div mat-dialog-content class="dialog-body">
+        <div *ngFor="let option of options">
+            <mat-label> {{option.option}}</mat-label>
+            <mat-slide-toggle class="pull-right" [checked]="settings[option.field]" (click)="updateSchedule(option)">
+            </mat-slide-toggle>
+        </div>
+    </div>
+    <div mat-dialog-actions class="dialog-footer">
+        <button mat-button class="sapper-button" (click)="closeDialog()">Cancel</button>
+    </div>
+</div> -->
+<div class="dialog" fxLayout="column" #tenantSettingsDialog>
+  <div class="dialog-header" fxFlex = "12%">
+      <h4 class="dialog-title">{{data.name}}</h4>
+      <mat-icon class="close pull-right" matTooltip="Close" (click)="closeDialog()">close</mat-icon>
+  </div>
+  <!-- <mat-icon class="close-tab" matTooltip="Hide tab" (click)="opened = !opened">chevron_right
+  </mat-icon> -->
+  <div mat-dialog-content class="dialog-body" fxFlex = "73%">
+    <mat-sidenav-container class="example-container" hasBackdrop="false">
+      <mat-sidenav #sidenav mode="push" [(opened)]="opened">
+        <mat-nav-list>
+          <a class="side-list" mat-list-item (click)="selectedOption = option" *ngFor="let option of options">{{option.option}}</a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content class="content">
+        <div *ngIf="selectedOption.field === 'password_policy'">
+          <sapper-password-policy #passwordConfig></sapper-password-policy>
+        </div>
+        <div *ngIf="selectedOption.field === 'user_config'">
+          <sapper-user-config></sapper-user-config>
+        </div>
+        <div *ngIf="selectedOption.field === 'disable_schedule'" class="schedule">
+          <mat-label> {{selectedOption.option}}</mat-label>
+          <mat-slide-toggle class="pull-right" [checked]="settings[selectedOption.field]" (click)="updateSchedule(selectedOption)">
+          </mat-slide-toggle>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  <div mat-dialog-actions class="dialog-footer" fxFlex = "15%">
+      <button mat-button class="sapper-button" (click)="closeDialog()">Cancel</button>
+      <button mat-button *ngIf="selectedOption.field === 'password_policy'" class="sapper-button" (click)="passwordConfig.passwordPolicyConfig()">Update</button>
+  </div>
+</div>
+

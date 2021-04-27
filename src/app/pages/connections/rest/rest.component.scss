@@ -1,0 +1,23 @@
+@import './../../shared/styles/colors.scss';
+
+:host {
+    .group-header {
+        margin-bottom: 5px;
+        display: block;
+    }
+    .icons {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        cursor: pointer;
+        .delete-icon {
+            color: $delete_red;
+        }
+        .add-icon {
+            color: $sapper_btn;
+            &:hover {
+                color: $blue_darker;
+            }
+        }
+    }
+}

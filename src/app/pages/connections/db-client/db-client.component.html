@@ -1,0 +1,60 @@
+<div *ngIf="connectionData">
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="100%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.URL</mat-label>
+                <input matInput type="text" name="dbUrl" [(ngModel)]="connectionData.url"
+                    (keydown.enter)="$event.preventDefault();" trim="blur">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.url=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.DATABASE</mat-label>
+                <mat-select name="database" [(ngModel)]="connectionData.database"
+                    (selectionChange)="onChangeDbType($event)" [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let database of databaseType" [value]="database.value">
+                        {{database.key}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.DRIVER-CLASS-NAME</mat-label>
+                <input matInput type="text" name="driverClass" [(ngModel)]="connectionData.driverClassName"
+                    (keydown.enter)="$event.preventDefault();" trim="blur" disabled>
+                <button mat-button matSuffix mat-icon-button aria-label="Clear"
+                    (click)="connectionData.driverClassName=''" disabled>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.USERNAME</mat-label>
+                <input matInput type="text" name="user-name" [(ngModel)]="connectionData.username"
+                    (keydown.enter)="$event.preventDefault();" trim="blur" autocomplete="new-password">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.username=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.PASSWORD</mat-label>
+                <input matInput type="password" name="password" [(ngModel)]="connectionData.password"
+                    (keydown.enter)="$event.preventDefault();" trim="blur" autocomplete="new-password">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.password=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+</div>

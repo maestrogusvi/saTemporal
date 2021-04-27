@@ -1,0 +1,54 @@
+<sapper-page-header [title]="selectedWorkflow.name" [description]="selectedWorkflow.description"
+  [button]="buttonObject"></sapper-page-header>
+<div class="workflow-preview-container">
+  <div>
+    <div class="workflow-details" fxLayout="row" fxLayoutGap="30px grid">
+      <mat-card class="header-card" fxFlex="60%" fxLayout='column' fxLayoutGap="10px">
+        <mat-card-header>
+          <h4>How it works?</h4>
+        </mat-card-header>
+        <mat-card-content>
+          <p [innerHtml]="selectedWorkflow.working"></p>
+        </mat-card-content>
+      </mat-card>
+      <div fxFlex="40%">
+        <div class="preview-sidebar">
+          <div class="application-card-container">
+            <mat-card class="applications-card" fxLayout='column'>
+              <mat-card-header class="header" fxFlex="30%">
+                <h6 class="text-center">Applications Used</h6>
+              </mat-card-header>
+              <mat-card-content class="content" fxFlex="70%">
+                <sapper-application-card [applicationsList]="selectedWorkflow.applicationsUsed"
+                  [applicationFlexOptions]="applicationFlexOptions"></sapper-application-card>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="tag-card-container">
+            <mat-card class="tags-card" fxLayout='column' fxLayoutGap="10px">
+              <mat-card-header class="header" fxFlex="30%">
+                <h6 class="text-center">Tags</h6>
+              </mat-card-header>
+              <mat-card-content class="content" fxFlex="70%">
+                <span class="tags small-text" *ngFor="let tag of selectedWorkflow.tags">
+                  {{tag}}
+                </span>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="preview-screenshot">
+      <h4>Preview</h4>
+      <mat-card class="screenshot-card" fxLayout='column' fxLayoutGap="10px">
+        <mat-card-content fxFlex="55%">
+          <div>
+            <img src="/assets/images/workflows/w3.png" alt="workflow" />
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

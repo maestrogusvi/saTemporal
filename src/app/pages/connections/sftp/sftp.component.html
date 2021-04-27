@@ -1,0 +1,58 @@
+<div *ngIf="connectionData">
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="49%">
+        <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+          <mat-label translate>Authentication Type</mat-label>
+          <mat-select name="type" [(ngModel)]="connectionData.sftpConnectionType" [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let type of sftpConnectionType" [value]="type.value" [disabled]="type.value==='KEYFILE'">
+                  {{type.label}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+      <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+              <mat-label translate>Host Name</mat-label>
+              <input matInput type="text" name="bucket-name" [(ngModel)]="connectionData.hostName"
+                  (keydown.enter)="$event.preventDefault();" trim="blur">
+              <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.hostName=''">
+                  <mat-icon>close</mat-icon>
+              </button>
+          </mat-form-field>
+      </div>
+      <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+              <mat-label translate>Port</mat-label>
+              <input matInput type="text" name="bucket-name" [(ngModel)]="connectionData.port"
+                  (keydown.enter)="$event.preventDefault();" trim="blur">
+              <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.port=''">
+                  <mat-icon>close</mat-icon>
+              </button>
+          </mat-form-field>
+      </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+      <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+              <mat-label translate>User Name</mat-label>
+              <input matInput type="text" name="user-name" [(ngModel)]="connectionData.username"
+                  (keydown.enter)="$event.preventDefault();" trim="blur" autocomplete="new-password">
+              <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.username=''">
+                  <mat-icon>close</mat-icon>
+              </button>
+          </mat-form-field>
+      </div>
+      <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field text form-field-wrapper" *ngIf="connectionData.sftpConnectionType==='BASIC'">
+              <mat-label translate>Password</mat-label>
+              <input matInput type="password" name="password"  [(ngModel)]="connectionData.password"
+                  (keydown.enter)="$event.preventDefault();" trim="blur" autocomplete="new-password">
+              <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.password=''">
+                  <mat-icon>close</mat-icon>
+              </button>
+          </mat-form-field>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,223 @@
+<div class="textarea" [style.width]="isOpenLeftSideBar == '' ? '97.8%' : '85.15%'"
+  [style.margin-left]="isOpenLeftSideBar == '' ? '30.05px' : '203px'" [style.height.px]='height'
+  contenteditable="false">
+  <mat-icon contentEditable='false' class="icon resize_icon" *ngIf="height >= 70" (click)="height = 60">
+    keyboard_arrow_down</mat-icon>
+  <mat-icon contentEditable='false' class="icon resize_icon" *ngIf="height <= 60" (click)="height = 150">
+    keyboard_arrow_up</mat-icon>
+
+  <div class="properties-panel">
+    <!-- <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header> -->
+    <mat-tab-group animationDuration="0ms" (selectedTabChange)="propertiesTabChange($event)">
+      <mat-tab label="properties">
+        <ng-template mat-tab-label>
+          <div contentEditable='false'>
+            <span class="propertie-name">{{rightPanelData.name}}</span>
+            <mat-icon class="icon">settings_applications</mat-icon>
+            <span class="button-tools margin-right-5 vertical-align-super">Properties</span>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="meta" *ngIf="isShowMeta()">
+        <ng-template mat-tab-label>
+          <div contentEditable='false'>
+            <mat-icon class="icon">list_alt</mat-icon>
+            <span class="button-tools margin-right-5 vertical-align-super">Meta</span>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="settings" *ngIf="propertyTemplate === 'workflow-prop'">
+        <ng-template mat-tab-label>
+          <div contentEditable='false'>
+            <mat-icon class="icon">miscellaneous_services</mat-icon>
+            <span class="button-tools margin-right-5 vertical-align-super"
+              (click)="openCloseTab('settings')">Settings</span>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="additional_properties" *ngIf="isShowAdditionalProperties()">
+        <ng-template mat-tab-label>
+          <div contentEditable='false'>
+            <mat-icon class="icon">library_add</mat-icon>
+            <span class="button-tools margin-right-5 vertical-align-super"
+              (click)="openCloseTab('additionalProperties')">Additional
+              properties</span>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+
+
+    <div class="properties-tab" [@customAnm]="custAnm" [style.max-height.px]='scrollHeight'>
+      <mat-drawer-container class="example-container">
+        <mat-drawer class="data-slot" #drawer [mode]="'side'">
+          <sapper-data-slots #dataSlots *ngIf="isDataSlotOpen" [droppedNode]='rightPanelData'
+            [mappingDetails]='mappingDetails' [dragdataObj]='dragdataObj' [parentData]='parentData'></sapper-data-slots>
+        </mat-drawer>
+        <mat-drawer-content>
+          <!-- <div class="properties-drawer-content"> -->
+          <button class="sapper-button data-slot-button" matTooltipPosition="right"
+            (click)="isDataSlotOpen = !isDataSlotOpen; drawer.toggle()">Data
+            Slot</button>
+          <div class="tabcontent" *ngIf="displayTab === 'properties'" [style.height.px]='scrollInnerHeight'>
+            <h3 class=" Properties-heading" *ngIf="workflowProperties">Automation Details</h3>
+            <div class="scrollable-container">
+              <form class="properties-form" *ngIf="!workflowProperties">
+                <div class="divider" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                  <mat-divider class="separator" fxFlex="1 0"></mat-divider>
+                  <div class="text-muted separator-text">Basic</div>
+                  <mat-divider class="separator" fxFlex="1 0"></mat-divider>
+                </div>
+                <div>
+                  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" name="name" [(ngModel)]="rightPanelData.name" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="rightPanelData.name=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea class="textarea-content" matInput placeholder="description"
+                      name="rightPanelData.description" [(ngModel)]="rightPanelData.description"></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="divider" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                  <mat-divider class="separator" fxFlex="1 0"></mat-divider>
+                  <div class="text-muted separator-text">Configuration</div>
+                  <mat-divider class="separator" fxFlex="1 0"></mat-divider>
+                </div>
+                <div *ngIf="isTpSourceProperties()">
+                  <sapper-tp-source #tpSource [droppedNode]='rightPanelData' [taskDetails]='taskProperties'
+                    [connection]="selectedConnection">
+                  </sapper-tp-source>
+                </div>
+                <div *ngIf="isTpSinkProperties()">
+                  <sapper-tp-sink #tpSink [droppedNode]='rightPanelData' [taskDetails]='taskProperties'
+                    [connection]="selectedConnection" [dragDataObj]='dragdataObj'>
+                  </sapper-tp-sink>
+                </div>
+                <div *ngIf="isSoapClient()">
+                  <sapper-soap-client #soapClient [droppedNode]='rightPanelData'
+                    [connectionId]="rightPanelData.connectionId" [soapTaskDetails]='taskProperties'
+                    [dragDataObj]='dragdataObj'>
+                  </sapper-soap-client>
+                </div>
+                <div *ngIf="isCsvParserProperties()">
+                  <sapper-csv-parser #csvParser [droppedNode]='rightPanelData' [dragDataObj]='dragdataObj'
+                    [taskDetails]='taskProperties'>
+                  </sapper-csv-parser>
+                </div>
+                <div *ngIf="isCsvConverterProperties()">
+                  <sapper-csv-converter #csvConverter [droppedNode]='rightPanelData' [dragDataObj]='dragdataObj'
+                    [taskDetails]='taskProperties'>
+                  </sapper-csv-converter>
+                </div>
+                <div *ngIf="isFixedWidthProperties()">
+                  <sapper-fixed-width-parser #fixedWidthParser [droppedNode]='rightPanelData'
+                    [dragDataObj]="dragdataObj" [taskDetails]='taskProperties'
+                    (saveMetaFixedWidth)="saveFixedWidthMeta($event)">
+                  </sapper-fixed-width-parser>
+                </div>
+                <div *ngIf="isWebhookTrigger()">
+                  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+                    <mat-label>Webhook URL</mat-label>
+                    <input matInput type="text" name="webhookPath" [(ngModel)]="webhookPath" disabled>
+                  </mat-form-field>
+                </div>
+                <div *ngIf="rightPanelData.propertiesType === 'APPLICATION'">
+                  <sapper-apps [rightPanelData]="rightPanelData">
+                  </sapper-apps>
+                </div>
+                <div *ngIf="isHttpClientProperties()">
+                  <sapper-http-client #httpClient [droppedNode]='rightPanelData' [taskDetails]='taskProperties'
+                    [httpClientConnectionType]='httpClientConnectionType' [connection]='selectedConnection'
+                    [dragDataObj]='dragdataObj'>
+                  </sapper-http-client>
+                </div>
+                <div *ngIf="isTransformationProperties()">
+                  <sapper-transformation #transformation [droppedNode]='rightPanelData' [taskDetails]='taskProperties'
+                    [dragDataObj]='dragdataObj' (isShowMapping)="isShowMapping.emit()"
+                    (isSourceDataDeleted)="saveProperties()">
+                  </sapper-transformation>
+                </div>
+                <div *ngIf="isSqlClientProperties()">
+                  <sapper-sql-client #sqlClient [droppedNode]='rightPanelData' [taskDetails]='taskProperties'
+                    [connection]='selectedConnection' [dragDataObj]='dragdataObj'
+                    (isQueryVerified)="isQueryVerified = $event">
+                  </sapper-sql-client>
+                </div>
+                <div *ngIf="isCollectorTaskProperties()">
+                  <sapper-collector #collector [droppedNode]='rightPanelData' [taskDetails]='taskProperties'
+                    [dragDataObj]='dragdataObj'>
+                  </sapper-collector>
+                </div>
+                <div *ngIf="rightPanelData?.sapper_prop?.sappertasktype === 'subProcess'">
+                  <div class="subprocess-container">
+                    <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+                      <div fxFlex="50%">
+                        <mat-form-field class="form-field form-field-wrapper set-width" appearance="outline">
+                          <mat-label>Iteration Object</mat-label>
+                          <textarea [froalaEditor]="iterationObjectOptions" matInput type="text"
+                            name="subProcessInputDataItem"
+                            [ngModel]="rightPanelData.subProcessInputDataItem | dataSourceTempToSlot: dragdataObj"
+                            (ngModelChange)="rightPanelData.subProcessInputDataItem = $event"
+                            required>{{rightPanelData.subProcessInputDataItem | dataSourceTempToSlot: dragdataObj}}</textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <form class="properties-form" *ngIf="workflowProperties">
+                <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput type="text" name="name" [(ngModel)]="rightPanelData.name" required>
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="rightPanelData.name=''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+                <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <textarea class="textarea-content" matInput placeholder="description"
+                    name="rightPanelData?.description" [(ngModel)]="rightPanelData.description"></textarea>
+                </mat-form-field>
+              </form>
+              <button *ngIf="!workflowProperties" mat-stroked-button class="sapper-button" (click)="savePropertyDetails()">
+                Save
+              </button>
+            </div>
+
+          </div>
+          <div class="tabcontent" *ngIf="displayTab === 'settings'" [style.height.px]='scrollInnerHeight'>
+            <h3 class="Properties-heading">Automation Settings</h3>
+            <div class="settings">
+              <div *ngFor="let option of options">
+                <mat-label>
+                  <h3 class="workflow-options"> {{option.option}}</h3>
+                </mat-label>
+                <mat-slide-toggle class="pull-right" [checked]="settings[option.field]"
+                  (change)="updateSchedule(option)">
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+          <div class="tabcontent" *ngIf="displayTab === 'meta'" [style.height.px]='scrollInnerHeight'>
+            <sapper-meta [taskProperties]="taskProperties" [droppedNode]='rightPanelData'></sapper-meta>
+          </div>
+          <div class="tabcontent" *ngIf="displayTab === 'additional_properties'">
+            <sapper-key-properties #keyProperties [tasktype]="rightPanelData?.sapper_prop?.sappertasktype"
+              [properties]="properties"></sapper-key-properties>
+            <button mat-stroked-button class="sapper-button" (click)="savePropertyDetails()">
+              Save
+            </button>
+          </div>
+          <!-- </div> -->
+        </mat-drawer-content>
+      </mat-drawer-container>
+    </div>
+  </div>
+  <div id="propertiesResizer" class="grabber"></div>
+</div>

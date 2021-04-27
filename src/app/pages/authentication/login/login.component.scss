@@ -1,0 +1,153 @@
+@import '../../shared/styles/colors.scss';
+@import '../../shared/styles/material-styles.scss';
+
+:host {
+  .login-form-container {
+    transition: all 0.6s ease-in-out;
+
+    .login-form {
+      margin-top: 5px;
+
+      h4 {
+        margin: 15px;
+      }
+
+      .social-account {
+        margin-top: 25px;
+        font-size: 12px;
+      }
+
+      .sapper-button {
+        background-color: $sapper_btn !important;
+        color: $white !important;
+        margin: 20px 0px 10px 0px;
+      }
+
+      a {
+        color: $dark_grey;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 15px 0;
+      }
+
+      form {
+        background-color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 30px;
+        height: 100%;
+        text-align: center;
+
+        .form-field {
+          width: 90%;
+        }
+      }
+
+      input:-internal-autofill-selected {
+        height: 30px;
+      }
+
+      img {
+        height: 56px;
+        left: 15%;
+        margin: 7px 20px 0px 0px;
+        position: absolute;
+        top: 0;
+        width: 71px;
+      }
+
+      a .fa {
+        font-size: 15px;
+        color: $dark_grey;
+        transition: .5s;
+      }
+
+      .social-container {
+        margin: 20px 0;
+
+        a {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0 10px;
+          height: 25px;
+          width: 30px;
+          transform: perspective(1000px) skew(0deg) translate(0, 0);
+          transition: .5s;
+          box-shadow: -5px 5px 10px 0px rgba(0, 0, 0, .10);
+
+          &:hover {
+            transform: perspective(100px) skew(0deg) translate(5px, -5px);
+            box-shadow: -20px 20px 20px rgba(0, 0, 0, .10);
+          }
+
+          &:before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: -5px;
+            height: 100%;
+            width: 5px;
+            background: $grey_lightest;
+            transition: .5s;
+            transform: rotate(0deg) skewY(-38deg);
+          }
+
+          &:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: -3px;
+            height: 4px;
+            width: 100%;
+            background: $grey_lightest;
+            transition: .5s;
+            transform: rotate(0deg) skewX(-52deg);
+          }
+
+          &.social-facebook {
+            background: $facebook_color;
+
+            &:before {
+              background: $facebook_color_left_shadow;
+            }
+
+            &:after {
+              background: $facebook_color_bottom_shadow;
+            }
+          }
+
+          &.social-linkedin {
+            background: $linkedin_color;
+
+            &:before {
+              background: $linkedin_color_left_shadow;
+            }
+
+            &:after {
+              background: $linkedin_color_bottom_shadow;
+            }
+          }
+
+          &.social-google {
+            background: $google_color;
+
+            &:before {
+              background: $google_color_left_shadow;
+            }
+
+            &:after {
+              background: $google_color_bottom_shadow;
+            }
+          }
+        }
+
+        .fa {
+          color: $white;
+        }
+      }
+    }
+  }
+}

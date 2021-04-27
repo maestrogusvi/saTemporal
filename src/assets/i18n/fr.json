@@ -1,0 +1,48 @@
+{
+  "HOME": {
+    "TITLE": "Bonjour Angulaire avec la ngx-traduire!",
+    "SELECT": "Changer de langue"
+  },
+  "LOGIN": {
+    "TITLE": "SignIn à l'aide de l'adresse email",
+    "HEADING": "SAPEUR",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Mot de passe",
+    "REMEMBER-ME": "Se Souvenir De Moi",
+    "LOGIN": "Connexion",
+    "SIGN-UP": "Inscrivez -",
+    "ACCOUNT-MSG": "N'avez pas de compte?",
+    "EMAIL-PLACEHOLDER": "Entrez l'adresse email",
+    "PASSWORD-PLACEHOLDER": "Entrez le mot de passe",
+    "FORGOT-PASSWORD": "Mot de passe oublié?"
+  },
+  "MAIN-HEADER": {
+    "LOGO": "Sapeur 3.0",
+    "MARKETPLACE": "Marketplace1",
+    "WORKFLOW":"Workflow",
+    "MONITOR":"Monitrice",
+    "CHANGE-LANGUAGE": "Changer de langue",
+    "CHANGE-LANGUAGE-OPTION1": "En",
+    "CHANGE-LANGUAGE-OPTION2": "Fr",
+    "CHANGE-THEME": "Change le thème",
+    "LOGOUT": "Se déconnecter",
+    "DASHBOARD": "TABLEAU DE BORD",
+    "SETTING": "Settings",
+    "MARKET-GROUPS": "Market Groups",
+    "ROLE-MAPPING": "Role Mapping",
+    "ORGANIZATIONS": "Organizations"
+  },
+  "CHANGE-THEME": {
+    "TITLE": "Change le thème",
+    "HEADER-COLOR": "Choisissez la couleur du texte de l'en-tête:",
+    "CONTENT-COLOR": "Choisissez la couleur du contenu:",
+    "BUTTON-COLOR": "Choisissez la couleur du bouton:",
+    "BUTTON-TEXT-COLOR": "Choisissez la couleur du texte du bouton:",
+    "SAVE": "sauvegarder"
+  },
+  "MONITOR": {
+    "TITLE":"skrow rotinom!",
+    "MSG": "...noos gnimoC"
+  }
+
+}

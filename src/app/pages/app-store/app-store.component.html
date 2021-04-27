@@ -1,0 +1,60 @@
+<div class="marketplace-container">
+
+  <sapper-page-header [title]="'App Store'" [description]="'Select one or more applications to see out of the box available Automation.'"></sapper-page-header>
+
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0" class="content">
+    <div class="item item-1 margin-top-5" fxFlex="15">
+      <h3 class="header-title categories">Categories Filter</h3>
+      <div class="filter-content">
+        <mat-form-field class="search_domain">
+          <mat-label><span class="fa fa-search"></span> Search</mat-label>
+          <input matInput name="search" [(ngModel)]="searchDomain">
+          <button mat-button *ngIf="searchDomain" matSuffix mat-icon-button aria-label="Clear"
+            (click)="searchDomain = ''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <div *ngFor="let domain of domainList | search : searchDomain; let i = index" class="domain">
+          <span class="normal-text"><mat-checkbox [matTooltip]="domain" [matTooltipDisabled] = "isTooltipEnabled(domain)"
+            (change)="selectDomain($event ,domain, i)">{{getDomainName(domain)}}</mat-checkbox></span>
+        </div>
+      </div>
+    </div>
+    <div class="item item-2" fxFlex="85%">
+      <div class="all_applications">
+        <div class="apps_content margin-top-5">
+          <h3 class="header-title">Applications</h3>
+          <mat-form-field class="search_app">
+            <mat-label><span class="fa fa-search"></span> Search</mat-label>
+            <input matInput name="searchapp" [(ngModel)]="searchApp">
+            <button mat-button *ngIf="searchApp" matSuffix mat-icon-button aria-label="Clear" (click)="searchApp = ''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </div>
+        <div class="selected-apps">
+          <mat-chip-list class="list" aria-label="App selection" *ngIf="selectedApp.length">
+            <mat-chip *ngFor="let app of selectedApp" color="primary">
+              {{app}}
+              <em class="fa fa-close" (click)="removeApp(app)"></em>
+            </mat-chip>
+          </mat-chip-list>
+          <div *ngIf="selectedApp.length" class="workflow-btn">
+            <button class="sapper-button" mat-stroked-button (click)="redirect()">Community workflow</button>
+          </div>
+        </div>
+        <ul class="application-list">
+          <li *ngFor="let application of applicationList | search : searchApp" matTooltip="{{application.description}}"
+            matTooltipPosition="above" (click)="selectApplication(application)">
+            <img alt="application" class="application-image" src="{{application.logoPath}}" />
+            <span translate>{{application.name}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <button (click)="router.navigateByUrl('/community-workflow')" class="sapper-button community-workflow-icon"  matTooltipPosition="left">
+    See Community Automation
+  </button>
+</div>

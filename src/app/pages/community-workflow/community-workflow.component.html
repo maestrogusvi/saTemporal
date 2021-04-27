@@ -1,0 +1,32 @@
+<div class="community-workflow">
+
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0" class="content">
+    <div class="item item-1" fxFlex="15">
+      <h3 class="header-title">Application Filter</h3>
+      <div class="filter-content">
+        <div *ngFor="let app of appData; let i = index" class="domain">
+          <mat-checkbox [matTooltip]="app.name" (change)="filterChange($event ,app.name, i, 'app')"
+          [matTooltipDisabled] = "isTooltipEnabled(app.name)" [checked]="app.checked">{{getName(app.name)}}</mat-checkbox>
+        </div>
+      </div>
+      <h3 class="header-title">Tag Filter</h3>
+      <div class="filter-content">
+        <div *ngFor="let app of tagData; let i = index" class="domain">
+          <mat-checkbox [matTooltip]="app" [matTooltipDisabled] = "isTooltipEnabled(app)"
+           (change)="filterChange($event ,app, i, 'tag')">{{getName(app)}}</mat-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="item item-2" fxFlex="85%">
+      <h3 class="header-title">Community Automation</h3>
+      <div class="workflow-cont">
+        <sapper-workflow-card [workflowList]="workflowList" [applicationFlexOptions]="applicationFlexOptions" [flexOptions]="flexOptions" [isCommunity]="true">
+        </sapper-workflow-card>
+      </div>
+    </div>
+  </div>
+  <button mat-fab color="primary" aria-label="Example icon button with a delete icon"
+      (click)="router.navigateByUrl('/automation/create')" class="create-workflow-icon">
+      <mat-icon matTooltip="Create Automation" matTooltipPosition="left">add</mat-icon>
+  </button>
+</div>

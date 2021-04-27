@@ -1,0 +1,19 @@
+@import './../../shared/styles/colors.scss';
+
+:host {
+  .page-footer {
+    background: $white;
+    text-align: right;
+    padding: 5px;
+    height: 30px;
+    box-shadow: 0px -3px 7px rgba(0, 0, 0, 0.14);
+    .normal-text {
+      color: $dark_grey;
+    }
+    .copyright-icon {
+      font-size: 17px;
+      color: $dark_grey;
+      vertical-align: sub;
+    }
+  }
+}

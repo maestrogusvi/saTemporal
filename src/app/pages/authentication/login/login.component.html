@@ -1,0 +1,34 @@
+<div class="login-form-container">
+  <div class="login-form" *ngIf="!rightPanel">
+    <form action="#" class="form-validate" role="form" name="loginForm" (submit)="login(userData)"
+      (keydown.enter)="$event.preventDefault(); login(userData);">
+      <h4>Sign in</h4>
+
+      <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" name="username" [(ngModel)]="userData.email" [ngModelOptions]="{standalone: true}" required>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="userData.email=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+
+      <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="userData.password" [ngModelOptions]="{standalone: true}" required>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword; $event.preventDefault();">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <p>Forgot your password? Please contact <a href="mailto:support@sapper.ai">support@sapper.ai</a></p>
+      <button mat-stroked-button class="sapper-button">Sign In</button>
+      <span class="text-muted social-account">Powered By Sapper</span>
+<!--      <div class="social-container">-->
+<!--        <a href="/login" class="social-facebook"><span class="fa fa-facebook"></span></a>-->
+<!--        <a href="/login" class="social-google"><span class="fa fa-google-plus"></span></a>-->
+<!--        <a href="/login" class="social-linkedin"><span class="fa fa-linkedin"></span></a>-->
+<!--      </div>-->
+    </form>
+  </div>
+</div>

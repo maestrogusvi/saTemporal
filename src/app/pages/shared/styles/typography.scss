@@ -1,0 +1,39 @@
+@import './colors.scss';
+
+.header {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.page-header {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sub-header {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.normal-text {
+  font-size: 14px;
+}
+
+.navigation-tabs {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+.small-text {
+  font-size: 11px;
+}
+
+.text-muted {
+  font-size: 12px;
+  color: $grey_darker;
+}
+
+

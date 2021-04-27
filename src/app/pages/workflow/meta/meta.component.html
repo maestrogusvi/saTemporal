@@ -1,0 +1,104 @@
+<div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="50%">
+        <h2 class="Properties-heading">Add Meta</h2>
+    </div>
+    <div fxFlex="50%">
+        <h2 class="Properties-heading"><i class="fa fa-trash pull-right" aria-hidden="true" (click)="deleteMeta()"></i>
+        </h2>
+    </div>
+</div>
+<div class="scrollable_container">
+    <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <div class="upload-url-section">
+                <h3 class="node_name">Attach Documents</h3>
+                <sapper-upload-file (selectedMetaSource)="selectedFile($event)" [acceptedFiles]="fileTypes">
+                </sapper-upload-file>
+            </div>
+        </div>
+        <div fxFlex="50%">
+            <div class="meta-data">
+                <mat-form-field class="meta" appearance="outline">
+                    <mat-label>File Name</mat-label>
+                    <input matInput disabled value="{{taskProperties['fileName']}}">
+                </mat-form-field>
+                <mat-form-field class="meta" appearance="outline">
+                    <mat-label>File Type</mat-label>
+                    <input matInput disabled value="{{taskProperties['fileType']}}">
+                </mat-form-field>
+                <mat-form-field class="form-field select-connection" appearance="outline" *ngIf="isFileTypeCsv()">
+                    <mat-label>Column Delimiter</mat-label>
+                    <mat-select name="operation" [(ngModel)]="requiredProperties.delimiter">
+                        <mat-option *ngFor="let option of delelimiterTypes" [value]="option.value">
+                            {{option.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="meta-data">
+
+                    <mat-form-field class="Req-fields" appearance="outline">
+                        <mat-label>Escape Char</mat-label>
+                        <input matInput name="escapeChar" maxlength="1" [(ngModel)]="requiredProperties.escapeChar"
+                            value="{{requiredProperties.escapeChar}}">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field select-connection Req-fields" appearance="outline"
+                        *ngIf="isFileTypeCsv()">
+                        <mat-label>Escape Disabled</mat-label>
+                        <mat-select name="escapeDisabled" [(ngModel)]="requiredProperties.escapeDisabled">
+                            <mat-option *ngFor="let option of escapeDisabled" [value]="option.value">
+                                {{option.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field select-connection Req-fields" appearance="outline"
+                        *ngIf="isFileTypeCsv()">
+                        <mat-label>SkipHeader Record</mat-label>
+                        <mat-select name="operation" [(ngModel)]="requiredProperties.skipHeaderRecord">
+                            <mat-option *ngFor="let option of skipHeaderRecord" [value]="option.value">
+                                {{option.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field select-connection Req-fields" appearance="outline"
+                        *ngIf="isFileTypeCsv()">
+                        <mat-label>Ignore Empty Lines</mat-label>
+                        <mat-select name="operation" [(ngModel)]="requiredProperties.ignoreEmptyLines">
+                            <mat-option *ngFor="let option of ignoreEmptyLines" [value]="option.value">
+                                {{option.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="Req-fields" appearance="outline">
+                        <mat-label>Quote</mat-label>
+                        <input matInput name="quote" maxlength=1 pattern="['|&quot]"
+                            [(ngModel)]="requiredProperties.quote" value="{{requiredProperties.quote}}">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field select-connection Req-fields" appearance="outline"
+                        *ngIf="isFileTypeCsv()">
+                        <mat-label>Quote Disabled</mat-label>
+                        <mat-select name="operation" [(ngModel)]="requiredProperties.quoteDisabled">
+                            <mat-option *ngFor="let option of quoteDisabled" [value]="option.value">
+                                {{option.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field class="form-field form-field-wrapper meta" *ngIf="taskProperties['fileType'] == 'XLSX'">
+                    <mat-label>Sheet Numbers</mat-label>
+                    <input matInput type="text" name="sheetNumber" [(ngModel)]="requiredProperties['sheetNumber']">
+                </mat-form-field>
+            </div>
+            <div class="upload-button-section">
+                <button class="upload_button" mat-stroked-button class="upload-button"
+                    (click)="uploadFile()">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>

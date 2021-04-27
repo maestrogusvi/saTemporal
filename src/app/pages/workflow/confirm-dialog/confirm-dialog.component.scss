@@ -1,0 +1,32 @@
+:host {
+  .dialog-container {
+    .container {
+      margin: 15px;
+      height: auto;
+      overflow: hidden;
+      position: relative;
+
+      .dialog-header {
+        border-bottom: 1px solid silver;
+        padding-bottom: 10px;
+      }
+
+      h3 {
+        margin: 0px;
+      }
+      .mat-dialog-actions {
+        margin-bottom: 0px;
+      }
+    }
+    .close.mat-button {
+      position: relative;
+      float: right;
+      top: 0;
+      right: 0;
+      padding: 5px;
+      line-height: 13px;
+      min-width: auto;
+      font-size: 13px;
+    }
+  }
+}

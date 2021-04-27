@@ -1,0 +1,67 @@
+<div class="signup-form-container">
+  <div class="registration-form">
+    <form action="#" class="form-validate" role="form" name="signupForm" [formGroup]="signupForm"
+      (keydown.enter)="$event.preventDefault()" (submit)="signup()">
+      <h4>Create Account</h4>
+
+      <mat-form-field class="form-field form-field-wrapper " appearance="outline">
+        <mat-label>Company Name</mat-label>
+        <input matInput id="companyName" type="text" trim="blur" name="companyName" formControlName="companyName"
+          [matTooltip]="getCompanyNameError()" matTooltipClass="error-tooltip" [(ngModel)]="userDetails.companyName"
+          required>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="userDetails.companyName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+        <mat-label>Admin Name</mat-label>
+        <input matInput id="name" type="text" trim="blur" name="name" formControlName="name"
+          [matTooltip]="getAdminNameError()" matTooltipClass="error-tooltip" [(ngModel)]="userDetails.adminName"
+          required>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="userDetails.adminName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+        <mat-label>Business Email</mat-label>
+        <input matInput id="email" type="text" trim="blur" name="email" formControlName="email"
+          [matTooltip]="getEmailError()" matTooltipClass="error-tooltip" [(ngModel)]="userDetails.businessEmail"
+          (blur)="onBlurEvent()" required>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="userDetails.businessEmail=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div fxLayout="row" class="domain">
+        <div fxFlex="38%">
+          <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+            <input matInput id="domain" type="text" trim="blur" name="domain" formControlName="domain"
+              [(ngModel)]="selectedDomain.prefix" required>
+          </mat-form-field>
+        </div>
+        <span class="hypen">-</span>
+        <div fxFlex="61%">
+          <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+            <mat-label>Domain Name</mat-label>
+            <input matInput id="domainName" type="text" trim="blur" name="domainName" formControlName="domainName"
+              [(ngModel)]="selectedDomain.suffix" required>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+        <mat-label>Contact Number</mat-label>
+        <input id="phoneNumber" type="tel" matInput formControlName="phoneNumber" [matTooltip]="getPhoneNumberError()"
+          matTooltipClass="error-tooltip" [(ngModel)]="userDetails.contactNumber" required>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="userDetails.contactNumber=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-stroked-button class="sapper-button" [ngClass]="{'disabled': signupForm.invalid}" type="submit">Sign Up</button>
+
+    </form>
+  </div>
+</div>

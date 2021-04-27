@@ -1,0 +1,40 @@
+<div class="tp-sink-container">
+  <mat-form-field class="form-field select-connection" appearance="outline">
+    <mat-label>Select Connection</mat-label>
+    <mat-select name="operation" [(value)]="selectedConnection" [compareWith]="attributeDisplay" required>
+      <mat-option *ngFor="let connection of connectionList" [value]="connection">
+        {{connection.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- <span class="create-connection">
+    <mat-icon (click)="openCreateConnectionDialog()">add_box</mat-icon>
+  </span> -->
+  <span class="create-connection">
+    <mat-icon class="edit-icon" (click)="openCreateConnectionDialog(selectedConnection)">edit</mat-icon>
+    <mat-icon (click)="openCreateConnectionDialog(null)">add_box</mat-icon>
+  </span>
+
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label>Directory Path</mat-label>
+    <textarea #directoryPath [froalaEditor]="directoryPathOptions" matInput type="text" name="directoryPath"
+      [ngModel]="(taskProperties.directoryPath | templateToSlot: dragDataObj)"
+      (ngModelChange)="taskProperties.directoryPath = $event"
+      required>{{taskProperties.directoryPath | templateToSlot: dragDataObj}}</textarea>
+  </mat-form-field>
+
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label>File Name</mat-label>
+    <textarea #fileName [froalaEditor]="fileNameOptions" matInput type="text" name="fileName"
+      [ngModel]="taskProperties.fileName | templateToSlot: dragDataObj"
+      (ngModelChange)="taskProperties.fileName = $event"
+      required>{{taskProperties.fileName | templateToSlot: dragDataObj}}</textarea>
+  </mat-form-field>
+
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label>Data Slot</mat-label>
+    <textarea #data [froalaEditor]="dataSlotOptions" matInput type="text" name="dataSlot"
+      [ngModel]="(taskProperties.data | templateToSlot: dragDataObj)" (ngModelChange)="taskProperties.data = $event"
+      required>{{taskProperties.data | templateToSlot: dragDataObj}}</textarea>
+  </mat-form-field>
+</div>

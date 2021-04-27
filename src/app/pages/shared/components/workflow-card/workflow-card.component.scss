@@ -1,0 +1,175 @@
+@import '../../styles/colors.scss';
+
+:host {
+  ::ng-deep .mat-card-header-text {
+    margin: 0px;
+  }
+
+  .workflow-card-container {
+
+    .workflow-card {
+      height: 100%;
+      box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.14), 0 3px 5px -3px rgba(0, 0, 0, 0.2);
+
+      .header {
+        margin-right: -10px;
+
+        .app-card {
+          width: 100%;
+        }
+      }
+
+      .speed-dial-actions {
+        margin-left: 10px;
+        margin-top: -5px;
+
+        ::ng-deep .eco-fab-speed-dial-container {
+          z-index: 0;
+        }
+
+        .menu-trigger {
+          margin-right: 0px;
+          z-index: 0;
+
+          .mat-fab {
+            width: 35px;
+            height: 35px;
+            background-color: $navy_blue;
+            box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.2), 0px 3px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+            .menu-action {
+              margin-bottom: 1px;
+            }
+          }
+
+        }
+
+        .fab-actions {
+          top: 8px;
+          left: 4px;
+
+          .fab-icon {
+            font-size: 15px;
+          }
+
+          .mat-mini-fab {
+            width: 30px;
+            height: 30px;
+            background-color: $navy_blue;
+            box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.2), 0px 3px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+          }
+        }
+
+        ::ng-deep .mat-button-wrapper {
+          padding: 0px;
+        }
+      }
+
+      .content {
+        margin: 0px 0px 10px 0px;
+        max-height: 100% !important;
+
+        &>div {
+          height: 80%;
+        }
+
+        .workflow-content {
+          height: 100%;
+
+          .sub-header {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+        }
+
+        .tags {
+          float: right;
+          background-color: $gray_semi_light;
+          color: $sapper_btn;
+          margin: 5px 5px 0px 5px;
+          border-radius: 10px;
+          width: auto;
+          min-width: 30px;
+          padding: 5px;
+          text-align: center;
+          vertical-align: middle;
+          box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+        }
+      }
+
+      .actions {
+        padding: 0px;
+        margin-top: auto;
+        border-top: 1px solid $gray_semi_light;
+        margin-left: -16px;
+        margin-right: -16px;
+
+        .border-right {
+          border-right: 1px solid $gray_semi_light;
+          margin-bottom: -8px;
+        }
+
+        .action-cont {
+          text-align: center;
+        }
+
+        .total-jobs,
+        .success,
+        .error {
+          margin-top: 8px;
+          font-size: 18px;
+        }
+
+        .total-jobs {
+          color: $blue_light;
+        }
+
+        .success {
+          color: $olive_green;
+        }
+
+        .error {
+          color: $text-danger;
+        }
+
+        .avg-time {
+          padding-left: 10px;
+          padding-right: 10px;
+
+          .time {
+            margin-top: 10px;
+            color: $blue_light;
+          }
+        }
+
+        .preview-action {
+          color: $sapper_btn;
+          float: right;
+          padding-top: 15px;
+        }
+      }
+    }
+
+    .workflow-card:hover {
+      cursor: pointer;
+      border: 1px solid $navy_blue;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px);
+      transition-delay: 2s;
+
+      .description {
+        opacity: 1;
+        transition-delay: 2s;
+      }
+    }
+
+    .workflow-card:hover .content {
+      bottom: 0;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+  }
+}

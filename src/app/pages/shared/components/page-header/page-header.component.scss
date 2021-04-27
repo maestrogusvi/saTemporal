@@ -1,0 +1,32 @@
+@import './../../styles/colors.scss';
+.page-header {
+    background: $white;
+    padding-bottom: 18px;
+    padding-top: 15px;
+    box-shadow: $box-shadow;
+    border-bottom: 1px solid $border_color;
+
+    .page-header-content {
+      padding: 0 15px;
+
+      .page-header-main {
+        .page-header-title {
+          margin: 0;
+          color: $blue_darker;
+        }
+        .page-header-subtitle {
+          color: #5b6e79;
+          font-size: 15px;
+          margin: 5px 0 3px;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .button {
+    float: right;
+    button {
+      height: 30px;
+    }
+  }

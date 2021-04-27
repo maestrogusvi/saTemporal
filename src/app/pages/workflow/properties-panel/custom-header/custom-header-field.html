@@ -1,0 +1,58 @@
+<div #customerHeader class="dialog-container">
+  <div class="container">
+    <div class="dialog-header">
+      <button class="close" mat-button (click)="dialogRef.close(false);">X</button>
+      <h3>
+        Custom Header
+      </h3>
+    </div>
+
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+      <div fxFlex="100%">
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngFor="let row of customHeaderList; let rowIndex=index"
+          id="customHeaderDiv_{{rowIndex}}">
+          <div class="contant" fxLayoutGap="15px" fxFlex="100%">
+            <div fxFlex="30%" fxLayoutGap="15px">
+              <mat-form-field appearance="outline" class="form_field">
+                <mat-label>Name Space URI</mat-label>
+                <input matInput type="text" name="namespaceURI" [(ngModel)]="row.namespaceURI"
+                  (keydown.enter)="$event.preventDefault();">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div fxFlex="30%" fxLayoutGap="15px">
+              <mat-form-field appearance="outline" class="form_field">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" [(ngModel)]="row.localName" name="localName" (keydown.enter)="$event.preventDefault();">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div fxFlex="30%" fxLayoutGap="15px">
+              <mat-form-field appearance="outline" class="form_field">
+                <mat-label>Message</mat-label>
+                <input matInput type="text" [(ngModel)]="row.message" name="message" (keydown.enter)="$event.preventDefault();">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <mat-icon class="delete-icon" matTooltip="Delete" *ngIf="customHeaderList.length !== 1" (click)="onDeleteRow('customHeaderDiv_'+rowIndex,rowIndex, row.namespaceURI, 'customerHeader')">delete</mat-icon>
+            <mat-icon class="add-icon" matTooltip="Add" (click)="addField('customerHeader')" *ngIf="customHeaderList.length === rowIndex+1">add</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions class="dialog-footer-actions">
+      <button mat-stroked-button class="sapper-button margin-right-15" (click)="saveConnection()">
+        Save
+      </button>
+      <button mat-stroked-button class="sapper-button" (click)="this.dialogRef.close(false)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

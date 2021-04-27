@@ -1,0 +1,27 @@
+<div class="fixed-width-container">
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label>Select Fixed width parser input type</mat-label>
+    <mat-select [(value)]="selectedOption" (selectionChange)="setFixedWidthParserInputType($event)" required>
+      <mat-option [value]="fixedWidthParserInputType" *ngFor="let fixedWidthParserInputType of fixedWidthParserOptions">{{ fixedWidthParserInputType.label }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="form-field form-field-wrapper"
+    appearance="outline" *ngIf="selectedOption?.value === 'PARSE_FILE'">
+    <mat-label>File Name</mat-label>
+    <textarea [froalaEditor]="fileNameOptions" matInput type="text" name="fileName"
+      [ngModel]="(taskProperties.fileName | templateToSlot: dragDataObj)" (ngModelChange)="taskProperties.fileName = $event" required>{{taskProperties.fileName | templateToSlot: dragDataObj}}</textarea>
+  </mat-form-field>
+
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline" *ngIf="selectedOption?.value === 'PARSE_STRING'">
+    <mat-label>Parse String</mat-label>
+    <textarea [froalaEditor]="parseStringOptions" matInput type="text" name="csvInput"
+      [ngModel]="(taskProperties.data | templateToSlot: dragDataObj)" (ngModelChange)="taskProperties.data = $event" required>{{taskProperties.data | templateToSlot: dragDataObj}}</textarea>
+  </mat-form-field>
+
+  <span class="show-meta-btn">
+    <button mat-stroked-button class="sapper-button" (click)="openFixedWidthParserModal()">
+      Show Meta
+    </button>
+  </span>
+</div>

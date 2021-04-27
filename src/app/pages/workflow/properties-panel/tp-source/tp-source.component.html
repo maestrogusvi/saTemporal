@@ -1,0 +1,59 @@
+<div class="tp-source-container">
+  <div>
+    <mat-form-field class="form-field select-connection" appearance="outline">
+      <mat-label>Select Connection</mat-label>
+      <mat-select name="operation" [(value)]="selectedConnection" (selectionChange)="onBlurSelectConnectionEvent()" [compareWith]="attributeDisplay"
+        required>
+        <mat-option *ngFor="let connection of connectionList" [value]="connection">
+          {{connection.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <span class="create-connection">
+      <mat-icon (click)="openCreateConnectionDialog()">add_box</mat-icon>
+    </span> -->
+    <span class="create-connection">
+      <mat-icon class="edit-icon" (click)="openCreateConnectionDialog(selectedConnection)">edit</mat-icon>
+      <mat-icon (click)="openCreateConnectionDialog(null)">add_box</mat-icon>
+    </span>
+
+    <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+      <mat-label>Directory Path</mat-label>
+      <input matInput type="text" name="directoryPath" [(ngModel)]="taskProperties.directoryPath" (change)="onBlurDirectoryPathEvent()"
+        required>
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.directoryPath=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+      <mat-label>Encoding</mat-label>
+      <mat-select [(value)]="taskProperties.encoding" required>
+        <mat-option [value]="taskProperties.encoding" *ngFor="let encodingType of encodingTypes">{{ encodingType }}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+    <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+      <mat-label>How do you want to read file?</mat-label>
+      <mat-select [(value)]="selectedOption" (selectionChange)="setFileReadOptions($event, droppedNode)" required>
+        <mat-option [value]="readFileOption" *ngFor="let readFileOption of readFileOptions">{{ readFileOption.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field form-field-wrapper" *ngIf="readFileOption.value === 'regularExpression'"
+      appearance="outline">
+      <mat-label>Regular Expression</mat-label>
+      <input matInput type="text" name="regularExpression" [(ngModel)]="taskProperties.regularExpression" required>
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.regularExpression=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="form-field form-field-wrapper" *ngIf="selectedOption.value === 'fileName'" appearance="outline">
+      <mat-label>Select Files</mat-label>
+      <mat-select [(ngModel)]="taskProperties.files" multiple required>
+        <mat-option *ngFor="let file of fileList" [value]="file">{{file}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

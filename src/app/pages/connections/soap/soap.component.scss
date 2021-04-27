@@ -1,0 +1,46 @@
+.myform-wrapper {
+  margin: 50px;
+  width: 350px;
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .mat-toolbar-single-row {
+    height: auto !important;
+
+    button {
+      width: 30%;
+    }
+  }
+}
+
+#fileUpload {
+  position: absolute;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  cursor: pointer;
+}
+.float {
+  float: right;
+}
+.bar {
+  height: 23px;
+  width: 170%;
+  font-size: 14px;
+}
+
+.mat-raised-buttonSoap {
+  border-radius: 31px;
+  min-width: 75px;
+  margin-right: -77px;
+  line-height: 25px;
+}
+
+.floatLeft {
+  float: left;
+}

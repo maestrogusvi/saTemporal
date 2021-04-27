@@ -1,0 +1,88 @@
+<div class="drop-area">
+  <button mat-raised-button color="primary" style="display: none;" [mdePopoverTriggerFor]="appPopover"
+    mdePopoverTriggerOn="click" #popoverTrigger="mdePopoverTrigger">
+    Show Popover
+  </button>
+
+  <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverOffsetX]="possitionLabel.x"
+    [mdePopoverOffsetY]="possitionLabel.y" [mdePopoverCloseOnClick]="false">
+    <mat-card style="max-width: 300px">
+      <mat-card-content>
+        <!-- <mat-form-field class="form-field form-field-wrapper" appearance="outline" *ngIf="currentLabel">
+          <mat-label>Equation</mat-label>
+          <input matInput type="text" name="regularExpression" [(ngModel)]="labelValue">
+        </mat-form-field> -->
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline" *ngIf="currentLabel">
+          <mat-label>Equation</mat-label>
+          <textarea [froalaEditor]="fileNameOptions" matInput type="text" name="regularExpression"
+            [ngModel]="labelValue | templateToSlot: dragdataObj" (ngModelChange)="labelValue = $event" required>{{labelValue | templateToSlot: dragdataObj}}</textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="saveCondition()">Save Condition</button>
+        <button mat-raised-button color="default" class="margin-left-10"
+          (click)="trigger.closePopover()">Cancel</button>
+      </mat-card-content>
+    </mat-card>
+  </mde-popover>
+  <div dnd-droppable (onDropSuccess)="drop($event)" [dropZones]="['drop-zone']" id="drop-zone" class="dropbox-container"
+    (click)="workflowProperties()">
+    <div *ngIf="dragedData.length === 0" fxLayout="row" fxLayoutAlign="center none" class="watermark-container">
+      <span *ngFor="let watermarkObject of workflowConstant.watermarkObjectList; ; let i = index " fxFlex="15%"
+        fxLayout="row" fxLayoutAlign="center none">
+        <span fxFlex="80%">
+          <div>
+            <mat-card class="watermark-card" fxLayout="column" fxLayoutAlign="center center">
+              <div fxFlex="50%" class="watermark-image">
+                <img class="watermark-image-{{i}}" src="{{watermarkObject.img}}" alt="watermark-image">
+              </div>
+              <mat-card-content fxFlex="50%" class="content">
+                <h3 class="text-muted"> {{watermarkObject.title}} </h3>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </span>
+        <span fxFlex="20%" class="arrow-separator">
+          <div>
+            <img class="arrow" [ngClass]="{'hide-arrow' : i===3}" src="assets/images/workflows/arrow.png" alt="arrow">
+          </div>
+        </span>
+      </span>
+
+      <div class="padding-right-15 icons-container">
+        <mat-slider [max]="sliderOptions.max" [min]="sliderOptions.min" [step]="sliderOptions.step"
+          [thumbLabel]="sliderOptions.thumbLabel" (change)="adjustZoom($event)" [(ngModel)]="sliderOptions.value"
+          [vertical]="sliderOptions.vertical">
+        </mat-slider>
+      </div>
+    </div>
+    <div class="drop-box" *ngFor="let item of dragedData"
+      [ngClass]="{'active':item.id === selectedItem && !testConnectionAction}">
+      <div class="droped-item-box" (click)="onNodeClicked(item, $event)" *ngIf="item.sapper_prop.bpmnType!=='subProcess'" [attr.id]="item.id"
+        [style.top]="item.sapper_prop.top + 'px'" [style.left]="item.sapper_prop.left + 'px'"
+        (mouseover)="hoverActions.style.display = 'block'" (mouseout)="hoverActions.style.display = 'none'">
+        <div class="drop-box-img">
+          <img alt="app-img" class="application-image" src="{{item.sapper_prop.logoPath}}" [ngClass]="{'success': testConnectionAction && nodeStatus(item).status === 'SUCCESS',
+          'failed': testConnectionAction && nodeStatus(item).status === 'FAILED'}" />
+        </div>
+        <span *ngIf="testConnectionAction"
+          [ngClass]="nodeStatus(item).status === 'SUCCESS' ? 'fa fa-check-circle icon-sucess-color' : 'fa fa-times-circle icon-failed-color'"
+          class="overlay" (click)="nodeStatus(item).status !== 'SUCCESS' && showMessageDialog(item)"></span>
+        <div class="drop-box-desc">
+          <span class="description" translate [matTooltip]="item.name">{{ item.name}}</span>
+        </div>
+        <div class="node-action" #hoverActions>
+          <mat-icon (click)="addNode(item)">add</mat-icon>
+          <mat-icon (click)="deleteNode(item)">delete_outline</mat-icon>
+          <mat-icon (click)="copyNode(item)" *ngIf="item.type !== 'startNode'">file_copy</mat-icon>
+          <mat-icon class="meta-icon" *ngIf="item.metaId" (click)="openMetaUplaod(item)">M
+          </mat-icon>
+        </div>
+      </div>
+      <div class="dropped-sub-process" (click)="onNodeClicked(item, $event)" *ngIf="item.sapper_prop.bpmnType ==='subProcess'" [attr.id]="item.id"
+        [style.top]="item.sapper_prop.top + 'px'" [style.left]="item.sapper_prop.left + 'px'" [style.height]="item.sapper_prop.height + 'px'" [style.width]="item.sapper_prop.width + 'px'" group="one">
+        <!-- <div class="node-action" #deleteProcess>
+          <mat-icon>delete_outline</mat-icon>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

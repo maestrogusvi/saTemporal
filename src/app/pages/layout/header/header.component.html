@@ -1,0 +1,176 @@
+<mat-toolbar color="primary" class="sapper-navbar">
+  <a class="sapper-brand" [routerLink]="'/welcome'">
+    <img class="brand-logo" alt="tenantLogo" [src]="logoPath">
+  </a>
+  <div class="sapper-menu">
+    <div class="main-header">
+      <a mat-button class="header-text" [routerLink]="'/markets-groups'" routerLinkActive="active-list-item" translate>
+        {{ 'MAIN-HEADER.MARKET-GROUPS' | translate }}
+      </a>
+    </div>
+    <div class="main-header">
+      <a mat-button class="header-text" [routerLink]="'/role-mapping'"  routerLinkActive="active-list-item" translate>
+        {{ 'MAIN-HEADER.ROLE-MAPPING' | translate }}
+      </a>
+    </div>
+    <div class="main-header">
+      <a mat-button class="header-text" [routerLink]="'/organizations'"  routerLinkActive="active-list-item"  translate>
+        {{ 'MAIN-HEADER.ORGANIZATIONS' | translate }}
+      </a>
+    </div>
+  </div>
+  <div class="right-menu">
+    <div class="user-details">
+      <div [matMenuTriggerFor]="menu">
+        <em class="fa fa-user margin-right-5 header-text"></em>
+        <em class="fa fa-caret-down header-text"></em>
+      </div>
+      <mat-menu #menu="matMenu" xPosition="before">
+<!--        <button mat-menu-item (click)='openSettings()'>-->
+<!--          <span translate>MAIN-HEADER.SETTING</span>-->
+<!--        </button>-->
+<!--        <button mat-menu-item (click)="router.navigateByUrl('/change-password')">-->
+<!--          <span translate>Change Password</span>-->
+<!--        </button>-->
+        <button mat-menu-item (click)='logout()'>
+          <span translate>MAIN-HEADER.LOGOUT</span>
+        </button>
+      </mat-menu>
+    </div>
+<!--    <div class="hamburgerMenu">-->
+<!--      <div [matMenuTriggerFor]="hamburgerMenu">-->
+<!--        <em class="fa fa-bars header-text"></em>-->
+<!--      </div>-->
+<!--      <mat-menu #hamburgerMenu="matMenu" xPosition="before">-->
+<!--        <button mat-menu-item [matMenuTriggerFor]="changeLanguage" class="menu-item option-dropdown">-->
+<!--          <span translate>MAIN-HEADER.CHANGE-LANGUAGE</span>-->
+<!--        </button>-->
+<!--        <button mat-menu-item (click)="openModal(uploadTemplate)" class="menu-item change-logo">-->
+<!--          <span>Upload Theme And Logo</span>-->
+<!--        </button>-->
+<!--      </mat-menu>-->
+<!--      <mat-menu #changeLanguage="matMenu" class="change-lang">-->
+<!--        <button mat-menu-item (click)="changeLang('en')">-->
+<!--          <span class="dropdown-item" translate>MAIN-HEADER.CHANGE-LANGUAGE-OPTION1</span>-->
+<!--        </button>-->
+<!--        <button mat-menu-item (click)="changeLang('fr')">-->
+<!--          <span class="dropdown-item" translate>MAIN-HEADER.CHANGE-LANGUAGE-OPTION2</span>-->
+<!--        </button>-->
+<!--      </mat-menu>-->
+<!--    </div>-->
+  </div>
+</mat-toolbar>
+
+<ng-template #uploadTemplate>
+  <div class="dialog">
+    <div class="dialog-header">
+      <h4 mat-dialog-title class="dialog-title float-left">Upload Logo and Theme</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <mat-dialog-content class="dialog-body">
+      <form novalidate [formGroup]="form">
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+          <div class="color_text" fxFlex="50%" translate>
+            CHANGE-THEME.HEADER-COLOR
+          </div>
+          <div class="item item-1" fxFlex="50%">
+            <div class="color-picker">
+              <mcc-color-picker hideUsedColors mccConnectedColorPicker [mccConnectedColorPickerOrigin]="triggerForHeaderTxt">
+              </mcc-color-picker>
+              <mat-form-field>
+                <input matInput mccColorPickerOrigin #triggerForHeaderTxt="mccColorPickerOrigin" formControlName="headerTextColor" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+          <div class="color_text" fxFlex="50%" translate>
+            CHANGE-THEME.HEADER-THEME
+          </div>
+          <div class="item item-1" fxFlex="50%">
+            <div class="color-picker">
+              <mcc-color-picker hideUsedColors mccConnectedColorPicker [mccConnectedColorPickerOrigin]="triggerForHeaderTheme">
+              </mcc-color-picker>
+              <mat-form-field>
+                <input matInput mccColorPickerOrigin #triggerForHeaderTheme="mccColorPickerOrigin" formControlName="headerTheme" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+          <div class="color_text" fxFlex="50%" translate>
+            CHANGE-THEME.HEADER-ACTIVE
+          </div>
+          <div class="item item-1" fxFlex="50%">
+            <div class="color-picker">
+              <mcc-color-picker hideUsedColors mccConnectedColorPicker [mccConnectedColorPickerOrigin]="triggerForHeaderActive">
+              </mcc-color-picker>
+              <mat-form-field>
+                <input matInput mccColorPickerOrigin #triggerForHeaderActive="mccColorPickerOrigin" formControlName="headerActive" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+          <div class="color_text" fxFlex="50%" translate>
+            CHANGE-THEME.BUTTON-COLOR
+          </div>
+          <div class="item item-1" fxFlex="50%">
+            <div class="color-picker">
+              <!-- CONNECT COLOR PICKER WITH AN INPUT -->
+              <mcc-color-picker hideUsedColors mccConnectedColorPicker [mccConnectedColorPickerOrigin]="triggerForBtnColor">
+              </mcc-color-picker>
+              <mat-form-field>
+                <input matInput mccColorPickerOrigin #triggerForBtnColor="mccColorPickerOrigin" formControlName="buttonColor" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+          <div class="color_text" fxFlex="50%" translate>
+            CHANGE-THEME.BUTTON-TEXT-COLOR
+          </div>
+          <div class="item item-1" fxFlex="50%">
+            <div class="color-picker">
+
+              <!-- CONNECT COLOR PICKER WITH AN INPUT -->
+              <mcc-color-picker hideUsedColors mccConnectedColorPicker [mccConnectedColorPickerOrigin]="triggerForBtnTxt">
+              </mcc-color-picker>
+              <mat-form-field>
+                <input matInput mccColorPickerOrigin #triggerForBtnTxt="mccColorPickerOrigin" formControlName="buttonTextColor" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+          <div class="color_text" fxFlex="50%" translate>
+            CHANGE-THEME.HEADER-LOGO
+          </div>
+          <div class="item item-1" fxFlex="50%">
+            <div class="upload">
+              <input type="button" class="btn btn-default uploadButton" value="Browse" />
+              <input type="file" id='myinput' name="file" (change)="onFileChange($event)" accept="image/*" /> </div>
+            <div class="image-validation-message">{{imageErrorMessage}}</div>
+          </div>
+        </div>
+        <div class="imageMessage" *ngIf="!imageErrorMessage && !showImage">
+          The uploaded image will be displayed on the left top corner as the logo.
+          Avoid using empty spaces around the image. The ideal size of width: height ratio of the image is 3:1
+          and
+          the image above 30Kb is not acceptable.</div>
+      </form>
+
+      <div class="previewImage" *ngIf="showImage">
+        <img [src]="tempImage" height="90" width="450" alt="temp-image" />
+      </div>
+    </mat-dialog-content>
+    <div class="dialog-footer">
+      <button mat-stroked-button class="sapper-button" (click)="saveImage(form.value)">
+        {{ 'CHANGE-THEME.SAVE' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>

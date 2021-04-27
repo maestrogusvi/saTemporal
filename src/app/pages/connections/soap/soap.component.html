@@ -1,0 +1,54 @@
+<div *ngIf="connectionDataProperties">
+    <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.PASSWORD-TYPE</mat-label>
+                <mat-select name="type" [(ngModel)]="connectionDataProperties.passwordTypeEnum" [ngModelOptions]="{standalone: true}"
+                    required>
+                    <mat-option *ngFor="let type of passwordType" [value]="type.value">
+                        {{type.key}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="connectionDataProperties.passwordTypeEnum != 'X509_Certificate'" fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.USERNAME</mat-label>
+                <input matInput type="text" [(ngModel)]="connectionDataProperties.username" (keydown.enter)="$event.preventDefault();"
+                    trim="blur">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionDataProperties.username=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div *ngIf="connectionDataProperties.passwordTypeEnum == 'X509_Certificate'">
+            <div fxFlex="50%">
+                <mat-form-field>
+                    <mat-toolbar class="bar">
+                        <!-- Readonly Input to show File names -->
+                        <input matInput [(ngModel)]="myfilename" readonly />
+                        <!-- Browse Button -->
+                        <button mat-raised-button class="mat-raised-buttonSoap" color="primary" (click)="fileUploadSoap(connectionDataProperties.fileId)">
+                            upload
+                        </button>
+                    </mat-toolbar>
+                    <!-- Fetch selected filed on change -->
+                    <input type="file" id="fileUpload" (change)="fileChangeEvent($event)" name="fileUpload" multiple="multiple"
+                        accept="file/*" />
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div class="floatLeft" fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text form-field-wrapper">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.PASSWORD</mat-label>
+                <input matInput type="password" name="password" [(ngModel)]="connectionDataProperties.password"
+                    (keydown.enter)="$event.preventDefault();" trim="blur" autocomplete="new-password">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionDataProperties.password=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+    </div>

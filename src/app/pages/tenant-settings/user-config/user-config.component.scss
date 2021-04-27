@@ -1,0 +1,37 @@
+.user-config-container {
+    padding: 5%;
+
+    table {
+        width: 100%;
+    }
+
+    .mat-header-cell{
+        font-weight: 600;
+    }
+
+    .mat-form-field {
+        font-size: 14px;
+        width: 25%;
+    }
+
+    .mat-column-inactive-active {
+        width: 10%;
+        text-align: center;
+    }
+
+    .mat-column-email {
+        width: 50%;
+    }
+
+    .mat-column-name {
+        width: 40%;
+
+        .user-name {
+            display: flex;
+            align-items: center;
+            span {
+                margin-left: 5px;
+            }
+        }
+    }
+}

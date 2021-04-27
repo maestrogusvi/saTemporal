@@ -1,0 +1,45 @@
+@import "./../../../shared/styles/colors.scss";
+:host {
+  .dialog-container {
+    .container {
+      height: auto;
+      overflow: hidden;
+      position: relative;
+
+      .dialog-header {
+        padding: 15px;
+        border-bottom: 1px solid $border_color;
+        padding-bottom: 10px;
+        h3 {
+          margin: 0px;
+        }
+      }
+
+      .dialog-content {
+        border-bottom: 1px solid $border_color;
+        padding: 15px;
+        margin: 0px;
+        .form-field {
+          display: block;
+        }
+      }
+
+      .dialog-footer-actions {
+        margin-bottom: 0px;
+        padding: 15px;
+        float: right;
+      }
+    }
+
+    .close.mat-button {
+      position: relative;
+      float: right;
+      top: 0;
+      right: 0;
+      padding: 5px;
+      line-height: 13px;
+      min-width: auto;
+      font-size: 13px;
+    }
+  }
+}

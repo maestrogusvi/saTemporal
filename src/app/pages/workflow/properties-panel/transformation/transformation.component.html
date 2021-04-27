@@ -1,0 +1,42 @@
+<div class="transformation-container">
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="45%">
+      <mat-form-field class="form-field set-width" appearance="outline">
+        <mat-label>Source Data Object</mat-label>
+        <textarea [froalaEditor]="sourceObjectOptions" matInput type="text" name="sourceMeta"
+          [ngModel]="(taskProperties.sourceMeta.value | templateToSlot: dragDataObj)"
+          (ngModelChange)="taskProperties.sourceMeta.value=$event"
+          required>{{taskProperties.sourceMeta.value | templateToSlot: dragDataObj}}</textarea>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="taskProperties.sourceMeta.value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div fxFlex="45%">
+      <mat-radio-group [(ngModel)]="taskProperties.targetMeta.type">
+        <mat-radio-button value="SLOT">
+          <mat-form-field class="form-field set-width" appearance="outline">
+            <mat-label>Target Data Object</mat-label>
+            <textarea [froalaEditor]="targetObjectOptions" matInput placeholder="Request Body" name="body"
+              [ngModel]="(taskProperties.targetMeta.value | templateToSlot: dragDataObj)"
+              (ngModelChange)="taskProperties.targetMeta.value=$event"
+              required>{{taskProperties.targetMeta.value | templateToSlot: dragDataObj}}</textarea>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="taskProperties.targetMeta.value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-radio-button>
+        <mat-radio-button value="FILE">
+          <mat-form-field class="form-field set-width" appearance="outline">
+            <mat-label>Upload Target Meta File</mat-label>
+            <ngx-mat-file-input [(ngModel)]="taskProperties.targetMeta.value"
+              placeholder="Basic outline placeholder"></ngx-mat-file-input>
+            <mat-icon matSuffix>folder</mat-icon>
+          </mat-form-field>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="csv-parser-container">
+    <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+      <mat-label>Select CSV parser input type</mat-label>
+      <mat-select [(value)]="selectedOption" (selectionChange)="setCsvParserInputType($event, droppedNode)" required>
+        <mat-option [value]="csvParserInputType" *ngFor="let csvParserInputType of csvParserInputTypeOptions">{{ csvParserInputType.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field form-field-wrapper"
+      appearance="outline" *ngIf="selectedOption?.value === 'FILENAME'">
+      <mat-label>File Name</mat-label>
+      <textarea [froalaEditor]="fileNameOptions" matInput type="text" name="fileName"
+        [ngModel]="(taskProperties.csvData | templateToSlot: dragDataObj)" (ngModelChange)="taskProperties.csvData = $event" required>{{taskProperties.csvData | templateToSlot: dragDataObj}}</textarea>
+    </mat-form-field>
+
+    <mat-form-field class="form-field form-field-wrapper" appearance="outline" *ngIf="selectedOption?.value === 'CSVSTRING'">
+      <mat-label>CSV Input</mat-label>
+      <textarea [froalaEditor]="fileNameOptions" matInput type="text" name="csvInput"
+        [ngModel]="(taskProperties.csvData | templateToSlot: dragDataObj)" (ngModelChange)="taskProperties.csvData = $event" required>{{taskProperties.csvData | templateToSlot: dragDataObj}}</textarea>
+    </mat-form-field>
+</div>

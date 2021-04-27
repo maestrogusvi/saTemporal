@@ -1,0 +1,39 @@
+<div>
+  <div class="header">
+    <sapper-workflow-header [currentWorkflow]="currentWorkflow" (openActiveWorkflow)="setActiveWorkflow($event)"
+      (closeClickedWorkflow)="closeClickedWorkflow($event)" (autoArrange)="workflowWindow.autoArrange()"
+      (saveWorkflow)="workflowWindow.saveWorkflow()" (uploadJsonFile)="workflowWindow.uploadJsonFile($event)"
+      (downloadWorkflowJson)="workflowWindow.downloadWorkflowJson()" (clearCanvas)="workflowWindow.clearCanvas()"
+      (deleteWorkflow)="workflowWindow.deleteWorkflow()" (testWorkflow)="workflowWindow.testWorkflow()"
+      (executeWorkflow)="workflowWindow.executeWorkflow()"></sapper-workflow-header>
+  </div>
+  <div class="workflow-parent">
+    <div class="leftBarContainer" id="leftBarContainer">
+      <sapper-left-sidebar [isDisplayNodes]="workflowWindows?.length > 0" [appData]="appData"
+        [activeWorkflow]="currentWorkflow" [triggerData]="triggerData" [coreData]="coreData" [helperData]="helperData"
+        (addNode)="workflowWindow.addNodeToActive($event)" (currentWorkflow)="setActiveWorkflow($event)" #leftSideBar>
+      </sapper-left-sidebar>
+    </div>
+    <div class="workflow-tabs" [ngClass]="{'active-tab': workflowTab?.id === currentWorkflow?.id}"
+      *ngFor="let workflowTab of workflowWindowList; let i = index">
+      <div class="workflowContainer float-left" id="workflowContainer" [ngClass]="{
+        'left-panel': leftSidebar?.displayTab,
+        'properties': propertiesPanel?.displayTab
+      }">
+        <sapper-workflow-window [workflowData]="workflowData" [currentWorkflow]="workflowTab"
+          (getDropData)="getNode($event)" (addNodeActive)="leftSideBar.addNodeActive()"
+          (isWorkflowGet)="getSchedule($event)" #workflowWindow>
+        </sapper-workflow-window>
+      </div>
+      <div class="bottom-properties-panel" id="rightBarContainer">
+        <sapper-properties-panel #propertiesPanel [isOpenLeftSideBar]="leftSidebar?.displayTab"
+          [workflow]="workflowWindow?.workflow" [mappingDetails]="workflowWindow?.mappingDetails"
+          [dragdataObj]="workflowWindow?.dragdataObj" [schedule]="schedule"
+          (saveWorkflow)="workflowWindow.saveWorkflow()" (isShowMapping)="showMapping(node)"
+          (isTransformationMetaChanged)="setTransformationMetaIds($event)"
+          (onDeleteSourceMeta)=setTransformationSource(node)>
+        </sapper-properties-panel>
+      </div>
+    </div>
+  </div>
+</div>

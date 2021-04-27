@@ -1,0 +1,36 @@
+<div *ngIf="rightPanelData">
+    <div>
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+            <mat-label>Select Connection</mat-label>
+            <mat-select name="connections" [(ngModel)]="rightPanelData.connections" (selectionChange)="onConnectionChange($event.value)">
+                <mat-option *ngFor="let option of rightPanelData.connection" [value]="option.name">
+                    {{option.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+            <mat-label>Select Version</mat-label>
+            <mat-select name="version" [(ngModel)]="rightPanelData.version" (selectionChange)="onVersionChange($event.value)">
+                <mat-option *ngFor="let option of rightPanelData.versionList" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+            <mat-label>Select Object</mat-label>
+            <mat-select name="object" [(ngModel)]="rightPanelData.object" (selectionChange)="onObjectChange($event.value)">
+                <mat-option *ngFor="let option of this.rightPanelData.objectId" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+            <mat-label>Select operation</mat-label>
+            <mat-select name="operation" [(ngModel)]="rightPanelData.operation" (selectionChange)="onOperationChange($event.value)">
+                <mat-option *ngFor="let option of rightPanelData.operationId" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>

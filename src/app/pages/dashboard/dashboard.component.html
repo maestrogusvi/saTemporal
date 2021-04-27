@@ -1,0 +1,168 @@
+<div class="sapper-dashboard" *ngIf="showDashboard">
+  <sapper-page-header [title]="'Dashboard'" [description]="'See holistic view of what\'s going on in your instance and take necessary actions based on the given insights.'"></sapper-page-header>
+  <div class="padding-left-15 padding-right-15">
+    <div class="top-cards" fxLayout fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0">
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card dashboard-card workflow-card">
+          <div class="card-header card-header-icon" fxLayout="column">
+            <div class="card-icon workflow-count">
+              <span>
+                <strong>{{dashboardDetails?.activeAutomation}}</strong>
+              </span>
+            </div>
+            <div class="card-description">
+              <p class="card-category">Active automations</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-bars"></em><a routerLink="/">See all automations</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card dashboard-card success-card">
+          <div class="card-header card-header-icon" fxLayout="column">
+            <div class="card-icon success">
+              <span>
+                <strong>{{dashboardDetails?.successfulAutomationJobs}}</strong>
+              </span>
+            </div>
+            <div class="card-description">
+              <p class="card-category">Successful jobs</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-calendar-check-o"></em><a routerLink="/">See all successful jobs
+              </a></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card dashboard-card error-card">
+          <div class="card-header card-header-icon" fxLayout="column">
+            <div class="card-icon error">
+              <span>
+                <strong>{{dashboardDetails?.failedAutomationJobs}}</strong>
+              </span>
+            </div>
+            <div class="card-description">
+              <p class="card-category"> Failed jobs</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-check-square"></em><a routerLink="/">See all failed jobs</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card dashboard-card warning-card">
+          <div class="card-header card-header-icon" fxLayout="column">
+            <div class="card-icon warning">
+              <span>
+                <strong>{{dashboardDetails?.averageErrorRate}} %</strong>
+              </span>
+            </div>
+            <div class="card-description">
+              <p class="card-category">Average error rate</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-check-square"></em><a routerLink="/">Just updated</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="middle-cards" fxLayout fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0">
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card card-chart connection-card set-border">
+          <div class="card-header card-header-icon">
+            <div class="card-icon card-1">
+              <span>Connections</span>
+            </div>
+            <div class="connection-round">
+              <span><strong>{{dashboardDetails?.totalConnection}}</strong></span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-bars"></em><a routerLink="/">See all connections</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card card-chart application-card set-border">
+          <div class="card-header card-header-icon">
+            <div class="card-icon card-2">
+              <span>Applications</span>
+            </div>
+            <div class="connection-round">
+              <span><strong>{{dashboardDetails?.totalApplication}}</strong></span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-bars"></em><a routerLink="/appstore">See all applications</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card card-chart workflow-card set-border">
+          <div class="card-header card-header-icon">
+            <div class="card-icon card-3">
+              <span>Automations</span>
+            </div>
+            <div class="connection-round">
+              <span><strong>{{dashboardDetails?.totalAutomation}}</strong></span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-bars"></em><a routerLink="/automation">See all automations</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-tile" fxFlex="25%">
+        <div class="card card-chart community-workflow-card set-border">
+          <div class="card-header card-header-icon">
+            <div class="card-icon card-4">
+              <span>Community Automations</span>
+            </div>
+            <div class="connection-round">
+              <span><strong>{{dashboardDetails?.communityAutomation}}</strong></span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-bars"></em><a routerLink="/community-workflow">See all community
+              automations</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-cards" fxLayout fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0">
+      <div class="dashboard-tile" fxFlex="50%">
+        <div class="card card-chart set-border">
+          <div class="card-header card-header-icon">
+            <div class="card-icon card-1">
+              <sapper-line-chart></sapper-line-chart>
+            </div>
+            <h6 class="card-title normal-text">Records and Automation processed</h6>
+          </div>
+          <div class="card-footer">
+            <div class="stats "><em class="fa fa-clock-o"></em><a>Updated 4 minutes ago</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-tile" fxFlex="50%">
+        <div class="card card-chart set-border">
+          <div class="card-header card-header-icon">
+            <div class="card-icon card-2">
+              <sapper-bar-chart></sapper-bar-chart>
+            </div>
+            <h6 class="card-title normal-text">Total API calls</h6>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><em class="fa fa-clock-o"></em><a>Updated 4 minutes ago</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

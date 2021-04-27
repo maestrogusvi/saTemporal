@@ -1,0 +1,173 @@
+<div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label translate>Select Connection</mat-label>
+    <mat-select placeholder="Select Connection" name="Select Connection" [(ngModel)]="selectedConnectionId" required>
+      <mat-option *ngFor="let connection of connections" [value]="connection.id">
+        {{connection.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <span class="create-connection">
+    <mat-icon class="edit-icon" (click)="openCreateConnectionDialog(selectedConnection)">edit</mat-icon>
+    <mat-icon (click)="openCreateConnectionDialog(null)">add_box</mat-icon>
+  </span>
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label translate>Application</mat-label>
+
+    <mat-select [(ngModel)]="taskProperties.application" placeholder="Select Application" name="application" required>
+      <mat-option *ngFor="let application of applications" [value]="application.name" (click)="getWsdlByApplicationName(application.name)">
+        {{application.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+  <mat-form-field appearance="outline" class="applicationUpload form-field-wrapper">
+    <mat-label translate>WSDL URL</mat-label>
+    <input matInput type="text" name="url" [(ngModel)]="taskProperties.url" (keydown.enter)="$event.preventDefault();"
+      trim="blur" required disabled>
+  </mat-form-field>
+  <button mat-stroked-button class="sapper-button" (click)="getWsdlOperations()">
+    <span matTooltip="Get operations" class="material-icons">
+      list
+    </span> </button>
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="50%">
+      <mat-form-field class="version form-field form-field-wrapper" appearance="outline">
+        <mat-label translate>Version</mat-label>
+        <mat-select placeholder="version" [(ngModel)]="taskProperties.version" name="version">
+          <mat-option *ngFor="let version of versionsMap[taskProperties.application]" [value]="version">
+            {{version}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-slide-toggle [(ngModel)]="taskProperties.isAddressing" [checked]="isAddressing" (change)="isAddressing = $event.source.checked"
+        class="mat-slideToggle">Addressing</mat-slide-toggle>
+    </div>
+    <div fxFlex="50%">
+      <button mat-stroked-button class="sapper-button" (click)="openCustomDialog()">Custom
+        Header
+        Fields</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="operations.length>0 || selectedOperationName !== null" fxLayout fxLayout.xs="column" fxLayoutGap="15px"
+  fxLayoutGap.xs="0">
+
+  <div fxFlex="30%" class="portion">
+    <mat-form-field *ngIf="operations.length > 1" appearance="outline" class="searchInputOperation form-field-wrapper">
+      <input matInput type="text" name="operationSearchText" placeholder="Search..." [(ngModel)]="operationSearchText">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="operationSearchText=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-selection-list [multiple]="false">
+      <div *ngIf="selectedOperationName === null">
+        <mat-list-option *ngFor="let operation of operations | search : operationSearchText" [value]="operation"
+          (click)="onSelectOperation(operation)">
+          {{operation.operationName}}
+        </mat-list-option>
+        <mat-paginator [length]="length" [pageSize]="pageSize" (page)="onOperationPageChange($event)">
+        </mat-paginator>
+      </div>
+      <div *ngIf="selectedOperationName !== null">
+        <mat-list-option>
+          {{selectedOperationName}}
+        </mat-list-option>
+      </div>
+    </mat-selection-list>
+  </div>
+
+  <div fxFlex="80%" class="wsdl-fields">
+    <div class="portion">
+      <div class="fields">
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label>Documentation</mat-label>
+          <textarea class="textarea-content" matInput placeholder="documentation" name="taskProperties.documentation"
+            [(ngModel)]="taskProperties.documentation" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label translate>service EndPoint Namespace</mat-label>
+          <input matInput type="text" placeholder="service EndPoint Namespace" name="taskProperties.serviceEndPointNamespace"
+            [(ngModel)]="taskProperties.serviceEndPointNamespace" (keydown.enter)="$event.preventDefault();" trim="blur"
+            required>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.serviceEndPointNamespace=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label>Port Type Name</mat-label>
+          <input matInput type="text" placeholder="Port Type Name" name="taskProperties.portTypeName" [(ngModel)]="taskProperties.portTypeName"
+            required disabled>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.portTypeName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label translate>Operation Name</mat-label>
+          <input matInput type="text" placeholder="Operation Name" name="taskProperties.operationName" [(ngModel)]="taskProperties.operationName"
+            (keydown.enter)="$event.preventDefault();" trim="blur" required disabled>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.operationName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label>Service Name</mat-label>
+          <input matInput type="text" matInput placeholder="Service Name" name="taskProperties.serviceName" [(ngModel)]="taskProperties.serviceName"
+            required disabled>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.serviceName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label translate>Soap Operation Name Space</mat-label>
+          <input matInput type="text" placeholder="Soap Operation Name Space" name="taskProperties.soapOperationNamespace"
+            [(ngModel)]="taskProperties.soapOperationNamespace" (keydown.enter)="$event.preventDefault();" trim="blur"
+            required disabled>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.soapOperationNamespace=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label>Request Object Name</mat-label>
+          <input matInput type="text" matInput placeholder="Request Object Name" name="taskProperties.requestObjectName"
+            [(ngModel)]="taskProperties.requestObjectName" required disabled>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.requestObjectName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+          <mat-label translate>Response Object Name</mat-label>
+          <input matInput type="text" placeholder="Response Object Name" name="taskProperties.responseObjectName"
+            [(ngModel)]="taskProperties.responseObjectName" (keydown.enter)="$event.preventDefault();" trim="blur"
+            required disabled>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.responseObjectName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="test" class="request-body">
+        <mat-form-field class="responceBox form-field-wrapper" appearance="outline">
+          <mat-label translate>Request Body</mat-label>
+          <textarea class="textarea-content" matInput placeholder="Request Body" name="body" (ngModelChange)="taskProperties.requestBody=$event"
+            [froalaEditor]="reqBodyOptions" [ngModel]="taskProperties.requestBody | templateToSlot: dragDataObj"
+            required>{{taskProperties.requestBody | templateToSlot: dragDataObj}}</textarea>
+        </mat-form-field>
+        <button mat-stroked-button class="sapper-button getRequest" (click)="getResponse(RequestBody)">Get
+          Request</button>
+      </div>
+    </div>
+  </div>
+</div>

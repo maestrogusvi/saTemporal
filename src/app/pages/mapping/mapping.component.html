@@ -1,0 +1,273 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <h4 class="dialog-title">{{getDialogTitle()}}</h4>
+    <mat-icon class="close pull-right" matTooltip="Close" (click)="closeDialog()">close</mat-icon>
+  </div>
+  <div mat-dialog-content class="dialog-body mapping-body">
+    <div fxLayout fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0">
+      <div fxFlex="50%" fxLayout fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0">
+        <div class="source-fields" fxFlex="40%">
+          <mat-toolbar color="primary" class="sapper-toolbar">
+            <span class="title">Source Fields</span>
+            <span class="toolbar-spacer"></span>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon *ngIf="!isSourceExpanded" (click)="expandAll('sourceTree','isSourceExpanded')">
+                chevron_right</mat-icon>
+              <mat-icon *ngIf="isSourceExpanded" (click)="collapseAll('sourceTree','isSourceExpanded')">
+                expand_more</mat-icon>
+            </button>
+          </mat-toolbar>
+          <mat-card class="source-tree-card">
+            <mat-card-content class="card-content">
+              <mat-accordion *ngFor="let source of sourceFields">
+                <mat-expansion-panel class="expansion-panel" (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false" [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{source.fileName}}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="fields-header">
+                    <mat-form-field class="form_field text search" appearance="outline">
+                      <mat-label>Search</mat-label>
+                      <input matInput type="text" name="search" #sourceFilter
+                        (keyup)="filterNodes(sourceFilter.value, sourceTree)">
+                      <button mat-button *ngIf="sourceFilter.value" matSuffix mat-icon-button aria-label="Clear"
+                        (click)="clearFilter(sourceTree,sourceFilter)">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                  <div class="expansion-content">
+                    <div>
+                      <tree-root #sourceTree [nodes]="source.meta" [focused]="true" [options]="options">
+                        <ng-template #treeNodeTemplate let-node let-index="index">
+                          <div (click)="nodeClicked(node, 'sourceField')">
+                            <span class="node-label">{{ node.data.name }}</span>
+                            <span class="checkbox c-checkbox pull-right">
+                              <label>
+                                <input #sourceField type="checkbox" [name]="node.data.id" [value]="node.data.id"
+                                  [id]="node.data.id" [disabled]="!currentTargetElement"
+                                  [checked]="isMappedWithTarget(node?.data?.id)" *ngIf="isShow(node)" />
+                              </label>
+                            </span>
+                          </div>
+                        </ng-template>
+                      </tree-root>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div fxFlex="15%">
+          <svg class="svg-cl">
+            <svg:path class="connector" *ngFor="let path of pathArray;" [attr.d]="path.dimensions">
+            </svg:path>
+          </svg>
+        </div>
+        <div class="target-fields" fxFlex="40%">
+          <mat-toolbar color="primary" class="sapper-toolbar">
+            <span class="title">Target Fields</span>
+            <span class="toolbar-spacer"></span>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon *ngIf="!isTargetExpanded" (click)="expandAll('targetTree','isTargetExpanded')">
+                chevron_right</mat-icon>
+              <mat-icon *ngIf="isTargetExpanded" (click)="collapseAll('targetTree','isTargetExpanded')">
+                expand_more</mat-icon>
+            </button>
+          </mat-toolbar>
+          <mat-card class="target-tree-card">
+            <mat-card-content class="card-content">
+              <mat-accordion *ngFor="let target of targetFields">
+                <mat-expansion-panel class="expansion-panel" (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false" [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{target.fileName}}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="fields-header">
+                    <mat-form-field class="form_field text search" appearance="outline">
+                      <mat-label>Search</mat-label>
+                      <input matInput type="text" name="search" #targetFilter
+                        (keyup)="filterNodes(targetFilter.value, targetTree)">
+                      <button mat-button *ngIf="targetFilter.value" matSuffix mat-icon-button aria-label="Clear"
+                        (click)="clearFilter(targetTree,targetFilter)">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                  <div class="expansion-content">
+                    <div>
+                      <tree-root #targetTree [nodes]="target.meta" [focused]="true" [options]="options">
+                        <ng-template #treeNodeTemplate let-node let-index="index">
+                          <div class="tree-node-div" (click)="nodeClicked(node, 'targetField')">
+                            <span class="checkbox c-checkbox pull-left">
+                              <label>
+                                <input #targetField type="checkbox" [name]="node.data.id" [value]="node.data.id"
+                                  [id]="node.data.id" [checked]="isCheckedTarget(node.data.id)" *ngIf="isShow(node)" />
+                              </label>
+                            </span>
+                            <span class="node-label">{{node.data.name}}</span>
+                          </div>
+                          <div class="tree-icons-div">
+                            <span class="pull-right" *ngIf="isShowAddSource(node.data.id)"
+                              matTooltip="Activate target to add source" (click)="setInputOutputFieldsOnActivate(node)">
+                              <i class="fa fa-plus" aria-hidden="true"></i>
+                            </span>
+                            <span class="pull-right" matTooltip="Edit mapping" *ngIf="isMappedTarget(node.data.id)"
+                              (click)="editMapping(node?.data?.id)">
+                              <i class="fa fa-edit" aria-hidden="true"></i>
+                            </span>
+                          </div>
+                        </ng-template>
+                      </tree-root>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div fxFlex="50%">
+        <div class="transformation-container">
+          <div fxLayout fxFlex="100%" fxLayout.xs="column" fxLayoutGap="0" fxLayoutGap.xs="0">
+            <!-- <div class="transformation-sidenav" fxFlex="30%">
+              <mat-toolbar color="primary" class="sapper-toolbar">
+                <span class="title">Formulae List</span>
+                <span class="toolbar-spacer"></span>
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                  <mat-icon *ngIf="!isFormulaExpanded" (click)="expandAll('formulaTree','isFormulaExpanded')">
+                    chevron_right</mat-icon>
+                  <mat-icon *ngIf="isFormulaExpanded" (click)="collapseAll('formulaTree','isFormulaExpanded')">
+                    expand_more</mat-icon>
+                </button>
+              </mat-toolbar>
+              <mat-card class="source-tree-card">
+                <mat-card-header class="fields-header">
+                  <mat-form-field class="form_field text search" appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" name="search" #formulaFilter
+                      (keyup)="filterNodes(formulaFilter.value, formulaTree)">
+                    <button mat-button *ngIf="formulaFilter.value" matSuffix mat-icon-button aria-label="Clear"
+                      (click)="clearFilter(formulaTree,formulaFilter)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </mat-card-header>
+                <mat-card-content class="card-content">
+                  <div>
+                    <tree-root #formulaTree [nodes]="formulaList" [options]="formulaTreeOptions">
+                      <ng-template #treeNodeTemplate let-node let-index="index">
+                        <div (click)="openExampleModal(node)">{{node.data.name}}
+                        </div>
+                      </ng-template>
+                    </tree-root>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div> -->
+            <mat-tab-group color="primary" backgroundColor="primary" [(selectedIndex)]="mappingTabIndex"
+              (selectedTabChange)="tabChanged($event)">
+              <mat-tab label="Field Mapping">
+                <div class="transformation-content" fxFlex="100%">
+                  <div fxLayout fxLayout.xs="column" fxLayoutGap="0" fxLayoutGap.xs="0">
+                    <div class="transformation-top-content" fxFlex="100%">
+                      <div class="selected-source-fields" fxFlex="45%">
+                        <mat-toolbar color="primary" class="sapper-toolbar">
+                          <span class="title">Selected Source Field(s)</span>
+                          <span class="toolbar-spacer"></span>
+                        </mat-toolbar>
+                        <mat-card class="source-tree-card">
+                          <mat-card-content class="card-content">
+                            <div>
+                              <tree-root #selectedSourceTree [nodes]="inputFields" [options]="selectedNodeOptions">
+                              </tree-root>
+                            </div>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                      <div fxFlex="10%"></div>
+                      <div class="selected-target-fields" fxFlex="45%">
+                        <mat-toolbar color="primary" class="sapper-toolbar">
+                          <span class="title">Selected Target Field(s)</span>
+                          <span class="toolbar-spacer"></span>
+                        </mat-toolbar>
+                        <mat-card class="target-tree-card">
+                          <mat-card-content class="card-content">
+                            <div>
+                              <tree-root #selectedTargetTree [nodes]="outputFields" [options]="selectedNodeOptions">
+                              </tree-root>
+                            </div>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                  <div fxLayout fxLayout.xs="column" fxLayoutGap="0" fxLayoutGap.xs="0">
+                    <div class="transformation-bottom-content" fxFlex="100%">
+                      <mat-toolbar color="primary" class="sapper-toolbar">
+                        <span class="title">Transformation</span>
+                        <span class="toolbar-spacer"></span>
+                      </mat-toolbar>
+                      <mat-card class="source-tree-card">
+                        <mat-card-content class="card-content">
+                          <textarea class="textarea-content" matInput [mentionConfig]="mentionConfig"
+                            [(ngModel)]="mappingExpression" (change)="setMappingObj('expression')"
+                            placeholder="Press @ to get the formula list and # to get the source field list to choose from"></textarea>
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Scripting">
+                <div fxLayout fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+                  <div class="scripting-container" fxFlex="100%">
+                    <div fxLayout="row">
+                      <div fxFlex="50%">
+                        <mat-form-field class="form_field text" appearance="outline">
+                          <mat-label>Language</mat-label>
+                          <select matNativeControl name="language" disabled="true">
+                            <option value="JAVASCRIPT" selected>
+                              JAVASCRIPT
+                            </option>
+                          </select>
+                        </mat-form-field>
+                      </div>
+                      <div fxFlex="50%">
+                        <mat-form-field class="form_field text" appearance="outline">
+                          <mat-label>Function Name</mat-label>
+                          <input name="functionName" matInput placeholder="Function Name" [(ngModel)]="functionName"
+                            (change)="onFunctionNameChange($event)">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div class="script-box" fxFlex="100%">
+                        <mat-toolbar color="primary" class="sapper-toolbar">
+                          <span class="title">Script</span>
+                          <span class="toolbar-spacer"></span>
+                        </mat-toolbar>
+                        <ngx-codemirror #scriptEditor [options]="{lineNumbers: true}" [autoFocus]="true"
+                          (focusChange)="setMappingObj('expression')" [(ngModel)]="mappingScript"></ngx-codemirror>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="dialog-footer">
+    <button mat-button cdkFocusInitial class="sapper-button margin-right-15" (click)="saveMapping()">Save</button>
+    <button mat-button class="sapper-button btn-cancel" (click)="cancelOrBack()">{{getCancelBtnLbl()}}
+    </button>
+  </div>
+</div>

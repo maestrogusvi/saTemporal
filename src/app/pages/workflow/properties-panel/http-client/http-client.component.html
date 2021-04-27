@@ -1,0 +1,148 @@
+<div class="http-client-container">
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="23%">
+      <mat-form-field class="form-field set-width" appearance="outline">
+        <mat-label>Select Connection Type</mat-label>
+        <mat-select name="connectionType" [(value)]="selectedConnectionType" (selectionChange)="getConnectionsByType(selectedConnectionType)"
+          required>
+          <mat-option *ngFor="let type of connectionType" [value]="type.value">
+            {{type.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="25%">
+      <mat-form-field class="form-field set-width select-connection" appearance="outline">
+        <mat-label>Select Connection</mat-label>
+        <mat-select name="connection" [(value)]="selectedConnection" value required>
+          <mat-option *ngFor="let connection of connectionList" [value]="connection">
+            {{connection.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span class="create-connection">
+        <mat-icon class="edit-icon" (click)="openCreateConnectionDialog(selectedConnection)">edit</mat-icon>
+        <mat-icon (click)="openCreateConnectionDialog(null)">add_box</mat-icon>
+      </span>
+    </div>
+
+    <div fxFlex="50%">
+      <mat-form-field class="form-field set-width" appearance="outline">
+        <mat-label>API URI</mat-label>
+        <textarea [froalaEditor]="urlOptions" matInput type="text" name="apiUri" [ngModel]="(taskProperties.apiURI | templateToSlot: dragDataObj)"
+          (ngModelChange)="taskProperties.apiURI=$event" required>{{taskProperties.apiURI | templateToSlot: dragDataObj}}</textarea>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="100%" fxLayoutGap="15px">
+      <div fxFlex="23%">
+        <mat-form-field class="form-field set-width" appearance="outline">
+          <mat-label>HTTP Method</mat-label>
+          <mat-select name="http-method" [(value)]="taskProperties.httpMethod" value required>
+            <mat-option *ngFor="let method of httpMethods" [value]="method">
+              {{method}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="25%">
+        <mat-form-field class="form-field select-connection set-width" appearance="outline">
+          <mat-label>Request Content Type</mat-label>
+          <mat-select name="content-type" [(value)]="taskProperties.requestContentType" value required>
+            <mat-option *ngFor="let type of contentTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="25%">
+        <mat-form-field class="form-field select-connection set-width" appearance="outline">
+          <mat-label>Response Content Type</mat-label>
+          <mat-select name="content-type" [(value)]="taskProperties.responseContentType" value required>
+            <mat-option *ngFor="let type of contentTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="50%">
+      <label>HTTP Headers</label>
+    </div>
+    <div fxFlex="50%">
+      <label>Query Parameters</label>
+    </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="50%">
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngFor="let row of headerArr; let rowIndex=index"
+        id="httpHeaderDiv_{{rowIndex}}">
+        <div class="http-headers" fxLayoutGap="15px" fxFlex="100%">
+          <div fxFlex="46%">
+            <mat-form-field appearance="outline" class="form_field">
+              <mat-label>Header key</mat-label>
+              <input matInput type="text" name="row.headerKey" [(ngModel)]="row.headerKey" (change)="onChangeOfHeadersAndParams(row, rowIndex, 'httpHeader')">
+            </mat-form-field>
+          </div>
+          <div fxFlex="40%">
+            <mat-form-field appearance="outline" class="form_field">
+              <mat-label>value</mat-label>
+              <input matInput type="text" name="row.headerValue" [(ngModel)]="row.headerValue" (change)="onChangeOfHeadersAndParams(row, rowIndex, 'httpHeader')">
+            </mat-form-field>
+          </div>
+          <div fxFlex="8%">
+            <div class="icons">
+              <mat-icon class="delete-icon" matTooltip="Delete" *ngIf="headerArr.length !== 1" (click)="onDeleteRow('httpHeaderDiv_'+rowIndex,rowIndex, row.headerKey, 'httpHeader')">delete</mat-icon>
+              <mat-icon class="add-icon" matTooltip="Add" (click)="addField('httpHeader')" *ngIf="headerArr.length === rowIndex+1">add</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="50%">
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngFor="let row of queryParamArr; let rowIndex=index"
+        id="queryParamDiv_{{rowIndex}}">
+        <div fxFlex="100%" fxLayoutGap="15px" class="http-headers">
+          <div fxFlex="40%">
+            <mat-form-field appearance="outline" class="form_field">
+              <mat-label>key</mat-label>
+              <input matInput type="text" name="row.headerKey" [(ngModel)]="row.headerKey" (change)="onChangeOfHeadersAndParams(row, rowIndex, 'queryParam')">
+            </mat-form-field>
+          </div>
+          <div fxFlex="47%">
+            <mat-form-field appearance="outline" class="form_field">
+              <mat-label>value</mat-label>
+              <input matInput type="text" name="row.headerValue" [(ngModel)]="row.headerValue" (change)="onChangeOfHeadersAndParams(row, rowIndex, 'queryParam')">
+            </mat-form-field>
+          </div>
+          <div fxFlex="8%">
+            <div class="icons">
+              <mat-icon class="delete-icon" matTooltip="Delete" *ngIf="queryParamArr.length !== 1" (click)="onDeleteRow('queryParamDiv_'+rowIndex,rowIndex, row.headerKey, 'queryParam')">delete</mat-icon>
+              <mat-icon class="add-icon" matTooltip="Add" (click)="addField('queryParam')" *ngIf="queryParamArr.length === rowIndex+1">add</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="100%" fxLayoutGap="15px">
+      <div class="request-body" *ngIf="taskProperties.httpMethod === 'POST' || taskProperties.httpMethod === 'PUT' || taskProperties.httpMethod === 'PATCH'">
+        <mat-form-field class="form-field set-width" appearance="outline">
+          <mat-label>Request Body</mat-label>
+          <textarea class="textarea-content" matInput placeholder="Request Body" name="body"
+            (ngModelChange)="taskProperties.requestBody=$event"
+            [froalaEditor]="reqBodyOptions" [ngModel]="taskProperties.requestBody | templateToSlot: dragDataObj"
+            required>{{taskProperties.requestBody | templateToSlot: dragDataObj}}</textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>

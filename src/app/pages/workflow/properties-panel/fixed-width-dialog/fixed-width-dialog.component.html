@@ -1,0 +1,82 @@
+<div class="dialog-header">
+  <h4 mat-dialog-title class="dialog-title text-bold" translate>Meta
+  </h4>
+  <button type="button" class="closeIcon" (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-content">
+
+  <mat-accordion class="fixed-width-accordion">
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+      <div fxFlex="98%">
+        <mat-expansion-panel class="expansion-panel" *ngFor="let fixedWidthMeta of fixedWidthMetaList; let i = index">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="title">
+              {{fixedWidthMeta.name ?  fixedWidthMeta.name : 'Field' }}
+            </mat-panel-title>
+            <mat-icon class="delete-icon" (click)="deleteField(i)">delete</mat-icon>
+          </mat-expansion-panel-header>
+
+          <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+            <div fxFlex="50%">
+            <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+              <mat-label>Field Name</mat-label>
+              <input matInput [(ngModel)]="fixedWidthMeta.name">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="fixedWidthMeta.name = ''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+            <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+              <mat-label>Start Index</mat-label>
+              <input matInput [(ngModel)]="fixedWidthMeta.startIndex">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="fixedWidthMeta.startIndex = ''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+            <div fxFlex="50%">
+            <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+              <mat-label>Number of Elements</mat-label>
+              <input matInput [(ngModel)]="fixedWidthMeta.charLength">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="fixedWidthMeta.name = ''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form-field form-field-wrapper type-field">
+              <mat-label translate>Type</mat-label>
+              <mat-select name="type" [(ngModel)]="fixedWidthMeta.type" [ngModelOptions]="{standalone: true}" required>
+                <mat-option *ngFor="let type of dataTypes" [value]="type.value" [disabled]="type.value!=='string'">
+                  {{type.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <div fxFlex="2%">
+        <span>
+          <mat-icon class="addIcon" matTooltip="Add New Field" (click)="addNewField()">add_circle_outline</mat-icon>
+        </span>
+      </div>
+    </div>
+  </mat-accordion>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <div>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-stroked-button class="sapper-button" (click)="saveFixedWidthMeta()">
+      Save
+    </button>
+  </div>
+</mat-dialog-actions>

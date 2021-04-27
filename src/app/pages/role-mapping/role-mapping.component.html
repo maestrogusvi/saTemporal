@@ -1,0 +1,63 @@
+<sapper-page-header class="set-margin" [title]="'ROLE-MAPPING.PAGE-HEADER' | translate" [description]="'ROLE-MAPPING.PAGE-DESCRIPTION' | translate"></sapper-page-header>
+<div class="connections-container">
+    <div class="create-connection" fxLayout="row" fxLayoutAlign="end start">
+      <button   mat-stroked-button class="sapper-button" (click)="openCreateConnectionDialog()">Add new Role Mapping</button>
+    </div>
+    <div class="connection-table" fxLayout fxLayout.xs="column" fxLayoutGap.xs="0">
+        <div class="card card-table">
+            <div class="card-table-header padding-20">
+              <h3 class="margin-0" translate>{{ 'ROLE-MAPPING.TABLE-HEADER' }}</h3>
+            </div>
+            <div class="empty-connection-list" *ngIf="connectionList && connectionList.length === 0">
+              <mat-card class="empty-data-card" fxLayout="column" fxLayoutAlign="center center">
+                <div fxFlex="50%">
+                  <img class="empty-image" src="assets/images/empty-connection.png" alt="empty-list">
+                </div>
+                <mat-card-content fxFlex="50%" class="content">
+                  <p class="text-muted"> No connections created yet!!! </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="margin-15"  style="text-align: center;" *ngIf="connectionList && connectionList.length > 0">
+                    <p-table #dt [value]="connectionList" styleClass="p-datatable-connectionList" [rowHover]="true"
+                             [rows]="10" [showCurrentPageReport]="true" [globalFilterFields]="['marketGroupId','brand.brandId','grpRole.grpRoleId','grpRole.grpRoleName','stRole.stRoleName']" [rowsPerPageOptions]="pageSizeOptions" [loading]="loading"
+                             [paginator]="connectionList.length >= 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+
+                      <ng-template pTemplate="caption">
+                        <div style="text-align: right">
+                          <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                          <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                        </div>
+                      </ng-template>
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th scope="col" [pSortableColumn]="'marketGroupId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER1' }}</th>
+                          <th scope="col" [pSortableColumn]="'brand.brandId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER2' }}</th>
+                          <th scope="col" [pSortableColumn]="'grpRole.grpRoleId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER3' }}</th>
+                          <th scope="col" [pSortableColumn]="'grpRole.grpRoleName'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER4' }}</th>
+                          <th scope="col" [pSortableColumn]="'stRole.stRoleName'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER5' }}</th>
+                          <th scope="col" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER6' }}</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-connection>
+                        <tr [pSelectableRow]="connection">
+                          <td>{{connection.marketGroupId}}</td>
+                          <td>{{connection.brand.brandId}}</td>
+                          <td>{{connection.grpRole.grpRoleId}}</td>
+                          <td>{{connection.grpRole.grpRoleName}}</td>
+                          <td>{{connection.stRole.stRoleName}}</td>
+                          <td class="icons">
+                                <mat-icon  class="edit-icon margin-right-10"
+                                matTooltip="{{ 'ROLE-MAPPING.EDIT' | translate }}"
+                                (click)="openPopUp(connection)">edit</mat-icon>
+                                <mat-icon class="delete-icon"
+                                matTooltip="{{ 'ROLE-MAPPING.DELETE' | translate }}"
+                                (click)="deleteConnection(connection.id)">delete</mat-icon>
+                          </td>
+                        </tr>
+                      </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

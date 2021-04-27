@@ -1,0 +1,15 @@
+<div class="csv-converter-container">
+  <mat-form-field class="form-field form-field-wrapper" appearance="outline">
+    <mat-label>Select CSV converter input type</mat-label>
+    <mat-select [(value)]="selectedOption" (selectionChange)="setCsvConverterInputType($event, droppedNode)" required>
+      <mat-option [value]="csvConverterInputType" *ngFor="let csvConverterInputType of csvConverterInputTypeOptions">{{ csvConverterInputType.label }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="form-field form-field-wrapper"
+    appearance="outline" *ngIf="selectedOption?.value === 'DATASLOT'">
+    <mat-label>Data Slot</mat-label>
+    <textarea [froalaEditor]="dataSlotOptions" matInput type="text" name="dataSlot"
+      [ngModel]="(taskProperties.data | templateToSlot: dragDataObj)" (ngModelChange)="taskProperties.data = $event" required>{{taskProperties.data | templateToSlot: dragDataObj}}</textarea>
+  </mat-form-field>
+</div>

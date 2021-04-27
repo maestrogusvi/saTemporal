@@ -1,0 +1,87 @@
+<div class="sql-client-container">
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="45%">
+      <mat-form-field class="form-field select-connection" appearance="outline">
+        <mat-label>Select Connection</mat-label>
+        <mat-select name="operation" [(value)]="selectedConnection" value required>
+          <mat-option *ngFor="let connection of connectionList" [value]="connection">
+            {{connection.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span class="create-connection">
+        <mat-icon class="edit-icon" (click)="openCreateConnectionDialog(selectedConnection)">edit</mat-icon>
+        <mat-icon (click)="openCreateConnectionDialog(null)">add_box</mat-icon>
+      </span>
+    </div>
+    <div fxFlex="45%">
+      <span class="normal-text" *ngIf="taskProperties?.queryType?.toLowerCase() === 'insert'">
+        <mat-checkbox matTooltip=" Batch Execution" [checked]="taskProperties.isBatchExecution"
+          (change)="onBatchProcessingChange($event)">
+          Batch Execution</mat-checkbox>
+      </span>
+    </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0">
+    <div fxFlex="45%">
+      <mat-form-field class="form-field select-connection" appearance="outline">
+        <mat-label>Query Type</mat-label>
+        <mat-select name="operation" [(value)]="taskProperties.queryType" value required>
+          <mat-option *ngFor="let queryType of queryTypes" [value]="queryType.value">
+            {{queryType.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="45%">
+      <mat-form-field class="form-field set-width" appearance="outline">
+        <mat-label>Query</mat-label>
+        <input matInput type="text" name="query" [(ngModel)]="taskProperties.query"
+          (keyup)="isQueryVerified.emit(false)" required>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.query=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="validateSqlQuery()"
+          matTooltip="Verify Query">
+          <mat-icon>check_circle</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0"
+    *ngFor="let namedParam of namedparamKeys;let i = index">
+    <div fxFlex="45%">
+      <mat-form-field class="form-field set-width" appearance="outline">
+        <mat-label>Key</mat-label>
+        <input matInput type="text" name="key" [(ngModel)]="namedParam.key" required disabled>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="namedParam.key=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div fxFlex="45%">
+      <mat-form-field class="form-field set-width" appearance="outline">
+        <mat-label>Value</mat-label>
+        <textarea [froalaEditor]="namedParam.options" matInput type="text" name="value"
+          [ngModel]="(namedParam.value | templateToSlot: dragDataObj)"
+          (ngModelChange)="onChangeOfParamsValue(i,namedParam.key, $event)" required></textarea>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="namedParam.value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngIf="taskProperties?.isBatchExecution">
+    <div fxFlex=" 45%">
+      <mat-form-field class="form-field set-width" appearance="outline">
+        <mat-label>Batch Data</mat-label>
+        <textarea [froalaEditor]="batchExpressionOptions" matInput type="text" name="value"
+          [ngModel]="(taskProperties.batchDataExpression | templateToSlot: dragDataObj)"
+          (ngModelChange)="taskProperties.batchDataExpression=$event" required></textarea>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="taskProperties.batchDataExpression=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

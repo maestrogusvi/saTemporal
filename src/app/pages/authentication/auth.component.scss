@@ -1,0 +1,189 @@
+@import "../shared/styles/colors.scss";
+
+$sapper-img: url("/assets/images/sapper-background.jpeg");
+
+:host {
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: $sapper-img;
+    background-size: cover;
+
+    .container {
+      background-color: $white;
+      border-radius: 10px;
+      box-shadow: 0 14px 28px $login_container_shadow_dark,
+        0 10px 10px $login_container_shadow;
+      position: relative;
+      overflow: hidden;
+      width: 378px;
+      max-width: 100%;
+      min-height: 480px;
+
+      &.right-panel-active {
+        .sign-in-container {
+          transform: translateX(100%);
+        }
+
+        .sign-up-container {
+          transform: translateX(100%);
+          opacity: 1;
+          z-index: 5;
+          animation: show 0.6s;
+        }
+
+        .overlay-container {
+          transform: translateX(-100%);
+
+          .overlay {
+            transform: translateX(50%);
+
+            .overlay-left {
+              transform: translateX(0);
+            }
+
+            .overlay-right {
+              transform: translateX(20%);
+            }
+          }
+        }
+      }
+
+      .form-container {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+
+        img {
+          height: 50px;
+          margin: 41px 0px 0px -15px;
+          position: absolute;
+          top: -20px;
+        }
+
+        .panel-heading {
+          position: relative;
+          padding: 21px 78px 0px 31px;
+          height: 74px;
+          box-shadow: 0 1px 3px $panel_heading_shadow;
+          font-size: 34px;
+          font-weight: 700;
+        }
+
+        .panel-heading span {
+          font-size: 27px;
+          vertical-align: middle;
+          margin-left: 41px;
+        }
+      }
+
+      .sign-in-container {
+        left: 0;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .sign-up-container {
+        left: 0;
+        width: 50%;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .overlay-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+
+        .overlay {
+          background-repeat: no-repeat;
+          background-image: linear-gradient(
+            -45deg,
+            $blue_dark,
+            $blue_light 83%,
+            $blue_dark 95%
+          );
+          background-size: cover;
+          background-position: 0 0;
+          color: $white;
+          position: relative;
+          left: -100%;
+          height: 100%;
+          width: 200%;
+          transform: translateX(0);
+          .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+            .sign-up {
+              background-color: transparent;
+              border-color: $white;
+            }
+            &.overlay-left {
+              h1 {
+                font-weight: bold;
+                margin: 0;
+              }
+              p {
+                font-size: 14px;
+                font-weight: 100;
+                line-height: 20px;
+                letter-spacing: 0.5px;
+                margin: 20px 0 30px;
+              }
+            }
+            &.overlay-right {
+              right: 0;
+              transform: translateX(0);
+            }
+            .card-avatar img {
+              width: 15%;
+              border-radius: 50%;
+            }
+            .card-body {
+              .card-title {
+                margin-bottom: 0px;
+              }
+              .card-category {
+                margin-top: 5px;
+              }
+            }
+            .overlay-title {
+              margin: -5px 0px 40px 0px;
+              text-align: center;
+            }
+            .testimonial-card {
+              background: transparent;
+              box-shadow: none;
+              color: $white;
+              .card-header {
+                justify-content: center;
+                mat-card-subtitle {
+                  color: $white;
+                  font-size: 13px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

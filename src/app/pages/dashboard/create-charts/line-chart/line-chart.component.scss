@@ -1,0 +1,17 @@
+// .path {  stroke: #fff !important; }
+.sapper-lable {
+  margin: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1a75b5;
+}
+
+.sapper-lable:hover {
+  text-decoration: underline;
+}
+
+.selected-filter {
+  font-weight: bold;
+  color: #1b659b;
+}

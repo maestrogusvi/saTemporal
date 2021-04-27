@@ -1,0 +1,40 @@
+<sapper-page-header [title]="'My Automation'" [description]="'Create and track your automation in this personalized hub.'"></sapper-page-header>
+<div class="workflow-listing-container">
+  <div fxLayout="row" class="workflow-actions" *ngIf="workflowList && workflowList.length > 0">
+    <div class="listing-search" fxFlex="35%">
+      <mat-form-field>
+        <mat-label translate>
+          <span class="fa fa-search"></span>
+          Search for a automation
+        </mat-label>
+        <input matInput name="search" [(ngModel)]="searchText">
+        <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="this.searchText = ''">
+          <span class="fa fa-close"></span>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="listing-search" fxFlex="50%">
+    </div>
+    <div class="create-workflow" fxFlex="15%" fxLayoutAlign="center center">
+      <button mat-stroked-button class="sapper-button" (click)="openWorkflowDetailsDialog()">Create Automation</button>
+    </div>
+  </div>
+  <div class="workflow-card-container">
+    <div *ngIf="workflowList && workflowList.length === 0" class="empty-workflow-list">
+      <mat-card class="empty-data-card" fxLayout="column" fxLayoutAlign="center center">
+        <div fxFlex="50%">
+          <img class="empty-image" src="assets/images/workflows/empty-list.png" alt="empty-list">
+        </div>
+        <mat-card-content fxFlex="50%" class="content">
+          <h2>You don't have any automation</h2>
+          <p class="text-muted"> Let's
+            <a href="#/appstore">browse automation </a>created by our community or </p>
+          <p class="text-muted">
+            <a (click)="openWorkflowDetailsDialog()">Create a new automation</a> to get started.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <sapper-workflow-card [searchString]= "searchText" [workflowList]="workflowList" [applicationFlexOptions]="applicationFlexOptions" [flexOptions] = "flexOptions"></sapper-workflow-card>
+  </div>
+</div>
+

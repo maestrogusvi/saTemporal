@@ -1,0 +1,157 @@
+<div class="dialog" #addEditConnection>
+  <div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="connectionData.groupId" translate>
+      ADD-EDIT-MARKET-GROUP-POPUP.TITLE-EDIT</h4>
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="!connectionData.groupId" translate="">ADD-EDIT-MARKET-GROUP-POPUP.TITLE-ADD</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dialogRef.close(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="dialog-body">
+    <form novalidate [formGroup]="connectionForm" role="form" name="connectionForm">
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ID</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.groupId" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.groupId=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.NAME</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.groupName" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.groupName=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.SAPPER</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.sapperTenant" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.sapperTenant=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.SUMTOTAL-STAGE</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.sumtotalStageURL" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.sumtotalStageURL=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.SUMTOTAL-PROD</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.sumtotalProdURL" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.sumtotalProdURL=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.HIERARCHY</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.hierarchyName" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.hierarchyName=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.BRAND</mat-label>
+            <mat-select name="type" #matmat1 [formControl]="orgTypes1" [(ngModel)]="brandListSelected" required multiple>
+              <div (mouseleave)="matmat1.close()">
+                <mat-option *ngFor="let application of brandList" [value]="application.brandId">
+                  {{application.brandName}}
+                </mat-option>
+              </div>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ORGANIZATION-TYPES</mat-label>
+            <mat-select name="type" #matmat [formControl]="orgTypes" [(ngModel)]="orgTypeListSelected" required multiple>
+              <div (mouseleave)="matmat.close()">
+              <mat-option *ngFor="let application of orgTypeList" [value]="application.typeId">
+                {{application.typeName}}
+              </mat-option>
+              </div>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.TOPDOMAIN</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.topDomain" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.topDomain=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.COMMENTS</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.comments" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.comments=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="33%">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.OEM</mat-label>
+            <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
+                          [(ngModel)]="connectionData.oem"
+                          (change)="setAll($event.checked)">
+            </mat-checkbox>
+        </div>
+        <div fxFlex="33%">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.USEREGIONS</mat-label>
+            <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
+                          [(ngModel)]="connectionData.useRegions"
+                          (change)="setAll($event.checked)">
+            </mat-checkbox>
+        </div>
+        <div fxFlex="33%">
+            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ACTIVE</mat-label>
+            <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
+                          [(ngModel)]="connectionData.active"
+                          (change)="setAll($event.checked)">
+            </mat-checkbox>
+        </div>
+      </div>
+
+    </form>
+  </mat-dialog-content>
+  <div class="dialog-footer">
+    <button mat-stroked-button (click)="saveMarketGroup()" class="sapper-button">
+      {{ 'ADD-EDIT-MARKET-GROUP-POPUP.SAVE' | translate }}
+    </button>
+  </div>
+</div>

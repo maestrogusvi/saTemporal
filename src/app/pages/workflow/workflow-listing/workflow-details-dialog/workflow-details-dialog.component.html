@@ -1,0 +1,35 @@
+<div class="dialog-container">
+  <div class="container">
+    <div class="dialog-header">
+      <button class="close" mat-button (click)="dialogRef.close(false);">X</button>
+      <h3>
+        Create Automation
+      </h3>
+    </div>
+    <div mat-dialog-content class="dialog-content">
+      <form>
+        <mat-form-field class="form-field">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" name="name" [(ngModel)]="processProp.name" (keydown.enter)="$event.preventDefault();">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="processProp.name=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Description</mat-label>
+          <textarea class="textarea-content" matInput name="documentation"
+            [(ngModel)]="processProp.documentation"></textarea>
+        </mat-form-field>
+      </form>
+    </div>
+    <div mat-dialog-actions class="dialog-footer-actions">
+      <button mat-stroked-button class="sapper-button margin-right-15" [ngClass]="{'disabled': !validateWorkflowData()}"
+      [disabled]="!validateWorkflowData()" (click)="saveWorkflow()">
+        Save
+      </button>
+      <button mat-stroked-button class="sapper-button" (click)="this.dialogRef.close(false)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+{
+    "data": {
+        "createdBy": "rohini123",
+        "createdDate": "2020-07-09T11:00:37.0514792+05:30",
+        "lastModifiedBy": "rohini123",
+        "lastModifiedDate": "2020-07-09T11:00:37.0514792+05:30",
+        "id": "5f06ab7d5835161160e8475b",
+        "meta": "{\"name\": { \"type\": \"string\",\"order\": \"1\"},\"isoCode\": { \"type\": \"string\",\"order\": \"2\"},\"shortName\": { \"type\": \"string\",\"order\": \"3\"},\"active\": { \"type\": \"string\",\"order\": \"4\"},\"id\": { \"type\": \"string\",\"order\": \"5\"}}",
+        "requiredProperties": {
+            "delimiter": ","
+        },
+        "fileType": "CSV",
+        "fileName": "example.csv"
+    }
+}

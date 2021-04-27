@@ -1,0 +1,88 @@
+@import '../../shared/styles/colors.scss';
+@import '../../shared/styles/material-styles.scss';
+
+:host {
+  .signup-form-container {
+    transition: all 0.6s ease-in-out;
+
+    .form-validate {
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 30px;
+      height: 100%;
+      text-align: center;
+
+      .form-field {
+        width: 90%;
+      }
+
+      .form-field1 {
+        width: 40%;
+        margin-right: 160px;
+      }
+
+      .form-field2 {
+        width: 48%;
+        margin-left: 135px;
+    margin-top: -46px;
+      }
+
+      h4 {
+        margin: 15px;
+      }
+
+      .text-danger {
+        color: #e60808;
+        font-size: 12px;
+        text-align: start;
+      }
+
+      .disabled {
+        color: #3a3f51;
+        cursor: not-allowed;
+      }
+
+      .sapper-button {
+        background-color: #2061e9 !important;
+        color: white !important;
+        margin: 20px 0px 10px 0px;
+      }
+
+      .mat-radio {
+        font-size: 12px;
+        width: 240px;
+
+        span {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+
+        ::ng-deep .mat-radio-container {
+          width: 12px;
+          height: 12px;
+
+          .mat-radio-outer-circle {
+            width: 12px;
+            height: 12px;
+          }
+
+          .mat-radio-inner-circle {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.domain {
+  width: 94%;
+}
+
+.hypen {
+  margin-top: 10px;
+}

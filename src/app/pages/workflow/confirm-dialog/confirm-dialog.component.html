@@ -1,0 +1,17 @@
+<div class="dialog-container">
+  <div class="container">
+    <div class="dialog-header">
+      <button class="close" mat-button (click)="onDismiss()">X</button>
+      <h3>
+        {{title}}
+      </h3>
+    </div>
+    <div mat-dialog-content>
+      <p>{{message}}</p>
+    </div>
+    <div mat-dialog-actions *ngIf="showActions">
+      <button id="dismiss" mat-button (click)="onDismiss()">No</button>
+      <button id="confirm" mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+    </div>
+  </div>
+</div>

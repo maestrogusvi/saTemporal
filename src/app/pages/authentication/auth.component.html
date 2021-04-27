@@ -1,0 +1,39 @@
+<div class="login-container">
+  <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" id="container">
+    <div class="form-container sign-up-container">
+
+      <div class="panel-heading text-center">
+        <img src="assets/images/SAPPER-LOGO.png" alt="logo" />
+      </div>
+
+      <!-- Signup form start -->
+      <sapper-signup></sapper-signup>
+      <!-- Signup form end -->
+    </div>
+    <div class="form-container sign-in-container" *ngIf="!rightPanel">
+      <div class="panel-heading text-center">
+        <img src="assets/images/vw-logo.jpg" alt="logo" />
+      </div>
+
+      <!-- Signin form start -->
+      <sapper-login></sapper-login>
+      <!-- Signin form end -->
+    </div>
+<!--    <div class="overlay-container">-->
+<!--      <div class="overlay">-->
+<!--        <div class="overlay-panel">-->
+<!--          <h1>Welcome Back to Sapper!</h1>-->
+<!--          <p>To keep connected with us please login with your personal info</p>-->
+<!--          <button mat-stroked-button class="sign-up sapper-button" id="signIn" (click)="gotoUrl('/login')">Sign-->
+<!--            In</button>-->
+<!--        </div>-->
+<!--        <div class="overlay-panel overlay-right">-->
+<!--          <h2 class="overlay-title">Welcome to Sapper!</h2>-->
+<!--          <sapper-carousel class="app-carousel margin-10" [slides]="testimonials"></sapper-carousel>-->
+<!--&lt;!&ndash;          <button mat-stroked-button class="sign-up sapper-button" id="signUp" (click)="gotoUrl('/signup')">Sign&ndash;&gt;-->
+<!--&lt;!&ndash;            Up</button>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+</div>

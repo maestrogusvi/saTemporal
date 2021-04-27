@@ -1,0 +1,110 @@
+<div class="dialog" #addEditConnection>
+  <div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="connectionData.id" translate>
+      ADD-EDIT-ORGANIZATION-POPUP.TITLE-EDIT</h4>
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="!connectionData.id">Create Connection</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dialogRef.close(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="dialog-body">
+    <form novalidate [formGroup]="connectionForm" role="form" name="connectionForm">
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="33%">
+          <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.ID</mat-label>
+          <mat-label> : {{connectionData.id}}</mat-label>
+        </div>
+        <div fxFlex="33%">
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.NAME</mat-label>
+            <mat-label translate> : {{connectionData.organizationName}}</mat-label>
+
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.HIERARCHY</mat-label>
+            <mat-label translate> : {{connectionData.hierarchy}}</mat-label>
+
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.BRAND</mat-label>
+            <mat-label translate> : {{connectionData.brandArray[0].brandName }}</mat-label>
+
+
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.PARENT-ORGANIZATION-CODE</mat-label>
+            <mat-label translate> : {{connectionData.parentOrganizationCode}}</mat-label>
+
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.REGION</mat-label>
+            <mat-label translate> : {{connectionData.region}}</mat-label>
+
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.ADDRESS1</mat-label>
+            <mat-label translate> : {{connectionData.address1}}</mat-label>
+
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.ADDRESS2</mat-label>
+            <mat-label translate> : {{connectionData.address2}}</mat-label>
+
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.CITY</mat-label>
+            <mat-label translate> : {{connectionData.city}}</mat-label>
+
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.STATE</mat-label>
+            <mat-label translate> : {{connectionData.state}}</mat-label>
+
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.POSTAL-CODE</mat-label>
+            <mat-label translate> : {{connectionData.postalCode}}</mat-label>
+
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.COUNTRY</mat-label>
+            <mat-label translate> : {{connectionData.country}}</mat-label>
+
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="33%">
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.PHONE1</mat-label>
+            <mat-label translate> : {{connectionData.phone1}}</mat-label>
+        </div>
+        <div fxFlex="33%">
+
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.PHONE2</mat-label>
+            <mat-label translate> : {{connectionData.phone2}}</mat-label>
+        </div>
+        <div fxFlex="33%">
+            <mat-label translate>ADD-EDIT-ORGANIZATION-POPUP.OPTIONALTEXT1</mat-label>
+            <mat-label translate> : {{connectionData.optionalText1}}</mat-label>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <div class="dialog-footer">
+
+  </div>
+</div>

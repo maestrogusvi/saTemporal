@@ -1,0 +1,32 @@
+<div class="header-container">
+  <div class="add-header">
+    <ul class="workflow-header-list">
+      <li (click)="addNewTab()">
+        <mat-icon>add</mat-icon>
+      </li>
+    </ul>
+  </div>
+  <div class="header-left">
+    <div class="window-header">
+      <ul class="workflow-header-list">
+        <li [ngClass]="{'active' : activeWorkflow?.id === window?.id}"
+          *ngFor="let window of workflowWindowList; let i = index" (click)="openWorkflow(window)">
+          <a [matTooltip]="window?.name">{{window?.name}}</a>
+          <mat-icon (click)="closeWindow(window?.id, i)" matTooltip="Close">close</mat-icon>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-right padding-right-0">
+    <!-- <mat-icon matTooltip="Reset" (click)="clearCanvas.emit()">refresh</mat-icon> -->
+    <mat-icon matTooltip="Execute" (click)="executeWorkflow.emit()">play_circle_outline</mat-icon>
+    <mat-icon matTooltip="Delete" (click)="deleteWorkflow.emit()" class="delete">delete_outline</mat-icon>
+    <mat-icon matTooltip="Save" (click)="saveWorkflow.emit()">save</mat-icon>
+
+     <mat-icon matTooltip="Export" (click)="downloadWorkflowJson.emit()">file_download</mat-icon>
+    <!-- <mat-icon matTooltip="Import" (click)="fileInput.click()">file_upload</mat-icon> 
+     -->
+    <input #fileInput type="file" (change)="uploadJsonFile.emit($event)" style="display:none;" />
+    <!-- <span matTooltip="Test Workflow" class="fa fa-plug plug" (click)="testWorkflow.emit()"></span> -->
+  </div>
+</div>

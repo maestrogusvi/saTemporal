@@ -1,0 +1,55 @@
+<sapper-page-header class="set-margin" [title]="'ORGANIZATION.PAGE-HEADER' | translate" [description]="'ORGANIZATION.PAGE-DESCRIPTION' | translate"></sapper-page-header>
+<div class="connections-container">
+
+    <div class="connection-table" fxLayout fxLayout.xs="column" fxLayoutGap.xs="0">
+        <div class="card card-table">
+            <div class="card-table-header padding-20">
+              <h3 class="margin-0" translate>{{ 'ORGANIZATION.TABLE-HEADER' }}</h3>
+            </div>
+            <div class="empty-connection-list" *ngIf="connectionList && connectionList.length === 0">
+              <mat-card class="empty-data-card" fxLayout="column" fxLayoutAlign="center center">
+                <div fxFlex="50%">
+                  <img class="empty-image" src="assets/images/empty-connection.png" alt="empty-list">
+                </div>
+                <mat-card-content fxFlex="50%" class="content">
+                  <p class="text-muted"> No connections created yet!!! </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="margin-15" style="text-align: center;" *ngIf="connectionList && connectionList.length > 0">
+                    <p-table #dt  (onRowSelect)="rowClick($event)" [value]="connectionList" styleClass="p-datatable-connectionList" [rowHover]="true"
+                             [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="pageSizeOptions" [globalFilterFields]="['marketGroupId','id','market','organizationName','organizationType','status','active']"  [loading]="loading"
+                             [paginator]="connectionList.length >= 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                      <ng-template pTemplate="caption">
+                        <div style="text-align: right">
+                          <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                          <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                        </div>
+                      </ng-template>
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th scope="col" [pSortableColumn]="'marketGroupId'" translate pResizableColumn>{{ 'ORGANIZATION.T-HEADER1' }}</th>
+                          <th scope="col" [pSortableColumn]="'id'" translate pResizableColumn>{{ 'ORGANIZATION.T-HEADER2' }}</th>
+                          <th scope="col" [pSortableColumn]="'market'" translate pResizableColumn>{{ 'ORGANIZATION.T-HEADER7' }}</th>
+                          <th scope="col" [pSortableColumn]="'organizationName'" translate pResizableColumn>{{ 'ORGANIZATION.T-HEADER3' }}</th>
+                          <th scope="col" [pSortableColumn]="'organizationType'" translate pResizableColumn>{{ 'ORGANIZATION.T-HEADER4' }}</th>
+                          <th scope="col" [pSortableColumn]="'status'" translate pResizableColumn>{{ 'ORGANIZATION.T-HEADER5' }}</th>
+                          <th scope="col" [pSortableColumn]="'active'" translate pResizableColumn>{{ 'ORGANIZATION.T-HEADER6' }}</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body"  let-connection>
+                        <tr [pSelectableRow]="connection" >
+                          <td (click)="rowClick(connection)">{{this.mkId? this.mkId: connection.marketGroupId}}</td>
+                          <td (click)="rowClick(connection)">{{connection.id}}</td>
+                          <td (click)="rowClick(connection)">{{connection.market}}</td>
+                          <td (click)="rowClick(connection)">{{connection.organizationName}}</td>
+                          <td (click)="rowClick(connection)">{{connection.organizationType}}</td>
+                          <td (click)="rowClick(connection)">{{connection.status}}</td>
+                          <td (click)="changeActiveOrganization(connection.id, connection.active==0? 1: 0)">{{connection.active==0? 'Inactive': 'Active'}}</td>
+                        </tr>
+                      </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

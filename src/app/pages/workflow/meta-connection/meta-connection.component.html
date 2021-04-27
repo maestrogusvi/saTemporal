@@ -1,0 +1,321 @@
+<div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title text-bold" translate>{{addingNewField ? 'Add New Field' : 'Meta'}}
+        <button *ngIf="!addingNewField" type="button" class="closeIcon" aria-label="Close" (click)="dialogRef.close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </h4>
+</div>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-content">
+    <span *ngIf="!addingNewField" class="text-bold"
+        (click)="expandCollpaseAll(dataSource, '', !expandedAll); expandedAll = !expandedAll">
+        <span *ngIf="expandedAll"><button mat-stroked-button class="expandColl">Expand All
+                <mat-icon class="mat-tree-collaps-exp" matTooltip="CollpaseAll">arrow_drop_up</mat-icon>
+            </button>
+        </span>
+        <span *ngIf="!expandedAll"> <button mat-stroked-button class="expandColl">Collpase All
+                <mat-icon class="mat-tree-collaps-exp" matTooltip="ExpandedAll">arrow_drop_down</mat-icon>
+            </button>
+        </span>
+    </span>
+    <span *ngIf="!addingNewField">
+        <mat-icon class="addIcon" matTooltip="Add New Field" (click)="addNewField()">add_circle_outline</mat-icon>
+    </span>
+    <div class="tree-container">
+        <div *ngIf="addingNewField">
+            <ng-container
+                *ngTemplateOutlet="newPropertyTemplate; context: {newFieldData : newField, currentFieldData: currentField}">
+            </ng-container>
+        </div>
+        <div *ngIf="!addingNewField">
+            <tree-root #metaTree [nodes]="dataSource" [focused]="true">
+                <ng-template #treeNodeTemplate let-node let-index="index">
+                    <div class="tree-node-div" (click)="setMetaProperties(node.data)">
+                        <span class="node-label">{{node.data.name}}
+                            <mat-icon class="addIconNode" matTooltip="Add New Field"
+                                (click)="setMetaProperties(node);addNewField()">add_circle_outline</mat-icon>
+                        </span>
+                    </div>
+                </ng-template>
+            </tree-root>
+        </div>
+        <div *ngIf="(currentField && !currentField.isObject) && !addingNewField">
+            <div *ngIf="!addingNewField" class="setMetaAttributeContainer">
+                <h3 class="text-bold">{{currentField.name}}</h3>
+                <div>
+                    <div>
+                        <mat-form-field class="text-field">
+                            <mat-label>UI Label</mat-label>
+                            <input matInput placeholder="UILabel" [(ngModel)]="currentField['ui-label']">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="text-field">
+                            <mat-label>Data Type</mat-label>
+                            <mat-select name="operation" [(ngModel)]="currentField.type"
+                                (selectionChange)="onTypeChange($event, currentField)">
+                                <mat-option [value]="null" disabled> -- Select Data Type -- </mat-option>
+                                <mat-option [value]="'string'">String</mat-option>
+                                <mat-option [value]="'number'">Number</mat-option>
+                                <mat-option [value]="'integer'">Integer</mat-option>
+                                <mat-option [value]="'boolean'">Boolean</mat-option>
+                                <mat-option [value]="'array'">Array</mat-option>
+                                <mat-option [value]="'object'">Object</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="currentField.type==='array'">
+                        <label id="example-radio-group-label">Type</label>
+                        <mat-radio-group aria-label="Select a type" [(ngModel)]="currentField.arraySubType"
+                            (change)="onArrayChange(currentField)">
+                            <mat-radio-button class="margin-left-15" [value]="'string/number'">
+                                String/Number</mat-radio-button>
+                            <mat-radio-button class="margin-left-15" [value]="'object'">Object
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div *ngIf="currentField.type==='object' && currentField.children.length > 0">
+                        <ng-container
+                            *ngTemplateOutlet="arrayObjectTemplate; context: {currentFieldData: currentField.children[0]}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="currentField.type==='array' && currentField.arraySubType === 'object'">
+                        <div *ngIf="currentField.children.length > 0">
+                            <ng-container
+                                *ngTemplateOutlet="arrayObjectTemplate; context: {currentFieldData: currentField.children[0]}">
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div *ngIf="currentField.type === 'string'">
+                        <mat-form-field class="text-field">
+                            <mat-label>Pattern</mat-label>
+                            <input matInput placeholder="Pattern" name="Pattern">
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="currentField.type === 'string'">
+                        <mat-form-field class="text-field">
+                            <mat-label>Format</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let format of formatList" [value]="format">{{format}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="currentField.type === 'string'">
+                        <mat-form-field class="text-field">
+                            <mat-label>Min Length</mat-label>
+                            <input matInput type="number" name="minLength" value="0" min="0" placeholder="Min Length"
+                                matTooltip="Enter minlength greater than 0 & less than maxlength" placement="top"
+                                container="body">
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="currentField.type === 'string'|| currentField.type==='string'">
+                        <mat-form-field class="text-field">
+                            <mat-label>Max Length</mat-label>
+                            <input matInput type="number" name="maxLength" value="10" min="1" placeholder="Max Length"
+                                matTooltip="Enter maxlength greater than minlength" placement="top" container="body">
+                        </mat-form-field>
+                    </div>
+                    <div
+                        *ngIf="currentField.type==='boolean' || currentField.type==='integer' || currentField.type === 'number' || currentField.type==='string'">
+                        <mat-form-field class="text-field">
+                            <mat-label>Description</mat-label>
+                            <input matInput placeholder="Description" name="description">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div *ngIf="currentField.type==='number'">
+                    <mat-form-field class="text-field">
+                        <mat-label>Minimum</mat-label>
+                        <input matInput type="number" name="minimum" [(ngModel)]="currentField.minimum">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="currentField.type==='number'">
+                    <mat-form-field class="text-field">
+                        <mat-label>Maximum</mat-label>
+                        <input matInput type="number" name="maximum" [(ngModel)]="currentField.maximum">
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+    <div *ngIf="!addingNewField">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-stroked-button class="sapper-button" (click)="saveWorkflowMeta()">
+            Save
+        </button>
+    </div>
+</mat-dialog-actions>
+
+<ng-template #newPropertyTemplate let-newField="newFieldData" let-currentField="currentFieldData">
+    <h3 class="text-bold">{{newField['ui-label']}}</h3>
+    <div>
+        <div>
+            <mat-form-field class="text-new-field">
+                <mat-label>UI Label<span class="text-danger" required> *</span></mat-label>
+                <input matInput placeholder="UILabel" [(ngModel)]="newField['ui-label']">
+            </mat-form-field>
+
+            <mat-form-field class="text-new-field">
+                <mat-label>Data Type</mat-label>
+                <mat-select name="operation" [(ngModel)]="newField.type"
+                    (selectionChange)="onTypeChange($event, newField)">
+                    <mat-option [value]="null" disabled> -- Select Data Type -- </mat-option>
+                    <mat-option [value]="'string'">String</mat-option>
+                    <mat-option [value]="'number'">Number</mat-option>
+                    <mat-option [value]="'integer'">Integer</mat-option>
+                    <mat-option [value]="'boolean'">Boolean</mat-option>
+                    <mat-option [value]="'array'">Array</mat-option>
+                    <mat-option [value]="'object'">Object</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="newField.type==='array'">
+            <label id="example-radio-group-label">Type</label>
+            <mat-radio-group aria-label="Select a type" [(ngModel)]="newField.arraySubType"
+                (change)="onArrayChange(newField)">
+                <mat-radio-button class="margin-left-15" [value]="'string/number'">
+                    String/Number</mat-radio-button>
+                <mat-radio-button class="margin-left-15" [value]="'object'">Object
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div *ngIf="newField.type==='object' && newField.children.length > 0">
+            <ng-container *ngTemplateOutlet="arrayObjectTemplate; context: {currentFieldData: newField.children[0]}">
+            </ng-container>
+        </div>
+
+        <div *ngIf="newField.type==='array' && newField.arraySubType === 'object' && newField.children.length > 0">
+            <ng-container *ngTemplateOutlet="arrayObjectTemplate; context: {currentFieldData: newField.children[0]}">
+            </ng-container>
+        </div>
+
+        <div *ngIf="newField.type === 'string'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Pattern</mat-label>
+                <input matInput placeholder="Pattern" name="Pattern">
+            </mat-form-field>
+            <mat-form-field class="text-new-field">
+                <mat-label>Format</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let format of formatList" [value]="format">{{format}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="newField.type === 'string'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Min Length</mat-label>
+                <input matInput type="number" name="minLength" value="0" min="0" placeholder="Min Length"
+                    matTooltip="Enter minlength greater than 0 & less than maxlength" placement="top" container="body">
+            </mat-form-field>
+            <mat-form-field class="text-new-field">
+                <mat-label>Max Length</mat-label>
+                <input matInput type="number" name="maxLength" value="10" min="1" placeholder="Max Length"
+                    matTooltip="Enter maxlength greater than minlength" placement="top" container="body">
+            </mat-form-field>
+        </div>
+        <div *ngIf="newField.type==='number'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Minimum</mat-label>
+                <input matInput type="number" name="minimum" [(ngModel)]="newField.minimum">
+            </mat-form-field>
+            <mat-form-field class="text-new-field">
+                <mat-label>Maximum</mat-label>
+                <input matInput type="number" name="maximum" [(ngModel)]="newField.maximum">
+            </mat-form-field>
+        </div>
+        <div
+            *ngIf="newField.type==='boolean' || newField.type==='integer' || newField.type === 'number' || newField.type==='string'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" name="description">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="fixed-dialog-actions">
+        <mat-dialog-actions align="end">
+            <button mat-button color="warn" (click)="cancelAddNewField()">Cancel</button>
+            <button mat-stroked-button [ngClass]="{'disabled': !newField['ui-label']}" color="primary"
+                [disabled]="!newField['ui-label']" (click)="saveNewField(currentField, newField)">
+                Save
+            </button>
+        </mat-dialog-actions>
+    </div>
+</ng-template>
+
+
+<ng-template #arrayObjectTemplate let-currentField="currentFieldData">
+    <div>
+        <div class="arryField">
+            <mat-form-field class="text-new-field">
+                <mat-label>UI Label<span class="text-danger" required> *</span></mat-label>
+                <input matInput placeholder="UILabel" (blur)="currentField['name'] = currentField['ui-label']"
+                    [(ngModel)]="currentField['ui-label']">
+            </mat-form-field>
+
+            <mat-form-field class="text-new-field">
+                <mat-label>Data Type</mat-label>
+                <mat-select name="operation" [(ngModel)]="currentField.type">
+                    <mat-option [value]="null" disabled> -- Select Data Type -- </mat-option>
+                    <mat-option [value]="'string'">String</mat-option>
+                    <mat-option [value]="'number'">Number</mat-option>
+                    <mat-option [value]="'integer'">Integer</mat-option>
+                    <mat-option [value]="'boolean'">Boolean</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="currentField.type === 'string'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Pattern</mat-label>
+                <input matInput placeholder="Pattern" name="Pattern">
+            </mat-form-field>
+            <mat-form-field class="text-new-field">
+                <mat-label>Format</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let format of formatList" [value]="format">{{format}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="currentField.type === 'string'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Min Length</mat-label>
+                <input matInput type="number" name="minLength" value="0" min="0" placeholder="Min Length"
+                    matTooltip="Enter minlength greater than 0 & less than maxlength" placement="top" container="body">
+            </mat-form-field>
+            <mat-form-field class="text-new-field">
+                <mat-label>Max Length</mat-label>
+                <input matInput type="number" name="maxLength" value="10" min="1" placeholder="Max Length"
+                    matTooltip="Enter maxlength greater than minlength" placement="top" container="body">
+            </mat-form-field>
+        </div>
+        <div *ngIf="currentField.type==='number'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Minimum</mat-label>
+                <input matInput type="number" name="minimum" [(ngModel)]="currentField.minimum">
+            </mat-form-field>
+            <mat-form-field class="text-new-field">
+                <mat-label>Maximum</mat-label>
+                <input matInput type="number" name="maximum" [(ngModel)]="currentField.maximum">
+            </mat-form-field>
+        </div>
+        <div
+            *ngIf="currentField.type==='boolean' || currentField.type==='integer' || currentField.type === 'number' || currentField.type==='string'">
+            <mat-form-field class="text-new-field">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" name="description">
+            </mat-form-field>
+        </div>
+    </div>
+</ng-template>

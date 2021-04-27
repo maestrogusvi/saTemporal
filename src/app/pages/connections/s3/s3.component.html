@@ -1,0 +1,46 @@
+<div *ngIf="connectionData">
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.BUCKET-NAME</mat-label>
+                <input matInput type="text" name="bucket-name" (keydown.enter)="$event.preventDefault();"
+                    [(ngModel)]="connectionData.bucketName" trim="blur">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.bucketName=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.ACCESS-KEY</mat-label>
+                <input matInput type="text" name="bucket-name"  (keydown.enter)="$event.preventDefault();"
+                    [(ngModel)]="connectionData.accessKey" trim="blur">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.accessKey=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.SECRET-ACCESS-KEY</mat-label>
+                <input matInput type="text" name="bucket-name"  (keydown.enter)="$event.preventDefault();"
+                    [(ngModel)]="connectionData.secretAccessKey" trim="blur">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.secretAccessKey=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field appearance="outline" class="form_field text">
+                <mat-label translate>ADD-EDIT-CONNECTION-POPUP.REGION</mat-label>
+                <input matInput type="text" name="bucket-name" [(ngModel)]="connectionData.region"
+                    (keydown.enter)="$event.preventDefault();" trim="blur">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.region=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+</div>

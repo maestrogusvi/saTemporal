@@ -1,0 +1,51 @@
+<div class="dialog" #addEditConnection>
+  <div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title float-left"  translate>
+      MARKET-POPUP.PAGE-HEADER</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dialogRef.close(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="dialog-body">
+    <div class="empty-connection-list" *ngIf="marketsData && marketsData.length === 0">
+      <mat-card class="empty-data-card" fxLayout="column" fxLayoutAlign="center center">
+        <div fxFlex="50%">
+          <img class="empty-image" src="assets/images/empty-connection.png" alt="empty-list">
+        </div>
+        <mat-card-content fxFlex="50%" class="content">
+          <p class="text-muted"> No connections created yet!!! </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="margin-15" style="text-align: center;" *ngIf="marketsData && marketsData.length > 0">
+      <p-table #dt [value]="marketsData" styleClass="p-datatable-connectionList" [rowHover]="true"
+               [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="pageSizeOptions" [loading]="loading"
+               [paginator]="marketsData.length >= 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER1' }}</th>
+            <th scope="col" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER2' }}</th>
+            <th scope="col" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER3' }}</th>
+            <th scope="col" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER5' }}</th>
+            <th scope="col" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER6' }}</th>
+            <th scope="col" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER7' }}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-connection>
+          <tr [pSelectableRow]="connection">
+            <td>{{this.mkgId}}</td>
+            <td>{{connection.marketId}}</td>
+            <td>{{connection.country}}</td>
+            <td>{{connection.active == 1 ? 'Active' : 'Inactive'}}</td>
+            <td> <p *ngFor="let brand of connection.brandArray"> {{brand.brandName}}</p></td>
+            <td> <p *ngFor="let orgType of connection.orgTypeArray"> {{orgType.typeName}}</p></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </mat-dialog-content>
+  <div class="dialog-footer">
+
+  </div>
+</div>
+

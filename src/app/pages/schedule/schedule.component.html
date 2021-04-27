@@ -1,0 +1,38 @@
+<div class="dialog">
+    <div class="dialog-header">
+        <h4 class="dialog-title">{{data.name}}</h4>
+        <mat-icon class="close pull-right" matTooltip="Close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div mat-dialog-content class="dialog-body">
+        <div fxLayout>
+            <div fxFlex="35%">
+                <mat-form-field class="calender" color="accent" appearance="fill">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="schedule.startDate"
+                        [value]="schedule.startDate">
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" class="sapper-datepicker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker class="sapper-datepicker"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div fxFlex="35%">
+                <mat-form-field class="calender" color="accent" appearance="fill">
+                    <mat-label>End Date</mat-label>
+                    <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="schedule.endDate"
+                        [value]="schedule.endDate">
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker" class="sapper-datepicker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <cron-editor [(cron)]="cronExpression" [disabled]="isCronDisabled" [(options)]="cronOptions">
+        </cron-editor>
+    </div>
+    <div mat-dialog-actions class="dialog-footer">
+        <button mat-button mat-dialog-close cdkFocusInitial class="sapper-button margin-right-15"
+            [ngClass]="{'disabled':isSaveDisabled()}" (click)="saveSchedule()"
+            [disabled]="isSaveDisabled()">Save</button>
+        <button mat-button class="sapper-button" (click)="closeDialog()">Cancel </button>
+    </div>
+</div>

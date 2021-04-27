@@ -1,0 +1,20 @@
+@import "./../../../shared/styles/colors.scss";
+@import "./../../../shared/styles/layout.scss";
+
+.group_header {
+  padding: 10px 15px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid $border_color;
+
+  .title {
+    display: flow-root;
+    margin: 0;
+  }
+}
+.form-field {
+  width: 24%;
+  padding: 15px 45px 31px 99px;
+  textarea {
+    resize: none;
+  }
+}

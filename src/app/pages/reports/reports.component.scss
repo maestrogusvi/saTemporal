@@ -1,0 +1,242 @@
+@import './../shared/styles/colors.scss';
+
+:host {
+    .sapper-dashboard {
+
+        .workflow-image {
+            width: 65%;
+            margin-top: -3px;
+        }
+
+        .top-cards {
+            .workflow-card {
+                border: 1px solid $active_blue;
+            }
+
+            .success-card {
+                border: 1px solid $olive_green;
+            }
+
+            .error-card {
+                border: 1px solid $dark_red;
+            }
+
+            .warning-card {
+                border: 1px solid $orange;
+            }
+
+            .dashboard-card {
+                .card-icon {
+                    padding: 15px;
+                    margin-top: -30px;
+                    float: left;
+                    width: 45%;
+                    height: 70px;
+                    text-align: center;
+                    line-height: 38px;
+                    font-size: 1.9em;
+                    box-shadow: $card-box-shadow;
+                    border-radius: 10px;
+                    border: 1px solid;
+                }
+
+                .workflow-count {
+                    color: $active_blue;
+                    background: $dashboard-workflow-round-fill;
+                }
+
+                .card-icon.success {
+                    background: $dashboard-success-round-fill;
+                }
+
+                .card-icon.error {
+                    background: $dashboard-error-round-fill;
+                }
+
+                .card-icon.warning {
+                    background: $dashboard-warning-round-fill;
+                }
+
+                .card-description {
+                    margin-top: 2%;
+
+                    .card-category {
+                        font-size: 19px;
+                    }
+                }
+            }
+        }
+
+        .middle-cards {
+            table {
+                width: 100%;
+            }
+
+            .card-1 {
+                background: linear-gradient(60deg, #E8E9F0, #D1D3E1);
+            }
+
+            .card-2 {
+                background: linear-gradient(60deg, #ebf7f8, #d8f0f2);
+            }
+
+            .card-3 {
+                background: linear-gradient(60deg, #e9edf2, #d3dbe5);
+            }
+
+            .card-4 {
+                background: linear-gradient(60deg, #e5efe5, #cce0cc);
+            }
+        }
+
+        .bottom-cards {
+            .card-1 {
+                background: linear-gradient(60deg, #E8E9F0, #D1D3E1);
+            }
+
+            .card-2 {
+                background: linear-gradient(60deg, #ebf7f8, #d8f0f2);
+            }
+        }
+
+        .dashboard-tile {
+            padding: 50px 0px 30px 0px;
+            margin-right: 0px;
+
+            .card {
+                background-color: $white;
+                box-shadow: $box-shadow;
+                border-radius: 10px;
+                outline: transparent;
+
+                .card-header,
+                .card-footer {
+                    border: none;
+                    padding: 0px;
+                    margin: 0px 15px 0px 15px;
+                }
+
+                .card-footer {
+                    margin-top: 4%;
+                    padding-bottom: 4%;
+                }
+
+                .card-header {
+                    border-bottom: 1px solid $silver;
+                    // height: 65%;
+                }
+
+                .card-icon,
+                .card-table-header {
+                    border-radius: 10px;
+                    box-shadow: $box-shadow;
+                }
+
+                .stats {
+                    font-size: 12px;
+                    line-height: 22px;
+
+                    a {
+                        color: $medium_light-gray;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    em.fa {
+                        color: $medium_light-gray;
+                        margin-right: 10px;
+                    }
+                }
+            }
+
+            .card-chart {
+                // height: 270px;
+
+                &.set-border {
+                    border: 1px solid $blue_dark;
+                }
+
+                .card-icon {
+                    background-color: $medium_light-gray;
+                    padding: 15px 0;
+                    margin-top: -30px;
+                    margin-bottom: 20px;
+                    float: left;
+                    width: 100%;
+                    font-size: 18px;
+                    text-align: center;
+                    line-height: 35px;
+                    color: $blue_darker;
+                    border: 1px solid $blue_dark;
+                }
+
+                .stats {
+                    font-size: 14px;
+                }
+
+                .card-header {
+                    // height: 85%;
+
+                    .connection-round {
+                        border-radius: 50%;
+                        font-size: 35px;
+                        box-shadow: $box-shadow;
+                        width: 135px;
+                        height: 135px;
+                        margin: 0 auto;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 20px;
+                    }
+                }
+
+                .card-footer {
+                    margin-top: 3%;
+                }
+            }
+
+            .connection-card {
+                .connection-round {
+                    color: $navy_blue;
+                    border: 6px solid $active_menu_bg;
+                }
+            }
+
+            .application-card {
+                .connection-round {
+                    color: #2b7e85;
+                    border: 6px solid $dashboard_application_round;
+                }
+            }
+
+            .workflow-card {
+                .connection-round {
+                    color: $navy_blue;
+                    border: 6px solid #254d7e;
+                }
+            }
+
+            .community-workflow-card {
+                .connection-round {
+                    color: #003c00;
+                    border: 6px solid #006400;
+                }
+            }
+
+            .card-header-icon {
+                text-align: center;
+
+                .card-title {
+                    margin: 0 0 20px;
+                }
+            }
+        }
+    }
+
+    .monitor-container {
+        min-height: calc(100vh - 120px);
+    }
+}

@@ -1,0 +1,180 @@
+@import "./../../shared/styles/colors.scss";
+
+$sapper-img: url("/assets/images/sapper-background.jpeg");
+
+.thank-you-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: $sapper-img;
+  background-size: cover;
+
+  .sapper-button {
+    background-color: $navy_blue !important;
+    color: $white !important;
+  }
+
+  .container {
+    background-color: $white;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px $login_container_shadow_dark,
+      0 10px 10px $login_container_shadow;
+    position: relative;
+    overflow: hidden;
+    width: 70%;
+    max-width: 100%;
+  }
+
+  .form-container {
+    top: 0;
+    transition: all 0.6s ease-in-out;
+
+    .header {
+      height: 150px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 2.12);
+      font-size: 34px;
+      font-weight: 700;
+      width: 100%;
+      display: -webkit-inline-box;
+      background-color: $blue_darker;
+      text-align: center;
+
+      .thank-you-txt {
+        width: 64%;
+        padding-top: 6%;
+        position: absolute;
+        left: 20%;
+        color: $white;
+
+        h5 {
+          margin: 1%;
+        }
+
+        h6 {
+          position: absolute;
+          margin: 5px -67px;
+          font-size: 15px;
+          left: 33%;
+        }
+      }
+
+      img {
+        height: 31px;
+        margin: 55px 0px 0px 138px;
+        position: absolute;
+        top: -24px;
+        width: 136px;
+      }
+
+      .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 105px solid transparent;
+        border-right: 108px solid transparent;
+        border-bottom: 150px solid $navy_blue;
+        position: relative;
+      }
+
+      .arrow-down:nth-child(2) {
+        right: -469px;
+      }
+
+      .arrow-down::after {
+        content: " ";
+        width: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-top: 78px solid $blue_darker;
+        top: 2.1em;
+        left: -50px;
+        position: absolute;
+      }
+    }
+
+    .thank-you-body {
+      padding: 2% 5%;
+      background: $gray_light;
+
+      mat-card {
+        text-align: center;
+
+        .icons {
+          font-size: 45px;
+        }
+
+        .mailbox {
+          color: $blue_lightest;
+        }
+
+        .email {
+          color: $orange;
+        }
+
+        .click {
+          color: $olive_green;
+        }
+
+        .card-head {
+          padding-top: 20px;
+        }
+
+        .cord-desc {
+          span {
+            font-weight: bold;
+            font-size: 15px;
+          }
+
+          p {
+            font-size: 11px;
+          }
+        }
+      }
+
+      .dashboard-tile {
+        padding: 2%;
+        display: inline-block;
+        width: 33%;
+
+        .card {
+          background-color: $white;
+          box-shadow: $box-shadow;
+          border-radius: 10px;
+          height: 180px;
+          outline: transparent;
+        }
+
+        .dashboard-card {
+          .icons {
+            position: absolute;
+            font-size: 45px;
+            padding: 2%;
+            left: 15%;
+            top: 4.5em;
+          }
+
+          .mailbox {
+            color: $blue_lightest;
+          }
+        }
+
+        .card-header-icon {
+          text-align: right;
+        }
+      }
+    }
+
+    .thank-you-footer {
+      padding: 3%;
+    }
+
+    img {
+      height: 56px;
+      left: 34%;
+      margin: 7px 20px 0px 0px;
+      position: absolute;
+      top: 0;
+      width: 71px;
+    }
+  }
+}

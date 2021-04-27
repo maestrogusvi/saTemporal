@@ -1,0 +1,87 @@
+<div class="dialog" #addEditConnection>
+  <div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="connectionData.marketId" translate>
+      ADD-EDIT-MARKETS-POPUP.TITLE-EDIT</h4>
+    <h4 mat-dialog-title class="dialog-title float-left" *ngIf="!connectionData.marketId" translate="">ADD-EDIT-MARKETS-POPUP.TITLE-ADD</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dialogRef.close(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="dialog-body">
+    <form novalidate [formGroup]="connectionForm" role="form" name="connectionForm">
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKETS-POPUP.MG-ID</mat-label>
+            <mat-select name="type" [(ngModel)]="connectionData.marketGroupId"
+                        [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let marketId of marketIds" [value]="marketId">
+                {{marketId}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKETS-POPUP.COUNTRY</mat-label>
+            <mat-select name="type" [(ngModel)]="connectionData.country"
+                        [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let contry of countries" [value]="contry.countryId">
+                {{contry.countryName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKETS-POPUP.SUMTOTALROLE</mat-label>
+            <mat-select name="type" #matmat1 [formControl]="orgTypes1" [(ngModel)]="brandListSelected" required multiple>
+              <div (mouseleave)="matmat1.close()">
+                <mat-option *ngFor="let application of brandList" [value]="application.brandId">
+                  {{application.brandName}}
+                </mat-option>
+              </div>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKETS-POPUP.VWROLE</mat-label>
+            <mat-select name="type" #matmat [formControl]="orgTypes" [(ngModel)]="orgTypeListSelected" required multiple>
+              <div (mouseleave)="matmat.close()">
+                <mat-option *ngFor="let application of orgTypeList" [value]="application.typeId">
+                  {{application.typeName}}
+                </mat-option>
+              </div>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-MARKETS-POPUP.MARKET-ID</mat-label>
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.marketId" trim="blur"
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.marketId=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-label style="margin-right: 29px;" translate>ADD-EDIT-MARKETS-POPUP.ACTIVE </mat-label>
+          <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
+                        [(ngModel)]="activeCheck">
+          </mat-checkbox>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <div class="dialog-footer">
+    <button mat-stroked-button  (click)="saveRoleMapping()" class="sapper-button">
+      {{ 'ADD-EDIT-MARKETS-POPUP.SAVE' | translate }}
+    </button>
+  </div>
+</div>

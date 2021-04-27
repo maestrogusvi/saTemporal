@@ -1,0 +1,78 @@
+<div *ngIf="flexOptions" class="workflow-card-container" [fxLayout]="flexOptions.layout" [fxLayout.xs]="flexOptions.layoutxs"
+  [fxLayoutGap]="flexOptions.layoutGap" [fxLayoutAlign]="flexOptions.layoutAlign">
+  <div *ngFor="let workflow of workflowList | search: searchString" [fxFlex]="flexOptions.size">
+    <mat-card class="workflow-card" fxLayout="column" fxLayoutGap="10px" (click)="navigateCard(isCommunity, workflow)">
+      <mat-card-header class="header" fxFlex="auto">
+        <sapper-application-card class="app-card" [applicationsList]="getTaskList(workflow.applicationUsed)"
+          [applicationFlexOptions]="applicationFlexOptions"></sapper-application-card>
+        <div class="speed-dial-actions" *ngIf="isCommunity !== true">
+          <eco-fab-speed-dial [direction]="'left'" [animationMode]="'scale'">
+            <eco-fab-speed-dial-trigger class="menu-trigger">
+              <button mat-fab>
+                <mat-icon class="menu-action">menu</mat-icon>
+              </button>
+            </eco-fab-speed-dial-trigger>
+            <eco-fab-speed-dial-actions class="fab-actions">
+              <button mat-mini-fab>
+                <mat-icon class="fab-icon" matTooltip="Delete Workflow" matTooltipPosition="above" (click)="$event.stopPropagation();deleteWorkflow(workflow.id)">delete_outline</mat-icon>
+              </button>
+              <button mat-mini-fab>
+                <mat-icon class="fab-icon" matTooltip="Copy Workflow" matTooltipPosition="above" (click)="$event.stopPropagation();cloneWorkflow(workflow.id)">file_copy</mat-icon>
+              </button>
+              <button mat-mini-fab (click)="executeWorkflow(workflow.id, $event)">
+                <mat-icon class="fab-icon" matTooltip="Execute Workflow" matTooltipPosition="above">play_circle_outline</mat-icon>
+              </button>
+            </eco-fab-speed-dial-actions>
+          </eco-fab-speed-dial>
+        </div>
+      </mat-card-header>
+      <mat-card-content class="content" fxFlex="45%" *ngIf="isCommunity === true">
+        <div class="workflow-content" fxLayout="column" fxLayoutGap="10px">
+          <span class="sub-header" fxFlex="30%">
+            {{workflow.name}}
+          </span>
+          <div class="description" fxFlex="50%">
+            <span>{{workflow.description}}</span>
+          </div>
+          <div fxFlex="20%">
+            <span class="tags small-text" *ngFor="let tag of workflow.tags">
+              {{tag}}
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-content class="content" fxFlex="45%" *ngIf="isCommunity !== true">
+        <div class="workflow-content" fxLayout="column">
+          <span class="sub-header" fxFlex="100%">
+            {{workflow.name}}
+          </span>
+          <div fxFlex="40%" *ngIf="workflow.tags">
+            <span class="tags small-text" *ngFor="let tag of workflow.tags">
+              {{tag}}
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="actions" *ngIf="isCommunity !== true">
+        <div fxLayout="row">
+          <span class="border-right action-cont" fxFlex="22%">
+            <div class="total-jobs">{{workflow.totalJobs? workflow.totalJobs : 0}}</div>
+            <div class="text-muted">Total jobs</div>
+          </span>
+          <span class="border-right action-cont" fxFlex="23%">
+            <div class="success">{{workflow.succeededJobs? workflow.succeededJobs : 0}}</div>
+            <div class="text-muted">Success</div>
+          </span>
+          <span class="border-right action-cont" fxFlex="20%">
+            <div class="error">{{workflow.failedJobs? workflow.failedJobs : 0}}</div>
+            <div class="text-muted">Errors</div>
+          </span>
+          <span class="avg-time action-cont" fxFlex="35%">
+            <div class="time"><span class="fa fa-clock-o"></span> {{workflow.avgTime ? workflow.avgTime : 0}}</div>
+            <div class="text-muted">Last Execution Time</div>
+          </span>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
