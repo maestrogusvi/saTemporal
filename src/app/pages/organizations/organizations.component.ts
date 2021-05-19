@@ -8,6 +8,7 @@ import { IOrganization } from './organizations.interface';
 import { OrganizationsService } from './organizations.service';
 import {Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import {FiltersDialogComponent} from './filters-dialog/filters-dialog.component';
 @Component({
   selector: 'sapper-organizations',
   templateUrl: './organizations.component.html',
@@ -38,6 +39,13 @@ export class OrganizationsComponent implements OnInit {
       this.mkId = queryParams.get('mkId');
     });
     this.getConnectionListing();
+  }
+  openFilterDialog() {
+    const dialogRef = this.dialog.open(FiltersDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   openPopUp(connectionData) {

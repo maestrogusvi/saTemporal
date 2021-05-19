@@ -6,7 +6,10 @@
             <div class="card-table-header padding-20">
               <h3 class="margin-0" translate>{{ 'ORGANIZATION.TABLE-HEADER' }}</h3>
             </div>
-            <div class="empty-connection-list" *ngIf="connectionList && connectionList.length === 0">
+
+          <button mat-button (click)="openFilterDialog()">Advanced Filters</button>
+
+          <div class="empty-connection-list" *ngIf="connectionList && connectionList.length === 0">
               <mat-card class="empty-data-card" fxLayout="column" fxLayoutAlign="center center">
                 <div fxFlex="50%">
                   <img class="empty-image" src="assets/images/empty-connection.png" alt="empty-list">

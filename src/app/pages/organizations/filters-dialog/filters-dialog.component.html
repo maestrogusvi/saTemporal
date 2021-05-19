@@ -1,0 +1,35 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title float-left" translate>Advanced Filters</h4>
+  </div>
+  <mat-dialog-content class="dialog-body">
+    <button mat-button (click)="addFilter()">Add +</button>
+
+    <div class="grid-table" *ngFor="let row of rowsFilterCount">
+      <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <mat-select disableRipple [(ngModel)]="row.Filter">
+          <mat-option value="Filter1">Filter1</mat-option>
+          <mat-option value="Filter2">Filter2</mat-option>
+          <mat-option value="Filter3">Filter3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Comparative</mat-label>
+        <mat-select disableRipple [(ngModel)]="row.Comparative">
+          <mat-option value="Comparative1">Comparative1</mat-option>
+          <mat-option value="Comparative2">Comparative2</mat-option>
+          <mat-option value="Comparative3">Comparative3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>With</mat-label>
+        <input matInput placeholder="With" [(ngModel)]="row.With">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <div class="dialog-footer">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="save()">Save</button>
+  </div>
+</div>

@@ -16,11 +16,12 @@ import { OrganizationsComponent } from './organizations.component';
 
 import { AddEditConnectionComponent } from './add-edit-connection/add-edit-connection.component';
 import { PageHeaderModule } from '../shared/components/page-header/page-header.module';
+import { FiltersDialogComponent } from './filters-dialog/filters-dialog.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 @NgModule({
-  declarations: [OrganizationsComponent, AddEditConnectionComponent],
+  declarations: [OrganizationsComponent, AddEditConnectionComponent, FiltersDialogComponent],
   imports: [
     CommonModule,
     OrganizationsRoutingModule,
