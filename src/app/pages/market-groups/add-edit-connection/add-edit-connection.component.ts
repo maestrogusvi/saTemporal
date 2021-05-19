@@ -5,8 +5,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MarketGroupService } from '../market-group.service';
 import { UtilsService } from '../../shared/utils.service';
 import { IMarketGroup } from '../market-group.interface';
-import { AppStoreService } from '../../app-store/app-store.service';
-import { IApplicationLov } from '../../app-store/app-store.interface';
 import {IOrgType} from '../../../interfaces/IOrgType';
 import {IBrand} from '../../../interfaces/IBrand';
 
@@ -16,10 +14,7 @@ import {IBrand} from '../../../interfaces/IBrand';
   styleUrls: ['./add-edit-connection.component.scss']
 })
 export class AddEditConnectionComponent implements OnInit {
-  selectedApplication: IApplicationLov = {
-    id: '',
-    name: ''
-  };
+
   connectionForm: FormGroup;
   connectionTypeControl: FormControl;
   orgTypes = new FormControl();
@@ -60,7 +55,7 @@ export class AddEditConnectionComponent implements OnInit {
   searchApp;
 
   connectionData: IMarketGroup;
-  applicationList: IApplicationLov[];
+  applicationList: any;
   connectionDataOnEdit: IMarketGroup;
   public enableBtnSave = false;
   file: File;
@@ -76,8 +71,7 @@ export class AddEditConnectionComponent implements OnInit {
     public dialogRef: MatDialogRef<AddEditConnectionComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private utilsService: UtilsService,
-    private marketGroupService: MarketGroupService,
-    private appStoreService: AppStoreService) {
+    private marketGroupService: MarketGroupService) {
     this.connectionDataOnEdit = data;
   }
 
@@ -133,12 +127,12 @@ export class AddEditConnectionComponent implements OnInit {
     }
     if ( this.connectionData.groupId) {
       this.marketGroupService.putMarketGroup(this.connectionData).subscribe(data => {
-        this.utilsService.showSuccess('market Group has been edited', '');
+        this.utilsService.showSuccess('Market Group successfully saved', '');
         this.dialogRef.close(true);
       });
     } else {
       this.marketGroupService.postMarketGroup(this.connectionData).subscribe(data => {
-        this.utilsService.showSuccess('New market Group has been created', '');
+        this.utilsService.showSuccess('Market Group successfully saved', '');
         this.dialogRef.close(true);
       });
     }

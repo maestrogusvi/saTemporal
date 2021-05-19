@@ -116,7 +116,7 @@
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.COMMENTS</mat-label>
             <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.comments" trim="blur"
-                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
+                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();">
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.comments=''">
               <mat-icon>close</mat-icon>
             </button>
@@ -130,26 +130,27 @@
                           [(ngModel)]="connectionData.oem"
                           (change)="setAll($event.checked)">
             </mat-checkbox>
-        </div>
-        <div fxFlex="33%">
-            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.USEREGIONS</mat-label>
-            <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
-                          [(ngModel)]="connectionData.useRegions"
-                          (change)="setAll($event.checked)">
-            </mat-checkbox>
-        </div>
-        <div fxFlex="33%">
-            <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ACTIVE</mat-label>
-            <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
-                          [(ngModel)]="connectionData.active"
-                          (change)="setAll($event.checked)">
-            </mat-checkbox>
+
+          <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.USEREGIONS</mat-label>
+          <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
+                        [(ngModel)]="connectionData.useRegions"
+                        (change)="setAll($event.checked)">
+          </mat-checkbox>
+
+          <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ACTIVE</mat-label>
+          <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"
+                        [(ngModel)]="connectionData.active"
+                        (change)="setAll($event.checked)">
+          </mat-checkbox>
         </div>
       </div>
 
     </form>
   </mat-dialog-content>
   <div class="dialog-footer">
+    <button mat-stroked-button  (click)="dialogRef.close(false)" class="btn-cancel margin-right-20">
+      Cancel
+    </button>
     <button mat-stroked-button (click)="saveMarketGroup()" class="sapper-button">
       {{ 'ADD-EDIT-MARKET-GROUP-POPUP.SAVE' | translate }}
     </button>

@@ -5,7 +5,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RoleMappingService } from '../role-mapping.service';
 import { UtilsService } from '../../shared/utils.service';
 import { IRoleMapping } from '../role-mapping.interface';
-import {IApplicationLov} from '../../app-store/app-store.interface';
 import {IGrpRole} from '../grp-role.interface';
 import {IBrand} from '../../../interfaces/IBrand';
 import {ISTRole} from '../st-role.interface';
@@ -17,10 +16,6 @@ import {ISTRole} from '../st-role.interface';
   styleUrls: ['./add-edit-connection.component.scss']
 })
 export class AddEditConnectionComponent implements OnInit {
-  selectedApplication: IApplicationLov = {
-    id: '',
-    name: ''
-  };
   connectionForm: FormGroup;
   connectionTypeControl: FormControl;
   @ViewChild('addEditConnection') addEditConnection: TemplateRef<any>;
@@ -33,7 +28,7 @@ export class AddEditConnectionComponent implements OnInit {
     value: 'FTP'
   }];
   searchApp;
-  applicationList: IApplicationLov[];
+  applicationList: any;
   connectionData: IRoleMapping;
   connectionDataOnEdit: IRoleMapping;
   public enableBtnSave = false;

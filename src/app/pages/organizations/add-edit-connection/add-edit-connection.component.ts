@@ -5,8 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OrganizationsService } from '../organizations.service';
 import { UtilsService } from '../../shared/utils.service';
 import { IOrganization } from '../organizations.interface';
-import { AppStoreService } from '../../app-store/app-store.service';
-import { IApplicationLov } from '../../app-store/app-store.interface';
+
 
 @Component({
   selector: 'sapper-add-edit-connection',
@@ -14,10 +13,7 @@ import { IApplicationLov } from '../../app-store/app-store.interface';
   styleUrls: ['./add-edit-connection.component.scss']
 })
 export class AddEditConnectionComponent implements OnInit {
-  selectedApplication: IApplicationLov = {
-    id: '',
-    name: ''
-  };
+
   connectionForm: FormGroup;
   connectionTypeControl: FormControl;
   @ViewChild('addEditConnection') addEditConnection: TemplateRef<any>;
@@ -56,7 +52,7 @@ export class AddEditConnectionComponent implements OnInit {
   searchApp;
 
   connectionData: IOrganization;
-  applicationList: IApplicationLov[];
+  applicationList: any;
   connectionDataOnEdit: IOrganization;
   public enableBtnSave = false;
   file: File;
@@ -65,8 +61,7 @@ export class AddEditConnectionComponent implements OnInit {
     public dialogRef: MatDialogRef<AddEditConnectionComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private utilsService: UtilsService,
-    private connectionService: OrganizationsService,
-    private appStoreService: AppStoreService) {
+    private connectionService: OrganizationsService) {
 
     this.connectionDataOnEdit = data;
   }

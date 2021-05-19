@@ -5,7 +5,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MarketsService } from '../markets.service';
 import { UtilsService } from '../../shared/utils.service';
 import { IMarket } from '../market.interface';
-import {IApplicationLov} from '../../app-store/app-store.interface';
 import {IBrand} from '../../../interfaces/IBrand';
 import {MarketGroupService} from '../../market-groups/market-group.service';
 import {IOrgType} from '../../../interfaces/IOrgType';
@@ -19,10 +18,6 @@ import {ICountry} from '../../../interfaces/ICountry';
   styleUrls: ['./add-edit-connection.component.scss']
 })
 export class AddEditConnectionComponent implements OnInit {
-  selectedApplication: IApplicationLov = {
-    id: '',
-    name: ''
-  };
   orgTypes = new FormControl();
   orgTypes1 = new FormControl();
   connectionForm: FormGroup;
@@ -37,7 +32,7 @@ export class AddEditConnectionComponent implements OnInit {
     value: 'FTP'
   }];
   searchApp;
-  applicationList: IApplicationLov[];
+  applicationList: any;
   connectionData: IMarket;
   connectionDataOnEdit: IMarket;
   public enableBtnSave = false;
@@ -135,7 +130,7 @@ export class AddEditConnectionComponent implements OnInit {
         }]
       };
       this.roleMappingService.putRoleMapping(datas).subscribe(data => {
-        this.utilsService.showSuccess('Market has been edited', '');
+        this.utilsService.showSuccess('Market successfully saved', '');
       });
     } else {
       const datas = {
@@ -149,7 +144,7 @@ export class AddEditConnectionComponent implements OnInit {
         }]
       };
       this.roleMappingService.postRoleMapping(datas).subscribe(data => {
-        this.utilsService.showSuccess('Market has been created', '');
+        this.utilsService.showSuccess('Market successfully saved', '');
       });
     }
     this.dialogRef.close(true);

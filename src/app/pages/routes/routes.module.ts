@@ -22,11 +22,6 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'community-workflow', loadChildren: () =>
-          import('../community-workflow/community-workflow.module').then(m => m.CommunityWorkflowModule),
-        canActivate: [AuthGuard]
-      },
-      {
         path: 'markets-groups',
         loadChildren: () => import('../market-groups/market-group.module').then(m => m.MarketGroupModule),
         canActivate: [AuthGuard]

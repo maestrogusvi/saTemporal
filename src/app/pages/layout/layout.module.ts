@@ -13,7 +13,6 @@ import { RoutesModule } from '../routes/routes.module';
 import { MccColorPickerModule } from 'material-community-components';
 import { MaterialModule } from '../shared/modules/material.module';
 import { FooterComponent } from './footer/footer.component';
-import { ChatbotComponent } from './../chatbot/chatbot.component';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -24,7 +23,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LayoutComponent,
     HeaderComponent,
     FooterComponent,
-    ChatbotComponent
   ],
   imports: [
     CommonModule,

@@ -14,7 +14,7 @@
                   <img class="empty-image" src="assets/images/empty-connection.png" alt="empty-list">
                 </div>
                 <mat-card-content fxFlex="50%" class="content">
-                  <p class="text-muted"> No connections created yet!!! </p>
+                  <p class="text-muted"> No Markets have been created!!! </p>
                 </mat-card-content>
               </mat-card>
             </div>
@@ -54,7 +54,7 @@
                                 (click)="openPopUp(connection)">edit</mat-icon>
                                 <mat-icon  class="delete-icon"
                                 matTooltip="{{ 'MARKET-POPUP.DELETE' | translate }}"
-                                (click)="deleteConnection(connection.id)">delete</mat-icon>
+                                (click)="deleteConnection(connection.marketId)">delete </mat-icon>
                           </td>
                         </tr>
                       </ng-template>
