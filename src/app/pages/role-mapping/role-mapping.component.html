@@ -31,18 +31,18 @@
                       </ng-template>
                       <ng-template pTemplate="header">
                         <tr>
-                          <th scope="col" [pSortableColumn]="'marketGroupId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER1' }}</th>
-                          <th scope="col" [pSortableColumn]="'brand.brandId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER2' }}</th>
-                          <th scope="col" [pSortableColumn]="'grpRole.grpRoleId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER3' }}</th>
-                          <th scope="col" [pSortableColumn]="'grpRole.grpRoleName'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER4' }}</th>
-                          <th scope="col" [pSortableColumn]="'stRole.stRoleName'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER5' }}</th>
+                          <th scope="col" [pSortableColumn]="'marketGroupId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER1' }} <p-sortIcon></p-sortIcon></th>
+                          <th scope="col" [pSortableColumn]="'brand.brandId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER2' }} <p-sortIcon></p-sortIcon></th>
+                          <th scope="col" [pSortableColumn]="'grpRole.grpRoleId'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER3' }} <p-sortIcon></p-sortIcon></th>
+                          <th scope="col" [pSortableColumn]="'grpRole.grpRoleName'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER4' }} <p-sortIcon></p-sortIcon></th>
+                          <th scope="col" [pSortableColumn]="'stRole.stRoleName'" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER5' }} <p-sortIcon></p-sortIcon></th>
                           <th scope="col" translate pResizableColumn>{{ 'ROLE-MAPPING.T-HEADER6' }}</th>
                         </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-connection>
                         <tr [pSelectableRow]="connection">
                           <td>{{connection.marketGroupId}}</td>
-                          <td>{{connection.brand.brandId}}</td>
+                          <td>{{separateString(connection.brand.brandId)}}</td>
                           <td>{{connection.grpRole.grpRoleId}}</td>
                           <td>{{connection.grpRole.grpRoleName}}</td>
                           <td>{{connection.stRole.stRoleName}}</td>

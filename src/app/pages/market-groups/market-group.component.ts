@@ -46,11 +46,15 @@ export class MarketGroupComponent implements OnInit {
     });
   }
 
-  openOrganization(idMarketGroup: any){
+  openOrganization(idMarketGroup: any) {
     this.router.navigateByUrl('/organizations?mkId=' + idMarketGroup);
   }
   openMarkets(idMarketGroup: any) {
     this.router.navigateByUrl('/markets?mkId=' + idMarketGroup);
+  }
+
+  openRoleMapping(idMarketGroup: any) {
+    this.router.navigateByUrl('/role-mapping?mkId=' + idMarketGroup);
   }
 
   /**
@@ -70,7 +74,10 @@ export class MarketGroupComponent implements OnInit {
    * @param id: string
    */
   deleteConnection(id: string): void {
-
+   this.connectionService.deleteMarketGroup(id).subscribe(data => {
+      this.connectionList = data.data;
+      this.loading = false;
+    });
   }
 
   /**
@@ -83,5 +90,20 @@ export class MarketGroupComponent implements OnInit {
       this.loading = false;
     });
     this.loading = false;
+  }
+
+  separateString(myString: any) {
+    let output = [];
+    let letters = 1;
+    let i = 0;
+
+    while (i < myString.length){
+
+      let initIndex = i;
+      let endIndex = i + letters;
+      output.push(myString.substring(initIndex, endIndex));
+      i = endIndex;
+    }
+    return output.join(',');
   }
 }

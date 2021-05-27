@@ -86,4 +86,19 @@ export class MarketsComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  separateString(myString: any) {
+    var output = [];
+    var letters = 1;
+    var i = 0;
+
+    while(i < myString.length){
+      console.log(i);
+      var initIndex = i;
+      var endIndex = i + letters;
+      output.push(myString.substring(initIndex, endIndex));
+      i = endIndex;
+    }
+    return output.join(',');
+  }
 }

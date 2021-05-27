@@ -18,6 +18,15 @@ export class OrganizationsService {
     return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONBYMG + mgId);
   }
 
+  getOrganizations() {
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATION);
+  }
+
+
+  getOrganizationsBySearch(url: string) {
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONANDSEARCH + url);
+  }
+
   putOrganizationActive(mgId: any, active) {
     const obj = {
       id: mgId,

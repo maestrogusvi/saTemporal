@@ -30,6 +30,10 @@ export class MarketGroupService {
     return this.utilsService.returnPutCall(API.SERVER + API.API + API.MARKETGROUPS, marketGroup);
   }
 
+  deleteMarketGroup(marketGroup: any) {
+    return this.utilsService.returnDeleteCall(API.SERVER + API.API + API.MARKETGROUPS + '/' + marketGroup );
+  }
+
   /**
    * To save the connections
    * @param connectionObject: IConnections

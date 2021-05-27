@@ -1,16 +1,19 @@
 export class API {
-  static SERVER = 'http://localhost:8080/';
+  static SERVER = 'http://localhost:8082/';
 
   static API = 'api/';
   static LOGIN = 'login';
 
   // ORGANIZATION
   static ORGANIZATIONBYMG = 'organization/marketGroup/';
+  static ORGANIZATION = 'organization/';
+  static ORGANIZATIONANDSEARCH = 'organization/marketGroup?search=';
   static ORGANIZATIONACTIVE = 'organization/active';
 
   // MarketGroups
 
   static MARKETGROUPS = 'marketGroup';
+
   static MARKETGROUPSID = 'marketGroup/mgId';
 
   // Market

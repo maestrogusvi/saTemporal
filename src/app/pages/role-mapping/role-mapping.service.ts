@@ -18,7 +18,7 @@ export class RoleMappingService {
   /**
    * To get connection listing
    */
-  getConnectionListing() {
+  getConnectionListing(mkg) {
     return this.utilsService.returnGetCall(API.SERVER + API.API + API.ROLEMAPPING);
   }
   deleteConnection(id: string) {

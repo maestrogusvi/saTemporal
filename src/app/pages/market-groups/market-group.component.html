@@ -30,23 +30,26 @@
                       </ng-template>
                       <ng-template pTemplate="header">
                         <tr>
-                          <th scope="col" [pSortableColumn]="'groupName'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER1' }}</th>
-                          <th scope="col" [pSortableColumn]="'brands'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER2' }}</th>
-                          <th scope="col"  [pSortableColumn]="'orgTypes'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER5' }}</th>
-                          <th scope="col" [pSortableColumn]="'active'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER3' }}</th>
+                          <th scope="col" [pSortableColumn]="'groupName'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER1' }} <p-sortIcon></p-sortIcon></th>
+                          <th scope="col" [pSortableColumn]="'brands'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER2' }} <p-sortIcon></p-sortIcon></th>
+                          <th scope="col"  [pSortableColumn]="'orgTypes'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER5' }} <p-sortIcon></p-sortIcon></th>
+                          <th scope="col" [pSortableColumn]="'active'" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER3' }} <p-sortIcon></p-sortIcon></th>
                           <th scope="col" translate pResizableColumn>{{ 'MARKET-GROUPS.T-HEADER4' }}</th>
                         </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-connection>
                         <tr [pSelectableRow]="connection">
-                          <td>{{connection.groupName + '_' + connection.groupId}}</td>
-                          <td> {{connection.brands}}</td>
-                          <td> {{connection.orgTypes}}</td>
+                          <td>{{connection.groupName + ' (' + connection.groupId + ')'}}</td>
+                          <td> {{separateString(connection.brands)}}</td>
+                          <td> {{separateString(connection.orgTypes)}}</td>
                           <td>{{connection.active? 'Active': 'Inactive'}}</td>
                           <td class="icons">
                                 <mat-icon  class="edit-icon margin-right-10"
                                 matTooltip="{{ 'MARKET-GROUPS.EDIT' | translate }}"
                                 (click)="openPopUp(connection)">edit</mat-icon>
+                            <mat-icon class="home-icon margin-right-10"
+                                      matTooltip="Role mapping"
+                                      (click)="openRoleMapping(connection.groupId)">home</mat-icon>
                             <mat-icon class="people-icon margin-right-10"
                                       matTooltip="{{ 'MARKET-GROUPS.ORGANIZATION' | translate }}"
                                       (click)="openOrganization(connection.groupId)">people</mat-icon>

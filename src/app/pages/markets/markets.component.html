@@ -33,9 +33,10 @@
                           <th scope="col" [pSortableColumn]="'marketGroupId'" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER1' }}</th>
                           <th scope="col" [pSortableColumn]="'marketId'" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER2' }}</th>
                           <th scope="col" [pSortableColumn]="'country'" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER3' }}</th>
-                          <th scope="col" [pSortableColumn]="'active'" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER5' }}</th>
+
                           <th scope="col" [pSortableColumn]="'brands'" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER6' }}</th>
                           <th scope="col" [pSortableColumn]="'orgTypes'" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER7' }}</th>
+                          <th scope="col" [pSortableColumn]="'active'" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER5' }}</th>
                           <th scope="col" translate pResizableColumn>{{ 'MARKET-POPUP.T-HEADER8' }}</th>
                         </tr>
                       </ng-template>
@@ -45,9 +46,10 @@
 <!--                          <td>{{connection.name + '_' + connection.marketId}}</td>-->
                           <td>{{connection.marketId}}</td>
                           <td>{{connection.country}}</td>
+
+                          <td>  {{separateString(connection.brands)}}</td>
+                          <td>  {{separateString(connection.orgTypes)}}</td>
                           <td>{{connection.active == 1 ? 'Active' : 'Inactive'}}</td>
-                          <td>  {{connection.brands}}</td>
-                          <td>  {{connection.orgTypes}}</td>
                           <td class="icons">
                                 <mat-icon  class="edit-icon margin-right-10"
                                 matTooltip="{{ 'MARKET-POPUP.EDIT' | translate }}"

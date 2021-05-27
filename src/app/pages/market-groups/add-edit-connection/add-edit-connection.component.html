@@ -115,8 +115,8 @@
         <div fxFlex="50%">
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.COMMENTS</mat-label>
-            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.comments" trim="blur"
-                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();">
+            <textarea class="textarea-content" matInput placeholder="description" name="desc" trim="blur" [(ngModel)]="connectionData.comments"
+                      [ngModelOptions]="{standalone: true}"></textarea>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.comments=''">
               <mat-icon>close</mat-icon>
             </button>

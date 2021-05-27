@@ -44,7 +44,10 @@ export class OrganizationsComponent implements OnInit {
     const dialogRef = this.dialog.open(FiltersDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if(result.data){
+        this.connectionList = result.data;
+      }
+
     });
   }
 
@@ -76,10 +79,19 @@ export class OrganizationsComponent implements OnInit {
    */
   getConnectionListing(): void {
     const mkg = this.mkId ? this.mkId : '';
-    this.connectionService.getOrganizationByMgListing(mkg).subscribe(data => {
-      this.connectionList = data.data;
-      this.loading = false;
-    });
+    // tslint:disable-next-line:triple-equals
+    if ( mkg != '') {
+      this.connectionService.getOrganizationByMgListing(mkg).subscribe(data => {
+        this.connectionList = data.data;
+        this.loading = false;
+      });
+    } else {
+      this.connectionService.getOrganizations().subscribe(data => {
+        this.connectionList = data.data;
+        this.loading = false;
+      });
+    }
+
     this.loading = false;
   }
   changeActiveOrganization(idOrganization: any, active: any): void {
@@ -89,4 +101,9 @@ export class OrganizationsComponent implements OnInit {
     });
     this.loading = false;
   }
+
+  separateString(myString: any){
+    const newString = myString.split(',');
+    return newString;
+}
 }

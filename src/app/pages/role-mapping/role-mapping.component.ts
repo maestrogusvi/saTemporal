@@ -6,7 +6,7 @@ import { UtilsService } from '../shared/utils.service';
 import { AddEditConnectionComponent } from './add-edit-connection/add-edit-connection.component';
 import { IRoleMapping } from './role-mapping.interface';
 import { RoleMappingService } from './role-mapping.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -21,11 +21,13 @@ export class RoleMappingComponent implements OnInit {
   public connectionList: IRoleMapping[] = [];
   loading = true;
   isAdmin: boolean;
+  mkId;
   constructor(
     public translate: TranslateService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
     public router: Router,
+    private route: ActivatedRoute,
     private connectionService: RoleMappingService) {
     translate.addLangs(utilsService.getLangList());
     translate.use(utilsService.getDefaultLang());
@@ -33,6 +35,9 @@ export class RoleMappingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe(queryParams => {
+      this.mkId = queryParams.get('mkId');
+    });
     this.getConnectionListing();
   }
 
@@ -79,9 +84,33 @@ export class RoleMappingComponent implements OnInit {
    * @returns void
    */
   getConnectionListing(): void {
-    this.connectionService.getConnectionListing().subscribe(data => {
-      this.connectionList = data.data;
-      this.loading = false;
-    });
+    const mkg = this.mkId ? this.mkId : '';
+    if (mkg != '') {
+      this.connectionService.getConnectionListing(mkg).subscribe(data => {
+        this.connectionList = data.data;
+        this.loading = false;
+      });
+    }else{
+      this.connectionService.getConnectionListing(mkg).subscribe(data => {
+        this.connectionList = data.data;
+        this.loading = false;
+      });
+    }
+
+  }
+
+  separateString(myString: any) {
+    var output = [];
+    var letters = 1;
+    var i = 0;
+
+    while(i < myString.length){
+      console.log(i);
+      var initIndex = i;
+      var endIndex = i + letters;
+      output.push(myString.substring(initIndex, endIndex));
+      i = endIndex;
+    }
+    return output.join(',');
   }
 }

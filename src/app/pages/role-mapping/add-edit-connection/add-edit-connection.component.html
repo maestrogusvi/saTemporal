@@ -36,6 +36,18 @@
       <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
         <div fxFlex="50%">
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
+            <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.VWROLE</mat-label>
+            <mat-select name="type" [(ngModel)]="connectionData.grpRole"
+                        [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let grpRole of grpRoleList" [value]="grpRole">
+                {{grpRole.grpRoleId}} {{grpRole.grpRoleName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.SUMTOTALROLE</mat-label>
             <mat-select name="type" [(ngModel)]="connectionData.stRole"
                         [ngModelOptions]="{standalone: true}" required>
@@ -45,21 +57,13 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div fxFlex="50%">
-          <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
-            <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.VWROLE</mat-label>
-            <mat-select name="type" [(ngModel)]="connectionData.grpRole"
-                        [ngModelOptions]="{standalone: true}" required>
-              <mat-option *ngFor="let grpRole of grpRoleList" [value]="grpRole">
-                {{grpRole.grpRoleName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
       </div>
     </form>
   </mat-dialog-content>
   <div class="dialog-footer">
+    <button mat-stroked-button  (click)="dialogRef.close(false)" class="btn-cancel margin-right-20">
+      Cancel
+    </button>
     <button mat-stroked-button  (click)="saveRoleMapping()" class="sapper-button">
       {{ 'ADD-EDIT-MARKET-GROUP-POPUP.SAVE' | translate }}
     </button>
