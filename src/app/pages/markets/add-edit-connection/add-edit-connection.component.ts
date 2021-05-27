@@ -91,6 +91,10 @@ export class AddEditConnectionComponent implements OnInit {
   getBrandsListing(): void {
     this.roleMappingService.getBrandsListing().subscribe(data => {
       this.brandList = data.data;
+      const brandsID = this.connectionData.brandArray.map(brand => brand.brandId);
+      const OrganizationID = this.connectionData.orgTypeArray.map(org => org.typeId);
+      this.orgTypes1.setValue(brandsID);
+      this.orgTypes.setValue(OrganizationID);
     });
 
   }

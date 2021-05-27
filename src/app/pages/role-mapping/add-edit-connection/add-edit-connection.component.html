@@ -38,7 +38,7 @@
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.VWROLE</mat-label>
             <mat-select name="type" [(ngModel)]="connectionData.grpRole"
-                        [ngModelOptions]="{standalone: true}" required>
+                        [ngModelOptions]="{standalone: true}" [disabled]="disableSelect.value" required>
               <mat-option *ngFor="let grpRole of grpRoleList" [value]="grpRole">
                 {{grpRole.grpRoleId}} {{grpRole.grpRoleName}}
               </mat-option>
@@ -50,7 +50,7 @@
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.SUMTOTALROLE</mat-label>
             <mat-select name="type" [(ngModel)]="connectionData.stRole"
-                        [ngModelOptions]="{standalone: true}" required>
+                        [ngModelOptions]="{standalone: true}" [disabled]="disableSelect.value" required>
               <mat-option *ngFor="let securityRole of stSecurityList" [value]="securityRole">
                 {{securityRole.stRoleName}}
               </mat-option>

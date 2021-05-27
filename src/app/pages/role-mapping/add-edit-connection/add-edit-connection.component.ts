@@ -16,6 +16,7 @@ import {ISTRole} from '../st-role.interface';
   styleUrls: ['./add-edit-connection.component.scss']
 })
 export class AddEditConnectionComponent implements OnInit {
+  disableSelect = new FormControl(false);
   connectionForm: FormGroup;
   connectionTypeControl: FormControl;
   @ViewChild('addEditConnection') addEditConnection: TemplateRef<any>;

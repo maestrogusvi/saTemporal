@@ -105,11 +105,16 @@
         <div fxFlex="50%">
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.TOPDOMAIN</mat-label>
-            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.topDomain" trim="blur"
-                   [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
-            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.topDomain=''">
-              <mat-icon>close</mat-icon>
-            </button>
+            <mat-select name="connection-name" #matmat2 [formControl]="topDomain" [(ngModel)]="topDomainListSelected" required multiple>
+              <div (mouseleave)="matmat2.close()">
+                <mat-option *ngFor="let application of brandList" [value]="application.brandId">
+                  {{application.brandName}}
+                </mat-option>
+                <mat-option *ngFor="let application of marketGroupList" [value]="application.groupId">
+                  {{application.groupName}}
+                </mat-option>
+              </div>
+            </mat-select>
           </mat-form-field>
         </div>
         <div fxFlex="50%">
@@ -123,7 +128,7 @@
           </mat-form-field>
         </div>
       </div>
-      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.xs="0">
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap="15px" fxLayoutGap.xs="0">
         <div fxFlex="33%">
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.OEM</mat-label>
             <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin"

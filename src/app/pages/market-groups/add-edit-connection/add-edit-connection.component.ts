@@ -19,6 +19,7 @@ export class AddEditConnectionComponent implements OnInit {
   connectionTypeControl: FormControl;
   orgTypes = new FormControl();
   orgTypes1 = new FormControl();
+  topDomain = new FormControl();
   @ViewChild('addEditConnection') addEditConnection: TemplateRef<any>;
   @ViewChild('restConnection') restConnection;
   connectionType = [{
@@ -66,6 +67,8 @@ export class AddEditConnectionComponent implements OnInit {
   orgTypeListSelected: IOrgType[];
   brandList: IBrand[];
   brandListSelected: IBrand[];
+  marketGroupList: IMarketGroup[];
+  topDomainListSelected: [];
 
   constructor(
     public dialogRef: MatDialogRef<AddEditConnectionComponent>,
@@ -84,7 +87,7 @@ export class AddEditConnectionComponent implements OnInit {
       this.connectionData = {
         oem: false,
         comments: '',
-        brandArray: [], orgTypeArray: [], sumtotalProdURL: '', sumtotalStageURL: '', topDomain: '', useRegions: false,
+        brandArray: [], orgTypeArray: [], sumtotalProdURL: '', sumtotalStageURL: '', topDomain: [], useRegions: false,
         groupId: '',
         groupName: '',
         brands: '',
@@ -106,14 +109,25 @@ export class AddEditConnectionComponent implements OnInit {
   getOrgTypeListing(): void {
     this.marketGroupService.GetOrgTypeListing().subscribe(data => {
       this.orgTypeList = data.data;
+      const OrganizationID = this.connectionData.orgTypeArray.map(org => org.typeId);
+      this.orgTypes.setValue(OrganizationID);
     });
 
   }
   getBrandsListing(): void {
     this.marketGroupService.GetBrandsListing().subscribe(data => {
       this.brandList = data.data;
+      const brandsID = this.connectionData.brandArray.map(brand => brand.brandId);
+      this.orgTypes1.setValue(brandsID);
+      this.getConnectionListing();
     });
+  }
 
+  getConnectionListing(): void {
+    this.marketGroupService.getConnectionListing().subscribe( data => {
+      this.marketGroupList = data.data;
+      // this.topDomain.setValue(this.connectionData.topDomain);
+    });
   }
 
   setAll(completed: boolean) {
@@ -125,6 +139,9 @@ export class AddEditConnectionComponent implements OnInit {
     if (this.orgTypeListSelected.length > 0 ) {
       this.connectionData.orgTypes = this.orgTypeListSelected.join('');
     }
+    // if (this.topDomainListSelected.length > 0 ) {
+    //   this.connectionData.topDomain = this.topDomainListSelected.join('');
+    // }
     if ( this.connectionData.groupId) {
       this.marketGroupService.putMarketGroup(this.connectionData).subscribe(data => {
         this.utilsService.showSuccess('Market Group successfully saved', '');

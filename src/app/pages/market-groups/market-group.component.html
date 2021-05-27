@@ -49,16 +49,16 @@
                                 (click)="openPopUp(connection)">edit</mat-icon>
                             <mat-icon class="home-icon margin-right-10"
                                       matTooltip="Role mapping"
-                                      (click)="openRoleMapping(connection.groupId)">home</mat-icon>
+                                      (click)="openRoleMapping(connection.groupId)">assignment_ind</mat-icon>
                             <mat-icon class="people-icon margin-right-10"
                                       matTooltip="{{ 'MARKET-GROUPS.ORGANIZATION' | translate }}"
-                                      (click)="openOrganization(connection.groupId)">people</mat-icon>
+                                      (click)="openOrganization(connection.groupId)">layers</mat-icon>
                             <mat-icon class="home-icon margin-right-10"
                                       matTooltip="{{ 'MARKET-GROUPS.MARKET' | translate }}"
-                                      (click)="openMarkets(connection.groupId)">home</mat-icon>
-                                <mat-icon *ngIf="isAdmin" class="delete-icon"
-                                matTooltip="{{ 'MARKET-GROUPS.DELETE' | translate }}"
-                                (click)="deleteConnection(connection.groupId)">delete</mat-icon>
+                                      (click)="openMarkets(connection.groupId)">business</mat-icon>
+<!--                                <mat-icon *ngIf="isAdmin" class="delete-icon"-->
+<!--                                matTooltip="{{ 'MARKET-GROUPS.DELETE' | translate }}"-->
+<!--                                (click)="deleteConnection(connection.groupId)">delete</mat-icon>-->
                           </td>
                         </tr>
                       </ng-template>

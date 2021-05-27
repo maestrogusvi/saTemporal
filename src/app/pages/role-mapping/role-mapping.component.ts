@@ -105,7 +105,7 @@ export class RoleMappingComponent implements OnInit {
     var i = 0;
 
     while(i < myString.length){
-      console.log(i);
+      // console.log(i);
       var initIndex = i;
       var endIndex = i + letters;
       output.push(myString.substring(initIndex, endIndex));
