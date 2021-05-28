@@ -8,7 +8,7 @@ export interface IMarketGroup {
   groupName: string;
   sumtotalProdURL?: string;
   sumtotalStageURL?: string;
-  topDomain?: [];
+  topDomain?: string;
   brands: string;
   brandArray: IBrand[];
   orgTypes: string;

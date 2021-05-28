@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 import { UtilsService } from '../shared/utils.service';
 import { IRoleMapping } from './role-mapping.interface';
@@ -19,21 +19,23 @@ export class RoleMappingService {
    * To get connection listing
    */
   getConnectionListing(mkg) {
-    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ROLEMAPPING);
+    const params = new HttpParams()
+      .set('marketGroupId', mkg);
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ROLEMAPPING + '?' + params.toString());
   }
   deleteConnection(id: string) {
     return this.utilsService.returnDeleteCall(`/connection/${id}`);
   }
-  getGrpRoles() {
-    return this.utilsService.returnGetCall(API.SERVER + API.API + API.GRPROLE);
+  getGrpRoles(marketGroupId, brand) {
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.GRPROLE + '/' + marketGroupId + '/' + brand);
   }
 
   getBrandsListing() {
     return this.utilsService.returnGetCall(API.SERVER + API.API + API.BRANDS);
   }
 
-  getSecurityRoleListing() {
-    return this.utilsService.returnGetCall(API.SERVER + API.API + API.STSECURITYROLE);
+  getSecurityRoleListing(marketGroupId, brand) {
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.STSECURITYROLE + '/' + marketGroupId + '/' + brand);
   }
 
   getMarketGroupIds() {

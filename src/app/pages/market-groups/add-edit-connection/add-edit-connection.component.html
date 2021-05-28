@@ -105,7 +105,7 @@
         <div fxFlex="50%">
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.TOPDOMAIN</mat-label>
-            <mat-select name="connection-name" #matmat2 [formControl]="topDomain" [(ngModel)]="topDomainListSelected" required multiple>
+            <mat-select name="connection-name" #matmat2 [formControl]="topDomain" [(ngModel)]="connectionData.topDomain" required>
               <div (mouseleave)="matmat2.close()">
                 <mat-option *ngFor="let application of brandList" [value]="application.brandId">
                   {{application.brandName}}

@@ -16,7 +16,9 @@ import {ISTRole} from '../st-role.interface';
   styleUrls: ['./add-edit-connection.component.scss']
 })
 export class AddEditConnectionComponent implements OnInit {
-  disableSelect = new FormControl(false);
+  grpSelect = new FormControl(true);
+  securityRoleSelect = new FormControl(true);
+  brandInput = new FormControl();
   connectionForm: FormGroup;
   connectionTypeControl: FormControl;
   @ViewChild('addEditConnection') addEditConnection: TemplateRef<any>;
@@ -51,8 +53,6 @@ export class AddEditConnectionComponent implements OnInit {
   ngOnInit(): void {
     this.getBrandsListing();
     this.getMarketGroupIds();
-    this.getRoleMappingList();
-    this.getSecurityRoleListing();
     if (this.connectionDataOnEdit.id) {
       this.connectionData = this.connectionDataOnEdit;
     } else {
@@ -71,30 +71,58 @@ export class AddEditConnectionComponent implements OnInit {
     });
   }
 
-  getRoleMappingList(): void {
-    this.roleMappingService.getGrpRoles().subscribe(data => {
+  getRoleMappingList(marketGroupId, brand): void {
+    this.roleMappingService.getGrpRoles(marketGroupId, brand).subscribe(data => {
       this.grpRoleList = data.data;
-    });
-
+      if (this.connectionData.grpRole === undefined) {
+        this.connectionData.grpRole = this.grpRoleList[0];
+      }
+      this.grpSelect.reset(false);
+    },
+      error => {
+        this.grpRoleList = undefined;
+        this.grpSelect.reset(true);
+      });
   }
 
   getBrandsListing(): void {
     this.roleMappingService.getBrandsListing().subscribe(data => {
       this.brandList = data.data;
+      if (this.connectionData.brand) {
+        this.brandInput.setValue(this.connectionData.brand.brandId);
+      }
+      this.validateBrandRole();
     });
+  }
+
+  validateBrandRole(): void {
+    if (this.connectionData) {
+      if (this.connectionData.brand && this.connectionData.marketGroupId) {
+        this.getRoleMappingList(this.connectionData.marketGroupId, this.connectionData.brand);
+        this.getSecurityRoleListing(this.connectionData.marketGroupId, this.connectionData.brand);
+      }
+    }
 
   }
 
-  getSecurityRoleListing(): void {
-    this.roleMappingService.getSecurityRoleListing().subscribe(data => {
+  getSecurityRoleListing(marketGroupId, brand): void {
+    this.roleMappingService.getSecurityRoleListing(marketGroupId, brand).subscribe(data => {
       this.stSecurityList = data.data;
-    });
-
+      if (this.connectionData.stRole === undefined) {
+        this.connectionData.stRole = this.stSecurityList[0];
+      }
+      this.securityRoleSelect.reset(false);
+      },
+      error => {
+        this.stSecurityList = undefined;
+        this.securityRoleSelect.reset(true);
+      });
   }
 
   getMarketGroupIds(): void {
     this.roleMappingService.getMarketGroupIds().subscribe(data => {
       this.marketIds = data.data;
+      this.validateBrandRole();
     });
 
   }
@@ -106,9 +134,9 @@ export class AddEditConnectionComponent implements OnInit {
         marketGroupId: this.connectionData.marketGroupId,
         roleMappingListDTO: [{
           id: this.connectionData.id,
-          grpRoleId: this.connectionData.grpRole.id,
-          stRoleId: this.connectionData.stRole.id,
-          brand: this.connectionData.brand.brandId
+          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.connectionData.grpRole.grpRoleId).id,
+          stRoleId: this.stSecurityList.find( grp => grp.stRoleId === this.connectionData.stRole.stRoleId).id,
+          brand: this.connectionData.brand
         }]
       };
       this.roleMappingService.putRoleMapping(datas).subscribe(data => {
@@ -120,7 +148,7 @@ export class AddEditConnectionComponent implements OnInit {
         roleMappingListDTO: [{
           grpRoleId: this.connectionData.grpRole.id,
           stRoleId: this.connectionData.stRole.id,
-          brand: this.connectionData.brand.brandId
+          brand: this.connectionData.brand
         }]
       };
       this.roleMappingService.postRoleMapping(datas).subscribe(data => {

@@ -68,7 +68,7 @@ export class AddEditConnectionComponent implements OnInit {
   brandList: IBrand[];
   brandListSelected: IBrand[];
   marketGroupList: IMarketGroup[];
-  topDomainListSelected: [];
+  topDomainListSelected: string;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditConnectionComponent>,
@@ -87,7 +87,7 @@ export class AddEditConnectionComponent implements OnInit {
       this.connectionData = {
         oem: false,
         comments: '',
-        brandArray: [], orgTypeArray: [], sumtotalProdURL: '', sumtotalStageURL: '', topDomain: [], useRegions: false,
+        brandArray: [], orgTypeArray: [], sumtotalProdURL: '', sumtotalStageURL: '', topDomain: '', useRegions: false,
         groupId: '',
         groupName: '',
         brands: '',
@@ -139,9 +139,6 @@ export class AddEditConnectionComponent implements OnInit {
     if (this.orgTypeListSelected.length > 0 ) {
       this.connectionData.orgTypes = this.orgTypeListSelected.join('');
     }
-    // if (this.topDomainListSelected.length > 0 ) {
-    //   this.connectionData.topDomain = this.topDomainListSelected.join('');
-    // }
     if ( this.connectionData.groupId) {
       this.marketGroupService.putMarketGroup(this.connectionData).subscribe(data => {
         this.utilsService.showSuccess('Market Group successfully saved', '');
