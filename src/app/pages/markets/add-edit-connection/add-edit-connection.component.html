@@ -27,7 +27,7 @@
             <mat-select name="type" [(ngModel)]="connectionData.country"
                         [ngModelOptions]="{standalone: true}" required>
               <mat-option *ngFor="let contry of countries" [value]="contry.countryISO">
-                {{contry.countryName}}
+                ({{contry.countryISO}}) {{contry.countryName}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -59,7 +59,7 @@
             <mat-select name="type" #matmat1 [formControl]="orgTypes1" [(ngModel)]="brandListSelected" required multiple>
               <div (mouseleave)="matmat1.close()">
                 <mat-option *ngFor="let application of brandList" [value]="application.brandId">
-                  {{application.brandName}}
+                  ({{application.brandId}}) {{application.brandName}}
                 </mat-option>
               </div>
             </mat-select>
