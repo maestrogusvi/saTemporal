@@ -187,6 +187,8 @@
     "ID": "Market group ID",
     "NAME": "Market group Name",
     "BRAND": "Brands",
+    "BRAND1": "Brand",
+    "GROUP": "Group",
     "HIERARCHY": "Hierarchy",
     "TOPDOMAIN": "Top Domain",
     "COMMENTS": "Comments",

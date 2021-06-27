@@ -26,7 +26,7 @@
             <mat-label translate>ADD-EDIT-MARKETS-POPUP.COUNTRY</mat-label>
             <mat-select name="type" [(ngModel)]="connectionData.country"
                         [ngModelOptions]="{standalone: true}" required>
-              <mat-option *ngFor="let contry of countries" [value]="contry.countryId">
+              <mat-option *ngFor="let contry of countries" [value]="contry.countryISO">
                 {{contry.countryName}}
               </mat-option>
             </mat-select>

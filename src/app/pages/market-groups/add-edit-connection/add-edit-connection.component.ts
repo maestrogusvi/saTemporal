@@ -109,6 +109,13 @@ export class AddEditConnectionComponent implements OnInit {
   getOrgTypeListing(): void {
     this.marketGroupService.GetOrgTypeListing().subscribe(data => {
       this.orgTypeList = data.data;
+      this.orgTypeList =  this.orgTypeList.sort((a, b) => {
+        const aName = a.typeName.toUpperCase();
+        const bName = b.typeName.toUpperCase();
+        if (aName > bName) { return 1; }
+        if (aName < bName) { return -1; }
+        return 0;
+      });
       const OrganizationID = this.connectionData.orgTypeArray.map(org => org.typeId);
       this.orgTypes.setValue(OrganizationID);
     });
@@ -117,6 +124,13 @@ export class AddEditConnectionComponent implements OnInit {
   getBrandsListing(): void {
     this.marketGroupService.GetBrandsListing().subscribe(data => {
       this.brandList = data.data;
+      this.brandList =  this.brandList.sort((a, b) => {
+        const aName = a.brandName.toUpperCase();
+        const bName = b.brandName.toUpperCase();
+        if (aName > bName) { return 1; }
+        if (aName < bName) { return -1; }
+        return 0;
+      });
       const brandsID = this.connectionData.brandArray.map(brand => brand.brandId);
       this.orgTypes1.setValue(brandsID);
       this.getConnectionListing();

@@ -107,11 +107,11 @@
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.TOPDOMAIN</mat-label>
             <mat-select name="connection-name" #matmat2 [formControl]="topDomain" [(ngModel)]="connectionData.topDomain" required>
               <div (mouseleave)="matmat2.close()">
-                <mat-option *ngFor="let application of brandList" [value]="application.brandId">
-                  {{application.brandName}}
+                <mat-option [value]="'Brand'">
+                  <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.BRAND1</mat-label>
                 </mat-option>
-                <mat-option *ngFor="let application of marketGroupList" [value]="application.groupId">
-                  {{application.groupName}}
+                <mat-option [value]="'Group'">
+                  <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.GROUP</mat-label>
                 </mat-option>
               </div>
             </mat-select>

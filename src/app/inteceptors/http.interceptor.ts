@@ -74,9 +74,6 @@ export class HttpInterceptorService implements HttpInterceptor {
           this.notifier.notify('error', 'Unable to perform requested action.');
           return;
         }
-        if (error && error.error) {
-          this.notifier.notify('error', error.error.errorMessage);
-        }
         return throwError(`Error Code: ${error.status}\nError Message: ${error.message}`);
       })
     );

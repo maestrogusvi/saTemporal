@@ -84,6 +84,13 @@ export class AddEditConnectionComponent implements OnInit {
   getOrgTypeListing(): void {
     this.marketGroupService.GetOrgTypeListing().subscribe(data => {
       this.orgTypeList = data.data;
+      this.orgTypeList =  this.orgTypeList.sort((a, b) => {
+        const aName = a.typeName.toUpperCase();
+        const bName = b.typeName.toUpperCase();
+        if (aName > bName) { return 1; }
+        if (aName < bName) { return -1; }
+        return 0;
+      });
     });
 
   }
@@ -91,6 +98,13 @@ export class AddEditConnectionComponent implements OnInit {
   getBrandsListing(): void {
     this.roleMappingService.getBrandsListing().subscribe(data => {
       this.brandList = data.data;
+      this.brandList =  this.brandList.sort((a, b) => {
+        const aName = a.brandName.toUpperCase();
+        const bName = b.brandName.toUpperCase();
+        if (aName > bName) { return 1; }
+        if (aName < bName) { return -1; }
+        return 0;
+      });
       const brandsID = this.connectionData.brandArray.map(brand => brand.brandId);
       const OrganizationID = this.connectionData.orgTypeArray.map(org => org.typeId);
       this.orgTypes1.setValue(brandsID);
@@ -111,6 +125,13 @@ export class AddEditConnectionComponent implements OnInit {
   getCountriesListining(): void {
     this.roleMappingService.getCountriesListining().subscribe(data => {
       this.countries = data.data;
+      this.countries =  this.countries.sort((a, b) => {
+        const aName = a.countryName.toUpperCase();
+        const bName = b.countryName.toUpperCase();
+        if (aName > bName) { return 1; }
+        if (aName < bName) { return -1; }
+        return 0;
+      });
     });
 
   }

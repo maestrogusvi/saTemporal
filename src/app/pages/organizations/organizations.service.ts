@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 import { UtilsService } from '../shared/utils.service';
 import { IOrganization } from './organizations.interface';
@@ -14,8 +14,11 @@ export class OrganizationsService {
   /**
    * To get connection listing
    */
-  getOrganizationByMgListing(mgId: any) {
-    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONBYMG + mgId);
+  getOrganizationByMgListing(mgId: any, size, page) {
+    let params = new HttpParams();
+    params = params.append('size', size);
+    params = params.append('page', page);
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONBYMG + mgId + '?' + params.toString() );
   }
 
   getOrganizations() {
@@ -23,8 +26,11 @@ export class OrganizationsService {
   }
 
 
-  getOrganizationsBySearch(url: string) {
-    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONANDSEARCH + url);
+  getOrganizationsBySearch(url: string, size, page) {
+    let params = new HttpParams();
+    params = params.append('size', size);
+    params = params.append('page', page);
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONANDSEARCH + url + '?' + params.toString());
   }
 
   putOrganizationActive(mgId: any, active) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {OrganizationsService} from '../organizations.service';
 import {IOrganization} from '../organizations.interface';
 import {MatDialogRef} from '@angular/material/dialog';
@@ -15,6 +15,8 @@ interface Filter {
 })
 export class FiltersDialogComponent implements OnInit {
 
+  @Input() public rowPerPage;
+  @Input() public page;
   rowsFilterCount: Filter[] = [];
   public connectionList: IOrganization[] = [];
   loading = true;
@@ -48,7 +50,7 @@ export class FiltersDialogComponent implements OnInit {
       }
 
     }
-    this.connectionService.getOrganizationsBySearch(url).subscribe(data => {
+    this.connectionService.getOrganizationsBySearch(url, this.rowPerPage, this.page).subscribe(data => {
       this.connectionList = data.data;
       this.loading = false;
       this.dialogRef.close({data: this.connectionList});

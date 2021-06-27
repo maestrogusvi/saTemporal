@@ -16,7 +16,10 @@ import {FiltersDialogComponent} from './filters-dialog/filters-dialog.component'
 })
 export class OrganizationsComponent implements OnInit {
 
-  pageSizeOptions = [10, 25, 50, { showAll: 'All' }];
+  pageSizeOptions = [10, 25, 50, 100];
+  rowsPerPage = 10;
+  page = 0;
+  totalRecords = 3000;
   connectionsPerPage;
   public connectionList: IOrganization[] = [];
   loading = true;
@@ -42,9 +45,11 @@ export class OrganizationsComponent implements OnInit {
   }
   openFilterDialog() {
     const dialogRef = this.dialog.open(FiltersDialogComponent);
+    dialogRef.componentInstance.rowPerPage = this.rowsPerPage;
+    dialogRef.componentInstance.page = this.page;
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result.data){
+      if (result.data) {
         this.connectionList = result.data;
       }
 
@@ -65,12 +70,21 @@ export class OrganizationsComponent implements OnInit {
    * Open dialog to create connection
    */
   openCreateConnectionDialog(datas: any): void {
-    const dialogRef = this.dialog.open(AddEditConnectionComponent, { data: datas, width: '800px' });
+    if (this.dialog.openDialogs.length == 0) {
+      const dialogRef = this.dialog.open(AddEditConnectionComponent, { data: datas, width: '800px' });
+    }
   }
 
   rowClick( data: IOrganization) {
     // and do some other stuff...
     this.openCreateConnectionDialog(data);
+  }
+
+  loadCustomers(event: any): void {
+    console.log(event);
+    this.rowsPerPage = event.rows;
+    this.page = (event.first / event.rows);
+    this.getConnectionListing();
   }
 
   /**
@@ -81,14 +95,16 @@ export class OrganizationsComponent implements OnInit {
     const mkg = this.mkId ? this.mkId : '';
     // tslint:disable-next-line:triple-equals
     if ( mkg != '') {
-      this.connectionService.getOrganizationByMgListing(mkg).subscribe(data => {
+      this.connectionService.getOrganizationByMgListing(mkg, this.rowsPerPage, this.page).subscribe(data => {
         this.connectionList = data.data;
         this.loading = false;
+        console.log(this.connectionList);
       });
     } else {
       this.connectionService.getOrganizations().subscribe(data => {
         this.connectionList = data.data;
         this.loading = false;
+        console.log(this.connectionList);
       });
     }
 
@@ -102,7 +118,7 @@ export class OrganizationsComponent implements OnInit {
     this.loading = false;
   }
 
-  separateString(myString: any){
+  separateString(myString: any) {
     const newString = myString.split(',');
     return newString;
 }
