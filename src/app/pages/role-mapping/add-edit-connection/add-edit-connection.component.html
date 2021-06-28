@@ -37,10 +37,10 @@
           <ng-container *ngIf="grpRoleList">
             <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
               <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.VWROLE</mat-label>
-              <mat-select name="type" [(ngModel)]="connectionData.grpRole.grpRoleId"
+              <mat-select name="type" [(ngModel)]="grpRoleId"
                           [ngModelOptions]="{standalone: true}" [disabled]="grpSelect.value" required>
                 <mat-option *ngFor="let grpRole of grpRoleList" [value]="grpRole.grpRoleId">
-                  {{grpRole.grpRoleId}} {{grpRole.grpRoleName}}
+                  ({{grpRole.grpRoleId}}) {{grpRole.grpRoleName}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -51,9 +51,9 @@
           <ng-container *ngIf="stSecurityList">
             <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
               <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.SUMTOTALROLE</mat-label>
-              <mat-select name="type" [(ngModel)]="connectionData.stRole.stRoleId"
+              <mat-select name="type" [(ngModel)]="stSecurityName"
                           [ngModelOptions]="{standalone: true}" [disabled]="securityRoleSelect.value" required>
-                <mat-option *ngFor="let securityRole of stSecurityList" [value]="securityRole.stRoleId">
+                <mat-option *ngFor="let securityRole of stSecurityList" [value]="securityRole.stRoleName">
                   {{securityRole.stRoleName}}
                 </mat-option>
               </mat-select>

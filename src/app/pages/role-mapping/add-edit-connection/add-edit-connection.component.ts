@@ -36,8 +36,12 @@ export class AddEditConnectionComponent implements OnInit {
   connectionDataOnEdit: IRoleMapping;
   public enableBtnSave = false;
   file: File;
+
   grpRoleList: IGrpRole[];
+  grpRoleId;
   stSecurityList: ISTRole[];
+  stSecurityName;
+
   brandList: IBrand[];
   marketIds: string[];
 
@@ -55,6 +59,8 @@ export class AddEditConnectionComponent implements OnInit {
     this.getMarketGroupIds();
     if (this.connectionDataOnEdit.id) {
       this.connectionData = this.connectionDataOnEdit;
+      this.grpRoleId = this.connectionData.grpRole.grpRoleId;
+      this.stSecurityName = this.connectionData.stRole.stRoleName;
     } else {
       this.connectionData = {
         brand: undefined, grpRole: undefined, marketGroupId: '', stRole: undefined,
@@ -75,7 +81,7 @@ export class AddEditConnectionComponent implements OnInit {
     this.roleMappingService.getGrpRoles(marketGroupId, brand).subscribe(data => {
       this.grpRoleList = data.data;
       if (this.connectionData.grpRole === undefined) {
-        this.connectionData.grpRole = this.grpRoleList[0];
+        this.grpRoleId = this.grpRoleList[0].grpRoleId;
       }
       this.grpSelect.reset(false);
     },
@@ -109,7 +115,7 @@ export class AddEditConnectionComponent implements OnInit {
     this.roleMappingService.getSecurityRoleListing(marketGroupId, brand).subscribe(data => {
       this.stSecurityList = data.data;
       if (this.connectionData.stRole === undefined) {
-        this.connectionData.stRole = this.stSecurityList[0];
+        this.stSecurityName = this.stSecurityList[0].stRoleName;
       }
       this.securityRoleSelect.reset(false);
       },
@@ -134,8 +140,8 @@ export class AddEditConnectionComponent implements OnInit {
         marketGroupId: this.connectionData.marketGroupId,
         roleMappingListDTO: [{
           id: this.connectionData.id,
-          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.connectionData.grpRole.grpRoleId).id,
-          stRoleId: this.stSecurityList.find( grp => grp.stRoleId === this.connectionData.stRole.stRoleId).id,
+          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.grpRoleId).id,
+          stRoleId: this.stSecurityList.find( grp => grp.stRoleName === this.stSecurityName).id,
           brand: this.connectionData.brand
         }]
       };
@@ -146,8 +152,8 @@ export class AddEditConnectionComponent implements OnInit {
       const datas = {
         marketGroupId: this.connectionData.marketGroupId,
         roleMappingListDTO: [{
-          grpRoleId: this.connectionData.grpRole.id,
-          stRoleId: this.connectionData.stRole.id,
+          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.grpRoleId).id,
+          stRoleId: this.stSecurityList.find( grp => grp.stRoleName === this.stSecurityName).id,
           brand: this.connectionData.brand
         }]
       };
@@ -157,6 +163,4 @@ export class AddEditConnectionComponent implements OnInit {
     }
     this.dialogRef.close(true);
   }
-
-
 }
