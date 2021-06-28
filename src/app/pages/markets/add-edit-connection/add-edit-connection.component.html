@@ -27,7 +27,7 @@
             <mat-select name="type" [(ngModel)]="connectionData.country"
                         [ngModelOptions]="{standalone: true}" required>
               <mat-option *ngFor="let contry of countries" [value]="contry.countryISO">
-                ({{contry.countryISO}}) {{contry.countryName}}
+                 {{contry.countryName}} ({{contry.countryISO}})
               </mat-option>
             </mat-select>
           </mat-form-field>
