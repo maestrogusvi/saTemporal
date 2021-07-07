@@ -16,6 +16,10 @@ import { RoleMappingComponent } from './role-mapping.component';
 
 import { AddEditConnectionComponent } from './add-edit-connection/add-edit-connection.component';
 import { PageHeaderModule } from '../shared/components/page-header/page-header.module';
+import {AppModule} from '../../app.module';
+import {OrderrByPipe} from '../../pipes/OrderrByPipe';
+import {MarketGroupModule} from '../market-groups/market-group.module';
+import {PipesModule} from '../../pipes/pipes.module';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -38,7 +42,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FormsModule,
     PageHeaderModule,
     NgxMatSelectSearchModule,
-    NgxTrimDirectiveModule
+    NgxTrimDirectiveModule,
+    PipesModule
   ]
 })
 export class RoleMappingModule { }

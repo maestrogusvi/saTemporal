@@ -81,7 +81,7 @@
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.BRAND</mat-label>
             <mat-select name="type" #matmat1 [formControl]="orgTypes1" [(ngModel)]="brandListSelected" required multiple>
               <div (mouseleave)="matmat1.close()">
-                <mat-option *ngFor="let application of brandList" [value]="application.brandId">
+                <mat-option *ngFor="let application of brandList | orderBy: {property: 'brandName', direction: 1}" [value]="application.brandId">
                   ({{application.brandId}}) {{application.brandName}}
                 </mat-option>
               </div>
@@ -93,7 +93,7 @@
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ORGANIZATION-TYPES</mat-label>
             <mat-select name="type" #matmat [formControl]="orgTypes" [(ngModel)]="orgTypeListSelected" required multiple>
               <div (mouseleave)="matmat.close()">
-              <mat-option *ngFor="let application of orgTypeList" [value]="application.typeId">
+              <mat-option *ngFor="let application of orgTypeList | orderBy: {property: 'typeName', direction: 1}" [value]="application.typeId">
                 {{application.typeName}}
               </mat-option>
               </div>

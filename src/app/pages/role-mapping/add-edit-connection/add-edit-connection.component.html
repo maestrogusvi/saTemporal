@@ -25,7 +25,7 @@
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.BRAND</mat-label>
             <mat-select name="type" [formControl]="brandInput" [(ngModel)]="connectionData.brand" (selectionChange)="validateBrandRole()" required>
-              <mat-option *ngFor="let brand of brandList" [value]="brand.brandId">
+              <mat-option *ngFor="let brand of brandList  | orderBy: {property: 'brandName', direction: 1}" [value]="brand.brandId">
                 {{brand.brandName}}
               </mat-option>
             </mat-select>
@@ -39,7 +39,7 @@
               <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.VWROLE</mat-label>
               <mat-select name="type" [(ngModel)]="grpRoleId"
                           [ngModelOptions]="{standalone: true}" [disabled]="grpSelect.value" required>
-                <mat-option *ngFor="let grpRole of grpRoleList" [value]="grpRole.grpRoleId">
+                <mat-option *ngFor="let grpRole of grpRoleList | orderBy: {property: 'grpRoleName', direction: 1}" [value]="grpRole.grpRoleId">
                   ({{grpRole.grpRoleId}}) {{grpRole.grpRoleName}}
                 </mat-option>
               </mat-select>
@@ -53,7 +53,7 @@
               <mat-label translate>ADD-EDIT-ROLE-MAPPING-POPUP.SUMTOTALROLE</mat-label>
               <mat-select name="type" [(ngModel)]="stSecurityName"
                           [ngModelOptions]="{standalone: true}" [disabled]="securityRoleSelect.value" required>
-                <mat-option *ngFor="let securityRole of stSecurityList" [value]="securityRole.stRoleName">
+                <mat-option *ngFor="let securityRole of stSecurityList | orderBy: {property: 'stRoleName', direction: 1}" [value]="securityRole.stRoleName">
                   {{securityRole.stRoleName}}
                 </mat-option>
               </mat-select>

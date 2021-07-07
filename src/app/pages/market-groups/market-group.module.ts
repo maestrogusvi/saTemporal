@@ -17,6 +17,8 @@ import { MarketGroupComponent } from './market-group.component';
 import { AddEditConnectionComponent } from './add-edit-connection/add-edit-connection.component';
 import {MarketComponent} from './market/market.component';
 import { PageHeaderModule } from '../shared/components/page-header/page-header.module';
+import {OrderrByPipe} from '../../pipes/OrderrByPipe';
+import {PipesModule} from '../../pipes/pipes.module';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -39,7 +41,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FormsModule,
     PageHeaderModule,
     NgxMatSelectSearchModule,
-    NgxTrimDirectiveModule
+    NgxTrimDirectiveModule,
+    PipesModule
   ]
 })
 export class MarketGroupModule { }

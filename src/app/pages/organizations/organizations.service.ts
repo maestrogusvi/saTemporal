@@ -21,8 +21,11 @@ export class OrganizationsService {
     return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONBYMG + mgId + '?' + params.toString() );
   }
 
-  getOrganizations() {
-    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATION);
+  getOrganizations( size, page) {
+    let params = new HttpParams();
+    params = params.append('size', size);
+    params = params.append('page', page);
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATION + '?' + params.toString());
   }
 
 
@@ -30,7 +33,7 @@ export class OrganizationsService {
     let params = new HttpParams();
     params = params.append('size', size);
     params = params.append('page', page);
-    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONANDSEARCH + url + '?' + params.toString());
+    return this.utilsService.returnGetCall(API.SERVER + API.API + API.ORGANIZATIONANDSEARCH + url + '&' + params.toString());
   }
 
   putOrganizationActive(mgId: any, active) {

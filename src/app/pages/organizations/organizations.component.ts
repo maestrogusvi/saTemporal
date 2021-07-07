@@ -17,9 +17,9 @@ import {FiltersDialogComponent} from './filters-dialog/filters-dialog.component'
 export class OrganizationsComponent implements OnInit {
 
   pageSizeOptions = [10, 25, 50, 100];
-  rowsPerPage = 10;
+  rowsPerPage = 100;
   page = 0;
-  totalRecords = 3000;
+  totalRecords = 5000;
   connectionsPerPage;
   public connectionList: IOrganization[] = [];
   loading = true;
@@ -51,6 +51,9 @@ export class OrganizationsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.data) {
         this.connectionList = result.data;
+        console.log(this.connectionList);
+      }else{
+        console.log("nada");
       }
 
     });
@@ -101,7 +104,7 @@ export class OrganizationsComponent implements OnInit {
         console.log(this.connectionList);
       });
     } else {
-      this.connectionService.getOrganizations().subscribe(data => {
+      this.connectionService.getOrganizations( this.rowsPerPage, this.page).subscribe(data => {
         this.connectionList = data.data;
         this.loading = false;
         console.log(this.connectionList);

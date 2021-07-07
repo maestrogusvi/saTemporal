@@ -22,6 +22,7 @@ import { ScheduleModule } from './pages/schedule/schedule.module';
 import { TenantSettingsModule } from './pages/tenant-settings/tenant-settings.module';
 import { MetaJsonToTreeFormatPipe } from './core/pipe/meta-json-to-tree-format.pipe';
 
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -48,7 +49,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LayoutModule,
     MaterialModule,
     FlexLayoutModule,
-    ToastrModule.forRoot(),
     ScheduleModule,
     TenantSettingsModule,
     ToastrModule.forRoot(),
@@ -94,7 +94,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
     NgxSpinnerModule
   ],
-  providers: [HttpClient, { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
+  providers: [HttpClient, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
