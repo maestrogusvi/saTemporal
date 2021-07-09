@@ -140,7 +140,7 @@ export class AddEditConnectionComponent implements OnInit {
         marketGroupId: this.connectionData.marketGroupId,
         roleMappingListDTO: [{
           id: this.connectionData.id,
-          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.grpRoleId).id,
+          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.grpRoleId).grpRoleId,
           stRoleId: this.stSecurityList.find( grp => grp.stRoleName === this.stSecurityName).id,
           brand: this.connectionData.brand
         }]
@@ -152,7 +152,7 @@ export class AddEditConnectionComponent implements OnInit {
       const datas = {
         marketGroupId: this.connectionData.marketGroupId,
         roleMappingListDTO: [{
-          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.grpRoleId).id,
+          grpRoleId: this.grpRoleList.find( grp => grp.grpRoleId === this.grpRoleId).grpRoleId,
           stRoleId: this.stSecurityList.find( grp => grp.stRoleName === this.stSecurityName).id,
           brand: this.connectionData.brand
         }]

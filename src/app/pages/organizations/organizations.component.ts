@@ -50,9 +50,10 @@ export class OrganizationsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.data) {
-        this.connectionList = result.data;
+        this.connectionList = result.data.data;
+        this.totalRecords = result.data.count;
         console.log(this.connectionList);
-      }else{
+      } else {
         console.log("nada");
       }
 
@@ -100,14 +101,14 @@ export class OrganizationsComponent implements OnInit {
     if ( mkg != '') {
       this.connectionService.getOrganizationByMgListing(mkg, this.rowsPerPage, this.page).subscribe(data => {
         this.connectionList = data.data;
+        this.totalRecords = data.count ? data.count : 3000;
         this.loading = false;
-        console.log(this.connectionList);
       });
     } else {
       this.connectionService.getOrganizations( this.rowsPerPage, this.page).subscribe(data => {
         this.connectionList = data.data;
+        this.totalRecords = data.count ? data.count : 3000;
         this.loading = false;
-        console.log(this.connectionList);
       });
     }
 

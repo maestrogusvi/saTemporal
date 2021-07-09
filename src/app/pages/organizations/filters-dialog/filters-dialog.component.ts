@@ -52,7 +52,7 @@ export class FiltersDialogComponent implements OnInit {
     const data = await this.connectionService.getOrganizationsBySearch(url, this.rowPerPage, this.page).toPromise();
     this.connectionList = data.data;
     this.loading = false;
-    this.dialogRef.close({data: data.data});
+    this.dialogRef.close({data});
 
   }
 

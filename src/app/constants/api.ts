@@ -1,5 +1,6 @@
 export class API {
-  static SERVER = 'https://vwgrp-stage.sapper.ai/';
+   static SERVER = 'https://vwgrp-stage.sapper.ai/';
+  // static SERVER = 'http://localhost:8082/';
 
   static API = 'api/';
   static LOGIN = 'login';
