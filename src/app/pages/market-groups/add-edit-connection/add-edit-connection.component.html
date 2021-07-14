@@ -93,8 +93,8 @@
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ORGANIZATION-TYPES</mat-label>
             <mat-select name="type" #matmat [formControl]="orgTypes" [(ngModel)]="orgTypeListSelected" required multiple>
               <div (mouseleave)="matmat.close()">
-              <mat-option *ngFor="let application of orgTypeList | orderBy: {property: 'typeName', direction: 1}" [value]="application.typeId">
-                {{application.typeName}}
+              <mat-option *ngFor="let application of orgTypeList | orderBy: {property: 'typeNameEn', direction: 1}" [value]="application.typeId">
+                {{application.typeNameEn}}
               </mat-option>
               </div>
             </mat-select>
