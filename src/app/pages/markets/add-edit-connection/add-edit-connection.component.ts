@@ -44,6 +44,7 @@ export class AddEditConnectionComponent implements OnInit {
   countries: ICountry[];
   marketIds: string[];
   activeCheck = false;
+  newMarket = true;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditConnectionComponent>,
@@ -62,6 +63,7 @@ export class AddEditConnectionComponent implements OnInit {
     this.getCountriesListining();
     if (this.connectionDataOnEdit.marketId) {
       this.connectionData = this.connectionDataOnEdit;
+      this.newMarket = false;
       if (this.connectionData.active === 1) {
         this.activeCheck = true;
       }

@@ -21,7 +21,7 @@
             <div class="margin-15"  style="text-align: center;" *ngIf="connectionList && connectionList.length > 0">
                     <p-table #dt [value]="connectionList" styleClass="p-datatable-connectionList" [rowHover]="true"
                              [rows]="10" [showCurrentPageReport]="true" [globalFilterFields]="['marketGroupId','marketId','country','active','brands','orgTypes']" [rowsPerPageOptions]="pageSizeOptions" [loading]="loading"
-                             [paginator]="connectionList.length >= 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                             [paginator]="connectionList.length >= 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [autoLayout]="true">
                       <ng-template pTemplate="caption">
                         <div style="text-align: right">
                           <i class="pi pi-search" style="margin:4px 4px 0 0"></i>

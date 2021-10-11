@@ -13,9 +13,9 @@
         <div fxFlex="50%">
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-MARKET-GROUP-POPUP.ID</mat-label>
-            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.groupId" trim="blur"
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.groupId" trim="blur" [disabled]="!newMarketGroup"
                    [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
-            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.groupId=''">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.groupId=''" [disabled]="!newMarketGroup">
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>

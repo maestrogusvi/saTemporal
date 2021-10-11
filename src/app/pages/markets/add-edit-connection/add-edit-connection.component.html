@@ -38,9 +38,9 @@
         <div fxFlex="50%">
           <mat-form-field appearance="outline" class="form_field form-field-wrapper text">
             <mat-label translate>ADD-EDIT-MARKETS-POPUP.MARKET-ID</mat-label>
-            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.marketId" trim="blur"
+            <input matInput type="text" name="connection-name" [(ngModel)]="connectionData.marketId" trim="blur" [disabled]="!newMarket"
                    [ngModelOptions]="{standalone: true}" (keydown.enter)="$event.preventDefault();" required>
-            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.marketId=''">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="connectionData.marketId=''" [disabled]="!newMarket">
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>

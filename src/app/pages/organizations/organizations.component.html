@@ -23,7 +23,7 @@
                     <p-table #dt  (onRowSelect)="rowClick($event)" [value]="connectionList" styleClass="p-datatable-connectionList" [rowHover]="true"
                              [(rows)]="rowsPerPage" [totalRecords]="totalRecords" [showCurrentPageReport]="true" [rowsPerPageOptions]="pageSizeOptions" [globalFilterFields]="['marketGroupId','id','market','organizationName','organizationType','status','active']"  [loading]="loading"
                              [paginator]="connectionList.length >= 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                             [lazy]="true" (onLazyLoad)="loadCustomers($event)">
+                             [autoLayout]="true" [lazy]="true" (onLazyLoad)="loadCustomers($event)">
                       <ng-template pTemplate="caption">
                         <div style="text-align: right">
                           <i class="pi pi-search" style="margin:4px 4px 0 0"></i>

@@ -69,6 +69,7 @@ export class AddEditConnectionComponent implements OnInit {
   brandListSelected: IBrand[];
   marketGroupList: IMarketGroup[];
   topDomainListSelected: string;
+  newMarketGroup = true;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditConnectionComponent>,
@@ -83,6 +84,7 @@ export class AddEditConnectionComponent implements OnInit {
     this.getBrandsListing();
     if (this.connectionDataOnEdit.groupId) {
       this.connectionData = this.connectionDataOnEdit;
+      this.newMarketGroup = false;
     } else {
       this.connectionData = {
         oem: false,

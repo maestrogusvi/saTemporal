@@ -17,7 +17,7 @@ import {FiltersDialogComponent} from './filters-dialog/filters-dialog.component'
 export class OrganizationsComponent implements OnInit {
 
   pageSizeOptions = [10, 25, 50, 100];
-  rowsPerPage = 100;
+  rowsPerPage = 25;
   page = 0;
   totalRecords = 5000;
   connectionsPerPage;
@@ -52,11 +52,7 @@ export class OrganizationsComponent implements OnInit {
       if (result.data) {
         this.connectionList = result.data.data;
         this.totalRecords = result.data.count;
-        console.log(this.connectionList);
-      } else {
-        console.log("nada");
       }
-
     });
   }
 
