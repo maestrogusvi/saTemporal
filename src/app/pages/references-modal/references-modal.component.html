@@ -1,0 +1,41 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <h4 mat-dialog-title class="dialog-title float-left">References</h4>
+  </div>
+  <mat-dialog-content class="dialog-body">
+    <table mat-table [dataSource]="brands" class="mat-elevation-z8 table-references" >
+      <ng-container matColumnDef="b-id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.brandId}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="b-name">
+        <th mat-header-cell *matHeaderCellDef> Brand Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="BrandsDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: BrandsDisplayedColumns;"></tr>
+    </table>
+    <table mat-table [dataSource]="org" class="mat-elevation-z8 table-references" >
+      <ng-container matColumnDef="o-id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.typeId}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="o-name">
+        <th mat-header-cell *matHeaderCellDef> Organizational Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.typeName}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="OrgDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: OrgDisplayedColumns;"></tr>
+    </table>
+
+  </mat-dialog-content>
+  <div class="dialog-footer">
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</div>

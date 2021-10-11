@@ -7,6 +7,7 @@ import { AddEditConnectionComponent } from './add-edit-connection/add-edit-conne
 import { IMarket } from './market.interface';
 import { MarketsService } from './markets.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ReferencesModalComponent} from '../references-modal/references-modal.component';
 
 
 @Component({
@@ -100,5 +101,9 @@ export class MarketsComponent implements OnInit {
       i = endIndex;
     }
     return output.join(',');
+  }
+
+  referencesModalComponent(): void {
+    this.dialog.open(ReferencesModalComponent, { data: {}, width: '1000px' });
   }
 }

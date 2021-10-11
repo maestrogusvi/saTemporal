@@ -21,6 +21,7 @@ import { MaterialModule } from './pages/shared/modules/material.module';
 import { ScheduleModule } from './pages/schedule/schedule.module';
 import { TenantSettingsModule } from './pages/tenant-settings/tenant-settings.module';
 import { MetaJsonToTreeFormatPipe } from './core/pipe/meta-json-to-tree-format.pipe';
+import { ReferencesModalComponent } from './pages/references-modal/references-modal.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -32,7 +33,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppComponent,
     PageNotFoundComponent,
     ThankYouComponent,
-    MetaJsonToTreeFormatPipe
+    MetaJsonToTreeFormatPipe,
+    ReferencesModalComponent
   ],
   imports: [
     BrowserModule,

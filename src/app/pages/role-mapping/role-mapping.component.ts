@@ -7,6 +7,7 @@ import { AddEditConnectionComponent } from './add-edit-connection/add-edit-conne
 import { IRoleMapping } from './role-mapping.interface';
 import { RoleMappingService } from './role-mapping.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ReferencesModalComponent} from '../references-modal/references-modal.component';
 
 
 @Component({
@@ -112,5 +113,9 @@ export class RoleMappingComponent implements OnInit {
       i = endIndex;
     }
     return output.join(',');
+  }
+
+  referencesModalComponent(): void {
+    this.dialog.open(ReferencesModalComponent, { data: {}, width: '1000px' });
   }
 }

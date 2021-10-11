@@ -8,6 +8,7 @@ import { IMarketGroup } from './market-group.interface';
 import { MarketGroupService } from './market-group.service';
 import {Router} from '@angular/router';
 import {MarketComponent} from './market/market.component';
+import {ReferencesModalComponent} from '../references-modal/references-modal.component';
 
 @Component({
   selector: 'sapper-market-group',
@@ -68,6 +69,10 @@ export class MarketGroupComponent implements OnInit {
       }
     });
   }
+
+  referencesModalComponent(): void {
+    this.dialog.open(ReferencesModalComponent, { data: {}, width: '1000px' });
+}
 
   /**
    * To delete connection
