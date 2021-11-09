@@ -155,7 +155,7 @@ export class AddEditConnectionComponent implements OnInit {
     if (this.orgTypeListSelected.length > 0 ) {
       this.connectionData.orgTypes = this.orgTypeListSelected.join('');
     }
-    if ( this.connectionData.groupId) {
+    if ( !this.newMarketGroup) {
       this.marketGroupService.putMarketGroup(this.connectionData).subscribe(data => {
         this.utilsService.showSuccess('Market Group successfully saved', '');
         this.dialogRef.close(true);
